@@ -10,8 +10,7 @@ local keys = {}
 mod = 'Mod4'
 tags = 9
 keys.tags = tags   --Uncomment this if not using custom tag names
---local terminal = 'kitty'
-local terminal="xterm"
+local terminal = 'kitty'
 local browser = "firefox"
 --local editor = "emacsclient --create-frame --no-wait --socket-name=adam-emacsd"
 local editor = "emacs"
