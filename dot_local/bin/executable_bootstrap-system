@@ -21,6 +21,15 @@ then
     systemctl reboot
 fi
 
+# system fonts are in /usr/share/fonts
+
+if [ ! -d /usr/share/fonts/jetbrains-mono ]
+then
+    rpm-ostree install jetbrains-mono-fonts
+    # emacs font cache has may have to be busted after this
+    systemctl reboot
+fi
+
 if [ ! -f ~/.ssh/config ]
 then
     echo "generate new ssh key or copy from existing machine"
