@@ -1,0 +1,112 @@
+#!/bin/bash
+
+
+if ! command -v awesome &> /dev/null
+then
+    rpm-ostree intsall awesome
+    systemctl reboot
+fi
+
+
+if ! command -v kitty &> /dev/null
+then
+    rpm-ostree install kitty
+    systemctl reboot
+fi
+
+
+if ! command -v rofi &> /dev/null
+then
+    rpm-ostree install rofi
+    systemctl reboot
+fi
+
+if [ ! -f ~/.ssh/config ]
+then
+    echo "generate new ssh key or copy from existing machine"
+    echo "scp -r <old-machine>:~/.ssh ~/.ssh"
+    exit 1
+fi
+
+
+# distroboxes
+
+dbox_create() {
+    if ! distrobox list | grep $1 &> /dev/null
+    then
+	distrobox create --name $1 -i archlinux:latest
+    fi
+}
+
+cntr_desktop=desktop-tools
+dbox_create $cntr_desktop
+
+cntr_devtools=devtools
+dbox_create $cntr_devtools
+
+
+lbin=~/.local/bin
+
+dbox_install() {
+    local bin_name="${3:-$1}"
+    if ! command -v $bin_name &> /dev/null
+    then
+	distrobox-enter -n $2 -e sudo pacman -S $1
+	distrobox-enter -n $2 -e distrobox-export --bin /usr/bin/$bin_name --export-path $lbin
+    fi
+}
+
+dbox_local_install() {
+    local bin_name="${3:-$1}"
+    if ! distrobox-enter -n $2 -e stat /usr/bin/$bin_name &> /dev/null
+    then
+	distrobox-enter -n $2 -e sudo pacman -S $1
+    fi
+}
+
+
+dbox_install restic $cntr_desktop
+dbox_install xorg-xset $cntr_desktop xset
+dbox_local_install git $cntr_devtools
+dbox_local_install openssh $cntr_devtools ssh
+dbox_install chezmoi $cntr_devtools;
+
+# dotfiles
+
+chez_local=~/.local/share/chezmoi
+chez_remote_http=https://github.com/AdamFrey/dotfiles.git
+chez_remote_ssh=git@github.com:AdamFrey/dotfiles.git
+if ! ls $chez_local | grep dot_config &> /dev/null
+then
+    rm -rf $chez_local
+    git clone $chez_remote_ssh $chez_local
+    chezmoi update
+fi
+
+cd $chez_local
+git fetch # slow
+#if ! git status -uno | grep -q "up to date" &> /dev/null
+#then
+#    git pull
+#    chezmoi update
+#fi
+
+rm -rf ~/.emacs.d
+
+if ! cat ~/.config/emacs/README.md | grep "Doom Emacs" &> /dev/null
+then    
+    git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+    ~/.config/emacs/bin/doom install
+fi
+
+# flatpaks
+
+flatpak_i () {
+    if ! flatpak info $1 &> /dev/null
+    then
+        flatpak install flathub $1
+    fi
+}
+
+flatpak_i us.zoom.Zoom
+flatpak_i com.bitwarden.desktop
