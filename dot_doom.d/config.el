@@ -237,11 +237,13 @@ only works for semicolons."
   (add-hook 'hack-local-variables-hook 'af/set-clojure-indent-style nil t)
   )
 
-;; wasn't working in fedora
-;; (add-to-list '+format-on-save-enabled-modes 'clojure-mode 'append)
-;; (add-to-list '+format-on-save-enabled-modes 'clojurescript-mode 'append)
-;; (add-to-list '+format-on-save-enabled-modes 'clojurec-mode 'append)
+(if (boundp '+format-on-save-enabled-modes)
+    (progn
+      (add-to-list '+format-on-save-enabled-modes 'clojure-mode 'append)
+      (add-to-list '+format-on-save-enabled-modes 'clojurescript-mode 'append)
+      (add-to-list '+format-on-save-enabled-modes 'clojurec-mode 'append)))
 
+;; TODO can I remove this part?
 ;; (setq +format-on-save-enabled-modes '(not emacs-lisp-mode sql-mode tex-mode latex-mode org-msg-edit-mode))
 
 (defun cljfmt-current-file ()
