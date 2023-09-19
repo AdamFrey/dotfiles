@@ -27,7 +27,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 18 :weight 'semi-light)
+;; "JetBrains Mono" would be preferred
+(setq doom-font (font-spec :family "monospace" :size 18 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "sans" :size 18))
 
 (setq doom-theme 'doom-solarized-light)
@@ -237,9 +238,10 @@ only works for semicolons."
   (add-hook 'hack-local-variables-hook 'af/set-clojure-indent-style nil t)
   )
 
-(add-to-list '+format-on-save-enabled-modes 'clojure-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'clojurescript-mode 'append)
-(add-to-list '+format-on-save-enabled-modes 'clojurec-mode 'append)
+;; wasn't working in fedora
+;; (add-to-list '+format-on-save-enabled-modes 'clojure-mode 'append)
+;; (add-to-list '+format-on-save-enabled-modes 'clojurescript-mode 'append)
+;; (add-to-list '+format-on-save-enabled-modes 'clojurec-mode 'append)
 
 ;; (setq +format-on-save-enabled-modes '(not emacs-lisp-mode sql-mode tex-mode latex-mode org-msg-edit-mode))
 
