@@ -3,6 +3,7 @@
 -- Importing libraries
 local gears = require('gears')
 local awful = require('awful')
+local vars = require('vars')
 
 -- Variables
 local keys = {}
@@ -10,10 +11,10 @@ local keys = {}
 mod = 'Mod4'
 tags = 9
 keys.tags = tags   --Uncomment this if not using custom tag names
-local terminal = 'kitty'
-local browser = "firefox"
---local editor = "emacsclient --create-frame --no-wait --socket-name=adam-emacsd"
-local editor = "emacs"
+--local terminal = 'kitty'
+-- local browser = "firefox"
+-- --local editor = "emacsclient --create-frame --no-wait --socket-name=adam-emacsd"
+-- local editor = "emacs"
 
 local function local_script(script_name)
   return "/home/adam/10-19.Software/10.Personal-Software/My-Computer/scripts/" .. script_name
@@ -46,12 +47,12 @@ keys.globalkeys = gears.table.join(
   awful.key({mod}, 'Down', function () awful.client.incwfact(-0.05) end),
 
   -- Applications
-  awful.key({mod}, 'Return', function() awful.util.spawn(terminal) end),
+  awful.key({mod}, 'Return', function() awful.util.spawn(vars.terminal) end),
   awful.key({mod}, 'r', function() awful.util.spawn('rofi -show drun') end),
-  awful.key({mod}, 'e', function() awful.util.spawn(editor) end),
+  awful.key({mod}, 'e', function() awful.util.spawn(vars.editor) end),
   awful.key({mod}, 't', function() awful.util.spawn(local_script('rofi-todoist fq')) end),
 
-  awful.key({mod}, "b", function () awful.spawn(browser) end, {description = "open a web browser", group = "launcher"}),
+  awful.key({mod}, "b", function () awful.spawn(var.browser) end, {description = "open a web browser", group = "launcher"}),
 
   -- Screenshots
   awful.key({mod, 'Shift'}, "s", function() awful.util.spawn('flameshot gui') end)
