@@ -1,0 +1,3 @@
+# env vars
+export XDG_CONFIG_HOME="$HOME/.config"
+# export EDITOR # TODO make template
