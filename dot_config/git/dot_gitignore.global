@@ -1,0 +1,16 @@
+*.log
+
+.envrc
+
+# Clojure
+.cpcache
+.nrepl-*
+.lein-repl-*
+.repl.clj
+adam_dev.clj
+
+# Emacs
+.dir-locals.el
+
+# JS
+.tern-port
