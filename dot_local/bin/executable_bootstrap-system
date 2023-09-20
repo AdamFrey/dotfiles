@@ -73,7 +73,7 @@ dbox_local_install() {
     fi
 }
 
-
+dbox_local_install openssh $cntr_desktop ssh
 dbox_install restic $cntr_desktop
 dbox_install xorg-xset $cntr_desktop xset
 dbox_install direnv $cntr_desktop
@@ -87,6 +87,7 @@ dbox_install chezmoi $cntr_devtools;
 dbox_install emacs $cntr_devtools;
 dbox_install emacs $cntr_devtools emacsclient;
 dbox_local_install direnv $cntr_devtools
+dbox_local_install rlwrap $cntr_devtools
 
 # dotfiles
 
