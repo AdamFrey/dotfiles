@@ -23,7 +23,7 @@ fi
 
 # system fonts are in /usr/share/fonts
 
-if [ ! -d /usr/share/fonts/jetbrains-mono ]
+if [ ! -d /usr/share/fonts/jetbrains-mono-fonts ]
 then
     rpm-ostree install jetbrains-mono-fonts
     # emacs font cache has may have to be busted after this
@@ -76,9 +76,17 @@ dbox_local_install() {
 
 dbox_install restic $cntr_desktop
 dbox_install xorg-xset $cntr_desktop xset
+dbox_install direnv $cntr_desktop
+
+
 dbox_local_install git $cntr_devtools
 dbox_local_install openssh $cntr_devtools ssh
+dbox_local_install jdk17-openjdk $cntr_devtools java
+dbox_local_install clojure $cntr_devtools;
 dbox_install chezmoi $cntr_devtools;
+dbox_install emacs $cntr_devtools;
+dbox_install emacs $cntr_devtools emacsclient;
+dbox_local_install direnv $cntr_devtools
 
 # dotfiles
 
@@ -119,3 +127,8 @@ flatpak_i () {
 
 flatpak_i us.zoom.Zoom
 flatpak_i com.bitwarden.desktop
+flatpak_i com.spotify.Client
+
+# Systemd services
+
+systemctl enable --user emacs
