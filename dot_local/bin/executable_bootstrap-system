@@ -75,6 +75,16 @@ dbox_install() {
 
 dbox_local_install() {
     local bin_name="${3:-$1}"
+
+    #if ! distrobox-enter -n $2 -e stat /usr/bin/yay &> /dev/null
+    #then
+     #   echo "needs yay"
+        # TODO desktop tools doesn't have git
+        #distrobox-enter -n $2 -e git clone https://aur.archlinux.org/yay.git /tmp/yay
+        #distrobox-enter -n $2 -e bash "cd /tmp/yay"
+
+    #fi
+
     if ! distrobox-enter -n $2 -e stat /usr/bin/$bin_name &> /dev/null
     then
 	distrobox-enter -n $2 -e sudo pacman -S $1
@@ -87,15 +97,16 @@ dbox_install xorg-xset $cntr_desktop xset
 dbox_install direnv $cntr_desktop
 
 
+dbox_install chezmoi $cntr_devtools;
+dbox_install emacs $cntr_devtools;
+dbox_install emacs $cntr_devtools emacsclient;
 dbox_local_install git $cntr_devtools
 dbox_local_install openssh $cntr_devtools ssh
 dbox_local_install jdk17-openjdk $cntr_devtools java
 dbox_local_install clojure $cntr_devtools;
-dbox_install chezmoi $cntr_devtools;
-dbox_install emacs $cntr_devtools;
-dbox_install emacs $cntr_devtools emacsclient;
 dbox_local_install direnv $cntr_devtools
 dbox_local_install rlwrap $cntr_devtools
+#dbox_local_install google-cloud-cli $cntr_devtools gcloud
 
 # dotfiles
 
