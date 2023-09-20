@@ -120,14 +120,6 @@ then
     chezmoi update
 fi
 
-cd $chez_local
-git fetch # slow
-#if ! git status -uno | grep -q "up to date" &> /dev/null
-#then
-#    git pull
-#    chezmoi update
-#fi
-
 rm -rf ~/.emacs.d
 
 if ! cat ~/.config/emacs/README.md | grep "Doom Emacs" &> /dev/null
