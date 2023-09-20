@@ -1,0 +1,5 @@
+{:paths ["src"]
+ :deps
+ {org.clojars.abhinav/snitch                {:mvn/version "0.1.14"}
+  io.github.nubank/morse                    {:git/tag "v2023.04.30.01" :git/sha "d99b09c"}
+  com.clojure-goes-fast/clj-java-decompiler {:mvn/version "0.3.3"}}}
