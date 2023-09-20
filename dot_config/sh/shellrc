@@ -1,3 +1,6 @@
 # env vars
 export XDG_CONFIG_HOME="$HOME/.config"
 # export EDITOR # TODO make template
+
+# PATH updates
+export PATH=$PATH:$HOME/.local/bin
