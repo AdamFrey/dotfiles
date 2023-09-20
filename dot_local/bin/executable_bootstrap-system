@@ -21,6 +21,14 @@ then
     systemctl reboot
 fi
 
+if ! command -v zsh &> /dev/null
+then
+    rpm-ostree install zsh
+    systemctl reboot
+fi
+
+
+
 # system fonts are in /usr/share/fonts
 
 if [ ! -d /usr/share/fonts/jetbrains-mono-fonts ]
