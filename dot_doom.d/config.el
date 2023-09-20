@@ -96,9 +96,9 @@ only works for semicolons."
 (global-set-key (kbd "C-c #") 'comment-header)
 
 (use-package! multiple-cursors
-              :config
-              (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-              (global-set-key (kbd "C-<") 'mc/mark-previous-like-this))
+  :config
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this))
 
 (defun whack-whitespace (arg)
   "Delete all white space from point to the next word.  With prefix ARG
@@ -121,7 +121,7 @@ only works for semicolons."
   (interactive)
   (let ((buffer (current-buffer)))
     (unless (one-window-p)
-            (delete-window))
+      (delete-window))
     (display-buffer-pop-up-frame buffer nil)))
 
 (global-set-key (kbd "M-t") 'afrey/pop-current-window-into-frame)
@@ -141,10 +141,10 @@ only works for semicolons."
 
 (defun magit-display-buffer-pop-up-frame (buffer)
   (if (with-current-buffer buffer (eq major-mode 'magit-status-mode))
-    (display-buffer buffer
-                    '((display-buffer-reuse-window
-                       display-buffer-pop-up-frame)
-                      (reusable-frames . t)))
+      (display-buffer buffer
+                      '((display-buffer-reuse-window
+                         display-buffer-pop-up-frame)
+                        (reusable-frames . t)))
     (magit-display-buffer-traditional buffer)))
 
 (after! magit
@@ -200,7 +200,7 @@ only works for semicolons."
 ;; Org Mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (after! ob
-        (add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj")))
+  (add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj")))
 
 (defun af/open-journal-file ()
   (interactive)
@@ -261,31 +261,31 @@ only works for semicolons."
 
 (after! clojure-mode
   (define-clojure-indent
-    (or 0)
-    (and 0)
-    (= 0)
-    (not= 0)
-    (+ 0)
-    (- 0)
-    (* 0)
-    (/ 0)
-    (< 0)
-    (> 0)
-    (str 0)
-    (concat 0)
-    (require 0)
-    (import 0)
-    (recur 0)
-    (some-fn 0)
-    (conj 1)
-    (cons 1)
-    (merge 0)
-    (some-> 0)
-    (some->> 0)
-    ;; nubank/matcher-combinators
-    (match? 0)
-    (health/send-timing 1)
-    )
+   (or 0)
+   (and 0)
+   (= 0)
+   (not= 0)
+   (+ 0)
+   (- 0)
+   (* 0)
+   (/ 0)
+   (< 0)
+   (> 0)
+   (str 0)
+   (concat 0)
+   (require 0)
+   (import 0)
+   (recur 0)
+   (some-fn 0)
+   (conj 1)
+   (cons 1)
+   (merge 0)
+   (some-> 0)
+   (some->> 0)
+   ;; nubank/matcher-combinators
+   (match? 0)
+   (health/send-timing 1)
+   )
 
   (add-hook 'clojure-mode-hook 'af/set-clojure-indent-style-hook)
 
@@ -394,7 +394,7 @@ only works for semicolons."
 ;; Common ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 (after! company-mode
-        (define-key company-mode-map (kbd "TAB") 'company-indent-or-complete-common))
+  (define-key company-mode-map (kbd "TAB") 'company-indent-or-complete-common))
 
 ;; AwesomeWM ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
