@@ -371,8 +371,9 @@ only works for semicolons."
   (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
   (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion)
 
-  ;; (advice-add 'cider-complete-at-point :override #'af/cider-complete-at-point)
-  (setq completion-category-overrides '((cider (orderless basic))))
+  ;; NOTE I'm using my own complete-at-point largely to get fuzzy matching on java imports
+  (advice-add 'cider-complete-at-point :override #'af/cider-complete-at-point)
+  ;; (setq completion-category-overrides '((cider (orderless basic))))
   ;; (add-to-list 'completion-category-defaults '(cider (styles basic))))
 
   (add-hook 'cider-mode
