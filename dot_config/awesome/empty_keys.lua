@@ -52,7 +52,7 @@ keys.globalkeys = gears.table.join(
   awful.key({mod}, 'e', function() awful.util.spawn(vars.editor) end),
   awful.key({mod}, 't', function() awful.util.spawn(local_script('rofi-todoist fq')) end),
 
-  awful.key({mod}, "b", function () awful.spawn(var.browser) end, {description = "open a web browser", group = "launcher"}),
+  awful.key({mod}, "b", function () awful.spawn(vars.browser) end, {description = "open a web browser", group = "launcher"}),
 
   -- Screenshots
   awful.key({mod, 'Shift'}, "s", function() awful.util.spawn('flameshot gui') end)
