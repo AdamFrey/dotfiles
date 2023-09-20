@@ -164,6 +164,10 @@ only works for semicolons."
                        "url"))
            (magit-get-current-branch))))
 
+;; Dotfiles ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package! chezmoi)
+
 ;; Projects ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (global-set-key (kbd "M-r") 'projectile-find-file)
