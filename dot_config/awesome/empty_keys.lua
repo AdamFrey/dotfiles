@@ -38,6 +38,12 @@ keys.globalkeys = gears.table.join(
   awful.key({mod}, "k", function () awful.client.focus.byidx(-1) end, {description = "focus previous by index", group = "client"}),
   awful.key({ mod, "Shift" }, "j", function () awful.client.swap.byidx(1) end, {description = "swap with next client by index", group = "client"}),
   awful.key({ mod, "Shift" }, "k", function () awful.client.swap.byidx( -1) end, {description = "swap with prev client by index", group = "client"}),
+  awful.key({mod}, "f", function ()
+      -- figure out if I can do this intelligently to always put it on the left side
+      awful.client.swap.bydirection('left')
+  end,
+    {description = "swap current client leftward", group = "client"}
+  ),
   awful.key({ mod}, "m", function () awful.layout.inc(1) end, {description = "select next", group = "layout"}),
 
 
