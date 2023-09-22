@@ -111,7 +111,9 @@ dbox_local_install clojure $cntr_devtools;
 dbox_local_install direnv $cntr_devtools
 dbox_local_install rlwrap $cntr_devtools
 dbox_local_install leiningen $cntr_devtools lein
-#dbox_local_install google-cloud-cli $cntr_devtools gcloud
+# to add to distrobox
+dbox_install ripgrep $cntr_devtools rg
+dbox_install fasd $cntr_devtools
 
 # dotfiles
 
