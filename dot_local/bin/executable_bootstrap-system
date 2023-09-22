@@ -48,6 +48,9 @@ fi
 
 # distroboxes
 
+# TODO bootstrap distrobox with chezmoi, then distrobox assemble
+
+
 dbox_create() {
     if ! distrobox list | grep $1 &> /dev/null
     then
@@ -87,6 +90,7 @@ dbox_local_install() {
 
     if ! distrobox-enter -n $2 -e stat /usr/bin/$bin_name &> /dev/null
     then
+        # TODO maybe --noconfirm here
 	distrobox-enter -n $2 -e sudo pacman -S $1
     fi
 }
