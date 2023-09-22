@@ -110,7 +110,7 @@ dbox_local_install jdk17-openjdk $cntr_devtools java
 dbox_local_install clojure $cntr_devtools;
 dbox_local_install direnv $cntr_devtools
 dbox_local_install rlwrap $cntr_devtools
-dbox_local_install leiningen $cntr_devtools leiningen
+dbox_local_install leiningen $cntr_devtools lein
 #dbox_local_install google-cloud-cli $cntr_devtools gcloud
 
 # dotfiles
