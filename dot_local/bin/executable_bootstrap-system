@@ -30,7 +30,11 @@ fi
 # I ran this but I don't think it was necessary. The beep was coming from kitty
 # sudo rmmod pcspkr
 
-
+# set zsh as shell
+if ! cat /etc/passwd | grep $USER | grep zsh &> /dev/null
+then
+    chsh --shell /bin/zsh $USER
+fi
 
 # system fonts are in /usr/share/fonts
 
@@ -120,6 +124,7 @@ dbox_local_install leiningen $cntr_devtools lein
 dbox_install ripgrep $cntr_devtools rg
 dbox_install fasd $cntr_devtools
 dbox_local_install kitty-terminfo $cntr_devtools
+
 
 # dotfiles
 
