@@ -33,7 +33,8 @@ fi
 # set zsh as shell
 if ! cat /etc/passwd | grep $USER | grep zsh &> /dev/null
 then
-    chsh --shell /bin/zsh $USER
+    echo "change shell to /bin/zsh"
+    sudo lchsh $USER
 fi
 
 # system fonts are in /usr/share/fonts
@@ -106,7 +107,8 @@ dbox_local_install openssh $cntr_desktop ssh
 dbox_install restic $cntr_desktop
 dbox_install xorg-xset $cntr_desktop xset
 dbox_install direnv $cntr_desktop
-dbox_local_install kitty-terminfo $cntr_desktop
+
+#dbox_local_install kitty-terminfo $cntr_desktop # TODO figure out how to make idempotent
 
 
 dbox_install chezmoi $cntr_devtools;
@@ -123,7 +125,7 @@ dbox_local_install leiningen $cntr_devtools lein
 # to add to distrobox
 dbox_install ripgrep $cntr_devtools rg
 dbox_install fasd $cntr_devtools
-dbox_local_install kitty-terminfo $cntr_devtools
+#dbox_local_install kitty-terminfo $cntr_devtools
 
 
 # dotfiles
