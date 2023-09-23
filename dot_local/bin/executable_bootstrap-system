@@ -27,6 +27,9 @@ then
     systemctl reboot
 fi
 
+# I ran this but I don't think it was necessary. The beep was coming from kitty
+# sudo rmmod pcspkr
+
 
 
 # system fonts are in /usr/share/fonts
