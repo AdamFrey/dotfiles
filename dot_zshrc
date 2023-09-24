@@ -26,13 +26,13 @@ setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately aft
 setopt EXTENDED_HISTORY  # record command start time
 
 # fzf - fuzzy find for history, etc
-. /usr/share/fzf/completion.zsh
-. /usr/share/fzf/key-bindings.zsh
+#. /usr/share/fzf/completion.zsh
+#. /usr/share/fzf/key-bindings.zsh
 
-eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install)"
-. /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-. /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+#eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install)"
+#. /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+#. /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+#. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
 # direnv
 eval "$(direnv hook zsh)"
@@ -42,9 +42,9 @@ if [ -f '/home/adam/10-19.Software/14.Open-Source/google-cloud-sdk/google-cloud-
 if [ -f '/home/adam/10-19.Software/14.Open-Source/google-cloud-sdk/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/adam/10-19.Software/14.Open-Source/google-cloud-sdk/google-cloud-sdk/completion.zsh.inc'; fi
 
 # babashka
-_bb_tasks() {
-    local matches=(`bb tasks |tail -n +3 |cut -f1 -d ' '`)
-    compadd -a matches
-    _files # autocomplete filenames as well
-}
-compdef _bb_tasks bb
+#_bb_tasks() {
+#    local matches=(`bb tasks |tail -n +3 |cut -f1 -d ' '`)
+#    compadd -a matches
+#    _files # autocomplete filenames as well
+#}
+#compdef _bb_tasks bb
