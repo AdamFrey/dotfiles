@@ -103,13 +103,7 @@ dbox_local_install() {
     fi
 }
 
-dbox_local_install openssh $cntr_desktop ssh
-dbox_install restic $cntr_desktop
-dbox_install xorg-xset $cntr_desktop xset
-dbox_install direnv $cntr_desktop
-
-#dbox_local_install kitty-terminfo $cntr_desktop # TODO figure out how to make idempotent
-
+distrobox-enter -n $cntr_desktop -e ~/.config/distrobox/desktop-tools-bootstrap.sh
 
 dbox_install chezmoi $cntr_devtools;
 dbox_install emacs $cntr_devtools;
