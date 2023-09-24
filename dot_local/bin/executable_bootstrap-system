@@ -37,10 +37,9 @@ then
     sudo lchsh $USER
 fi
 
-# system fonts are in /usr/share/fonts
-
 if [ ! -d /usr/share/fonts/jetbrains-mono-fonts ]
 then
+    # system fonts are in /usr/share/fonts
     rpm-ostree install jetbrains-mono-fonts
     # emacs font cache has may have to be busted after this
     systemctl reboot
@@ -53,11 +52,7 @@ then
     exit 1
 fi
 
-
 # distroboxes
-
-# TODO bootstrap distrobox with chezmoi, then distrobox assemble
-
 
 dbox_create() {
     if ! distrobox list | grep $1 &> /dev/null
@@ -72,55 +67,10 @@ dbox_create $cntr_desktop
 cntr_devtools=devtools
 dbox_create $cntr_devtools
 
-
-lbin=~/.local/bin
-
-dbox_install() {
-    local bin_name="${3:-$1}"
-    if ! command -v $bin_name &> /dev/null
-    then
-	distrobox-enter -n $2 -e sudo pacman -S $1
-	distrobox-enter -n $2 -e distrobox-export --bin /usr/bin/$bin_name --export-path $lbin
-    fi
-}
-
-dbox_local_install() {
-    local bin_name="${3:-$1}"
-
-    #if ! distrobox-enter -n $2 -e stat /usr/bin/yay &> /dev/null
-    #then
-     #   echo "needs yay"
-        # TODO desktop tools doesn't have git
-        #distrobox-enter -n $2 -e git clone https://aur.archlinux.org/yay.git /tmp/yay
-        #distrobox-enter -n $2 -e bash "cd /tmp/yay"
-
-    #fi
-
-    if ! distrobox-enter -n $2 -e stat /usr/bin/$bin_name &> /dev/null
-    then
-        # TODO maybe --noconfirm here
-	distrobox-enter -n $2 -e sudo pacman -S $1
-    fi
-}
-
 distrobox-enter -n $cntr_desktop -e ~/.config/distrobox/desktop-tools-bootstrap.sh
-
-dbox_install chezmoi $cntr_devtools;
-dbox_install emacs $cntr_devtools;
-dbox_install emacs $cntr_devtools emacsclient;
-dbox_local_install git $cntr_devtools
-dbox_local_install openssh $cntr_devtools ssh
-dbox_local_install jdk17-openjdk $cntr_devtools java
-dbox_local_install clojure $cntr_devtools;
-dbox_local_install direnv $cntr_devtools
-dbox_local_install rlwrap $cntr_devtools
-dbox_local_install leiningen $cntr_devtools lein
-
-# to add to distrobox
-dbox_install ripgrep $cntr_devtools rg
-dbox_install fasd $cntr_devtools
-#dbox_local_install kitty-terminfo $cntr_devtools
-
+distrobox-enter -n $cntr_devtools -e ~/.config/distrobox/devtools-bootstrap.sh
+#dbox_install ripgrep $cntr_devtools rg
+# TODO add fasd to desktop tools
 
 # dotfiles
 
