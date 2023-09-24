@@ -16,6 +16,7 @@ PROMPT='%(?.%F{green}√.%F{red}?%?)%f %B%F{240}%1~%f%b $ '
 autoload -U compinit; compinit # completion
 
 # history
+mkdir -p ~/.cache/shell
 export HISTFILE=~/.cache/shell/shell_history
 export HISTSIZE=1000000   # the number of items for the internal history list
 export SAVEHIST=1000000   # maximum number of items for the history file
