@@ -10,8 +10,21 @@ then
   source ~/.config/shell/shellrc
 fi
 
+# allows parameter expansion in prompts
+setopt prompt_subst
 
-PROMPT='%(?.%F{green}√.%F{red}?%?)%f %B%F{240}%1~%f%b $ '
+function set_prompt() {
+  # TODO figure out how to concatenate a local variable
+  if [[ -v CONTAINER_ID ]]
+  then
+    PROMPT='%F{240}[${CONTAINER_ID}]%f %(?.%F{green}√.%F{red}?%?)%f %B%F{240}%1~%f%b $ '
+  else
+    PROMPT='%(?.%F{green}√.%F{red}?%?)%f %B%F{240}%1~%f%b $ '
+  fi
+}
+
+typeset -a precmd_fuctions
+precmd_functions=(set_prompt)
 
 autoload -U compinit; compinit # completion
 
