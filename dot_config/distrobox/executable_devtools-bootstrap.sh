@@ -2,9 +2,8 @@
 
 source $(dirname "$0")/shared.sh
 
-install_yay
-
 #sudo pacman -Syyu
+install_arch_basics
 
 local_install chezmoi
 local_install clojure
@@ -23,5 +22,3 @@ yay_i google-cloud-cli
 export_install emacs
 export_install emacs emacsclient
 export_install ripgrep rg
-
-# todo install yay and google cloud sdk

@@ -2,7 +2,7 @@
 
 source $(dirname "$0")/shared.sh
 
-install_yay
+install_arch_basics
 
 local_install openssh
 local_install kitty-terminfo
