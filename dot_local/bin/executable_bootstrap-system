@@ -107,6 +107,8 @@ flatpak_i com.bitwarden.desktop
 flatpak_i com.spotify.Client
 flatpak_i fi.skyjake.Lagrange
 
+xdg-settings set default-web-browser org.mozilla.firefox.desktop
+
 # Systemd services
 
 systemctl enable --user emacs
