@@ -2,7 +2,9 @@
 
 source $(dirname "$0")/shared.sh
 
-pacman -Syyu
+install_yay
+
+#sudo pacman -Syyu
 
 local_install chezmoi
 local_install clojure
@@ -16,6 +18,7 @@ local_install leiningen
 local_install openssh
 local_install rlwrap
 local_install tldr
+yay_i google-cloud-cli
 
 export_install emacs
 export_install emacs emacsclient

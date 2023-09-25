@@ -2,6 +2,8 @@
 
 source $(dirname "$0")/shared.sh
 
+install_yay
+
 local_install openssh
 local_install kitty-terminfo
 
