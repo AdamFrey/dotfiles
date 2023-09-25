@@ -15,6 +15,7 @@ local_install kitty-terminfo
 local_install leiningen
 local_install openssh
 local_install rlwrap
+local_install tldr
 
 export_install emacs
 export_install emacs emacsclient
