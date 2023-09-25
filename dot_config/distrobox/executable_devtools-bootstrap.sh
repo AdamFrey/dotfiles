@@ -6,7 +6,6 @@ source $(dirname "$0")/shared.sh
 install_arch_basics
 
 local_install chezmoi
-local_install clojure
 local_install direnv
 local_install fasd
 local_install fzf
@@ -20,6 +19,8 @@ local_install tldr
 local_install terraform
 yay_i google-cloud-cli
 
+export_install clojure
+export_install clojure clj
 export_install emacs
 export_install emacs emacsclient
 export_install ripgrep rg
