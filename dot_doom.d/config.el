@@ -28,7 +28,8 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-font (font-spec :family "JetBrains Mono" :size 18 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "sans" :size 18))
+      doom-variable-pitch-font (font-spec :family "sans" :size 18)
+      doom-unicode-font (font-spec :family "Noto Color Emoji"))
 
 (setq doom-theme 'doom-solarized-light)
 
