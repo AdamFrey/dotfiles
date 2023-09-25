@@ -17,6 +17,7 @@ local_install leiningen
 local_install openssh
 local_install rlwrap
 local_install tldr
+local_install terraform
 yay_i google-cloud-cli
 
 export_install emacs
