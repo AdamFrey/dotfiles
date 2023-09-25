@@ -49,6 +49,7 @@ install_yay() {
 install_arch_basics () {
     install_yay
     local_install zsh
+    local_install neofetch
     yay_i zsh-autosuggestions-git
     yay_i zsh-syntax-highlighting-git
 }
