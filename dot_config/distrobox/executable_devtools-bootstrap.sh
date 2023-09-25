@@ -23,3 +23,8 @@ yay_i google-cloud-cli
 export_install emacs
 export_install emacs emacsclient
 export_install ripgrep rg
+
+if [ ! -f ~/.config/gcloud/application_default_credentials.json ]
+then
+    gcloud auth application-default login
+fi
