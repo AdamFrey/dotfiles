@@ -26,10 +26,6 @@ setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
 setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
 setopt EXTENDED_HISTORY  # record command start time
 
-# fzf - fuzzy find for history, etc
-#. /usr/share/fzf/completion.zsh
-#. /usr/share/fzf/key-bindings.zsh
-
 
 
 #. /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -91,3 +87,7 @@ _fasd_zsh_cmd_complete() {
 # enable command mode completion
 compctl -U -K _fasd_zsh_cmd_complete -V fasd -x 'C[-1,-*e],s[-]n[1,e]' -c - \
   'c[-1,-A][-1,-D]' -f -- fasd fasd_cd
+
+# fzf - fuzzy find for history, etc
+. ~/.local/share/fzf/completion.zsh
+. ~/.local/share/fzf/key-bindings.zsh

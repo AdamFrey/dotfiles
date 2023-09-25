@@ -8,6 +8,7 @@ local_install chezmoi
 local_install clojure
 local_install direnv
 local_install fasd
+local_install fzf
 local_install git
 local_install jdk17-openjdk
 local_install kitty-terminfo
