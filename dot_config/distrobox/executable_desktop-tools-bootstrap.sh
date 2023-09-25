@@ -13,3 +13,8 @@ export_install xorg-xset xset
 export_install fasd
 export_install fzf
 export_install tldr
+
+yay_i ttf-icomoon-feather-git
+# TODO copy from container
+#  /usr/share/fonts/TTF/icomoon-feather.ttf
+# to ~/.local/share/fonts/ ?
