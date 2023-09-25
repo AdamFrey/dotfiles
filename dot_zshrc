@@ -26,11 +26,10 @@ setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
 setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
 setopt EXTENDED_HISTORY  # record command start time
 
-
-
+# couldn't find the first one in fedora packages
 #. /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-#. /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-#. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+. /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+. /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # direnv
 #eval "$(direnv hook zsh)"

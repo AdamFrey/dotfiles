@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 if ! command -v awesome &> /dev/null
 then
     rpm-ostree intsall awesome
@@ -23,7 +22,7 @@ fi
 
 if ! command -v zsh &> /dev/null
 then
-    rpm-ostree install zsh
+    rpm-ostree install zsh zsh-autosuggestions zsh-syntax-highlighting
     systemctl reboot
 fi
 
@@ -82,6 +81,8 @@ then
     rm -rf $chez_local
     git clone $chez_remote_ssh $chez_local
     chezmoi update
+
+    echo "chezmoi init"
 fi
 
 rm -rf ~/.emacs.d
