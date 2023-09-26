@@ -92,7 +92,7 @@ end)
 
 -- Autostart
 awful.spawn.with_shell('$HOME/.config/polybar/launch.sh')
--- awful.spawn.with_shell('dunst')
+awful.spawn.with_shell('dunst')
 -- awful.spawn.with_shell('picom') -- My rinkydink videocard can't handle picom
 -- awful.spawn.with_shell('feh --bg-fill -r -z ~/30-39.Images/30.Wallpapers')
 -- awful.spawn.with_shell('flameshot')

@@ -8,6 +8,7 @@ local_install openssh
 local_install kitty-terminfo
 
 export_install direnv
+export_install dunst
 export_install restic
 export_install xorg-xset xset
 export_install fasd
