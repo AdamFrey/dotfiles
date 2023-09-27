@@ -106,6 +106,7 @@ flatpak_i us.zoom.Zoom
 flatpak_i com.bitwarden.desktop
 flatpak_i com.spotify.Client
 flatpak_i fi.skyjake.Lagrange
+flatpak_i com.todoist.Todoist
 
 xdg-settings set default-web-browser org.mozilla.firefox.desktop
 
