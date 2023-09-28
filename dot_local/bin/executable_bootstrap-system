@@ -102,7 +102,19 @@ flatpak_i () {
     fi
 }
 
+symlink () {
+    if [ ! -e $2 ]
+    then
+        ln -s $1 $2
+    fi
+}
+
 flatpak_i us.zoom.Zoom
+flatpak_i com.slack.Slack
+# https://github.com/flatpak/flatpak/issues/3787#issuecomment-1044677820
+# TODO get this working
+mkdir -p ~/.var/app/com.slack.Slack/config/gtk-3.0
+symlink /home/adam/.config/gtk-3.0/settings.ini ~/.var/app/com.slack.Slack/config/gtk-3.0/settings.ini
 flatpak_i com.bitwarden.desktop
 flatpak_i com.spotify.Client
 flatpak_i fi.skyjake.Lagrange
