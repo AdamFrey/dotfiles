@@ -23,6 +23,7 @@ export_install clojure
 export_install clojure clj
 export_install emacs
 export_install emacs emacsclient
+export_install httpie http
 export_install ripgrep rg
 
 if [ ! -f ~/.config/gcloud/application_default_credentials.json ]
