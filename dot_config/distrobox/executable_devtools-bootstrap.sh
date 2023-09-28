@@ -14,6 +14,7 @@ local_install jdk17-openjdk
 local_install kitty-terminfo
 local_install leiningen
 local_install openssh
+local_install podman
 local_install rlwrap
 local_install tldr
 local_install terraform
