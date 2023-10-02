@@ -127,5 +127,8 @@ compctl -U -K _fasd_zsh_cmd_complete -V fasd -x 'C[-1,-*e],s[-]n[1,e]' -c - \
   'c[-1,-A][-1,-D]' -f -- fasd fasd_cd
 
 # fzf - fuzzy find for history, etc
-. ~/.local/share/fzf/completion.zsh
-. ~/.local/share/fzf/key-bindings.zsh
+if [ -f ~/.local/share/fzf/completion.zsh ]; then source ~/.local/share/fzf/completion.zsh; fi
+if [ -f /usr/share/fzf/completion.zsh ]; then source /usr/share/fzf/completion.zsh; fi
+if [ -f ~/.local/share/fzf/key-bindings.zsh ]; then source ~/.local/share/fzf/key-bindings.zsh; fi
+if [ -f /usr/share/fzf/key-bindings.zsh ]; then source /usr/share/fzf/key-bindings.zsh; fi
+
