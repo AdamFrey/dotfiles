@@ -102,6 +102,13 @@ flatpak_i () {
     fi
 }
 
+flatpak_rm () {
+    if flatpak info $1 &> /dev/null
+    then
+        flatpak uninstall $1
+    fi
+}
+
 symlink () {
     if [ ! -e $2 ]
     then
@@ -109,15 +116,11 @@ symlink () {
     fi
 }
 
-flatpak_i us.zoom.Zoom
-flatpak_i com.slack.Slack
 # https://github.com/flatpak/flatpak/issues/3787#issuecomment-1044677820
 # TODO get this working
 mkdir -p ~/.var/app/com.slack.Slack/config/gtk-3.0
 symlink /home/adam/.config/gtk-3.0/settings.ini ~/.var/app/com.slack.Slack/config/gtk-3.0/settings.ini
 flatpak_i com.bitwarden.desktop
-flatpak_i com.spotify.Client
-flatpak_i fi.skyjake.Lagrange
 flatpak_i com.todoist.Todoist
 
 xdg-settings set default-web-browser org.mozilla.firefox.desktop
@@ -125,3 +128,23 @@ xdg-settings set default-web-browser org.mozilla.firefox.desktop
 # Systemd services
 
 systemctl enable --user emacs
+
+webpaks=(
+    "com.google.Chrome"
+    "com.spotify.Client"
+    "org.mozilla.firefox"
+    "fi.skyjake.Lagrange"
+    "com.slack.Slack"
+    "com.valvesoftware.Steam"
+    "us.zoom.Zoom"
+)
+
+if [ "$1" = "--no-web" ]; then
+    for pak in "${webpaks[@]}"; do
+        flatpak_rm $pak
+    done
+else
+    for pak in "${webpaks[@]}"; do
+        flatpak_i $pak
+    done
+fi
