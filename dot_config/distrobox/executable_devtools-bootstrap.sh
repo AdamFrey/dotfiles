@@ -18,6 +18,7 @@ local_install podman
 local_install rlwrap
 local_install tldr
 local_install terraform
+local_install unzip
 yay_i google-cloud-cli
 
 export_install clojure
