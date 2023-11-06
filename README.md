@@ -2,6 +2,15 @@
 
 Powered by Chezmoi
 
+## Distrobox
+
+Commands to sync distroboxes
+
+``` sh
+distrobox-enter -n devtools -e ~/.config/distrobox/devtools-bootstrap.sh
+distrobox-enter -n desktop-tools -e ~/.config/distrobox/desktop-tools-bootstrap.sh
+```
+
 ## Instructions
 
 ``` commands
