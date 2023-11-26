@@ -5,7 +5,7 @@ source $(dirname "$0")/shared.sh
 #sudo pacman -Syyu
 install_arch_basics
 
-local_install chezmoi
+
 local_install direnv
 local_install fasd
 local_install fzf
@@ -21,12 +21,16 @@ local_install terraform
 local_install unzip
 yay_i google-cloud-cli
 
+export_install chezmoi
 export_install clojure
 export_install clojure clj
-export_install emacs
-export_install emacs emacsclient
+
+# handled on fedora
+#export_install emacs
+#export_install emacs emacsclient
 export_install httpie http
 export_install ripgrep rg
+export_install zig
 
 if [ ! -f ~/.config/gcloud/application_default_credentials.json ]
 then
