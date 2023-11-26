@@ -27,6 +27,12 @@ then
     rpm-ostree install emacs
 fi
 
+if ! command -v flameshot  &> /dev/null
+then
+    rpm-ostree install flameshot
+fi
+
+
 # https://universal-blue.org/images/nvidia/
 # rpm-ostree kargs \
 #     --append=rd.driver.blacklist=nouveau \
