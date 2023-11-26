@@ -3,28 +3,37 @@
 if ! command -v awesome &> /dev/null
 then
     rpm-ostree intsall awesome
-    systemctl reboot
 fi
 
 
 if ! command -v kitty &> /dev/null
 then
     rpm-ostree install kitty
-    systemctl reboot
 fi
 
 
 if ! command -v rofi &> /dev/null
 then
     rpm-ostree install rofi
-    systemctl reboot
 fi
 
 if ! command -v zsh &> /dev/null
 then
     rpm-ostree install zsh zsh-autosuggestions zsh-syntax-highlighting
-    systemctl reboot
 fi
+
+if ! command -v emacs  &> /dev/null
+then
+    rpm-ostree install emacs
+fi
+
+# https://universal-blue.org/images/nvidia/
+# rpm-ostree kargs \
+#     --append=rd.driver.blacklist=nouveau \
+#     --append=modprobe.blacklist=nouveau \
+#     --append=nvidia-drm.modeset=1
+#
+# See https://universal-blue.org/images/nvidia/#video-playback
 
 # I ran this but I don't think it was necessary. The beep was coming from kitty
 # sudo rmmod pcspkr
