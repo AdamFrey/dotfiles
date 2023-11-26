@@ -23,7 +23,7 @@
  "LANG=en_US.UTF-8"
  "DESKTOP_STARTUP_ID=awesome/kitty/5841-20-matte-black-cadillac_TIME3393119"
  "XDG_RUNTIME_DIR=/run/user/1000"
- "PATH=/home/adam/10-19.Software/14.Open-Source/google-cloud-sdk/google-cloud-sdk/bin:/home/adam/.config/nvm/versions/node/v16.13.0/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/lib/psql13/bin:/usr/lib/psql13/bin"
+ "PATH=/home/adam/10-19.Software/14.Open-Source/google-cloud-sdk/google-cloud-sdk/bin:/home/adam/.config/nvm/versions/node/v16.13.0/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/lib/psql13/bin:/usr/lib/psql13/bin:/home/adam/.local/bin"
  "LC_COLLATE=C"
  "XDG_SESSION_ID=2"
  "XDG_SESSION_CLASS=user"
