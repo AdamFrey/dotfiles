@@ -163,3 +163,17 @@ else
         flatpak_i $pak
     done
 fi
+
+
+# Folders
+
+rmdir ~/Desktop &> /dev/null
+rmdir ~/Documents &> /dev/null
+rmdir ~/Downloads &> /dev/null
+rmdir ~/Music &> /dev/null
+rmdir ~/Pictures &> /dev/null
+rmdir ~/Public &> /dev/null
+rmdir ~/Templates &> /dev/null
+rmdir ~/Videos &> /dev/null
+
+mkdir -p ~/inbox
