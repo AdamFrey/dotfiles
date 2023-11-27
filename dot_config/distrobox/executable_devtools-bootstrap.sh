@@ -12,7 +12,6 @@ local_install fzf
 local_install git
 local_install jdk17-openjdk
 local_install kitty-terminfo
-local_install leiningen
 local_install openssh
 local_install podman
 local_install rlwrap
@@ -24,6 +23,7 @@ yay_i google-cloud-cli
 export_install chezmoi
 export_install clojure
 export_install clojure clj
+export_install leiningen lein
 
 # handled on fedora
 #export_install emacs
