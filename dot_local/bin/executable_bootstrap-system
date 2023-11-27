@@ -32,6 +32,17 @@ then
     rpm-ostree install flameshot
 fi
 
+if ! command -v direnv &> /dev/null
+then
+    rpm-ostree install direnv
+fi
+
+if ! command -v dunst &> /dev/null
+then
+    rpm-ostree install dunst
+fi
+
+
 
 # https://universal-blue.org/images/nvidia/
 # rpm-ostree kargs \

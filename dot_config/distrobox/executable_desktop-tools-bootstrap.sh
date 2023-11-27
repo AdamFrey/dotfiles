@@ -6,9 +6,9 @@ install_arch_basics
 
 local_install openssh
 local_install kitty-terminfo
+local_install direnv
+local_install dunst
 
-export_install direnv
-export_install dunst
 export_install restic
 export_install xorg-xset xset
 export_install fasd
