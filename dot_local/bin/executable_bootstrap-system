@@ -150,6 +150,7 @@ mkdir -p ~/.var/app/org.mozilla.firefox/config/gtk-3.0
 symlink /home/adam/.config/gtk-3.0/settings.ini ~/.var/app/org.mozilla.firefox/config/gtk-3.0/settings.ini
 flatpak_i com.bitwarden.desktop
 flatpak_i com.todoist.Todoist
+flatpak_i org.zealdocs.Zeal
 
 xdg-settings set default-web-browser org.mozilla.firefox.desktop
 
