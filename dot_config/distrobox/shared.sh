@@ -34,6 +34,13 @@ export_install() {
     distrobox-export --bin /usr/bin/$bin_name --export-path $lbin
 }
 
+export_install_yay() {
+    local bin_name="${2:-$1}"
+    yay_i $1
+    distrobox-export --bin /usr/bin/$bin_name --export-path $lbin
+}
+
+
 install_yay() {
     if ! is_installed yay
     then

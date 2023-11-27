@@ -30,7 +30,9 @@ export_install clojure clj
 #export_install emacs emacsclient
 export_install httpie http
 export_install ripgrep rg
-export_install zig
+# For the moment installing from source
+# export_install zig zig
+# export_install_yay zls-git zls
 
 if [ ! -f ~/.config/gcloud/application_default_credentials.json ]
 then
