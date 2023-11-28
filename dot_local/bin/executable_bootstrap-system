@@ -42,6 +42,13 @@ then
     rpm-ostree install dunst
 fi
 
+# NVIDIA
+# https://docs.fedoraproject.org/en-US/quick-docs/set-nvidia-as-primary-gpu-on-optimus-based-laptops/
+# rpm-ostree install akmod-nvidia
+# sudo akmods --force
+# opening Nvidia settings should show a bunch of relevant info
+# glxinfo | grep "OpenGL"
+# OpenGL vendor string: NVIDIA Corporation
 
 
 # https://universal-blue.org/images/nvidia/
