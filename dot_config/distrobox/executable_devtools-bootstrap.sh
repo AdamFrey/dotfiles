@@ -24,6 +24,8 @@ export_install chezmoi
 export_install clojure
 export_install clojure clj
 export_install leiningen lein
+export_install postgresql psql
+export_install_yay babashka-bin bb
 
 # handled on fedora
 #export_install emacs
