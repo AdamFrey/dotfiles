@@ -24,8 +24,15 @@ export_install chezmoi
 export_install clojure
 export_install clojure clj
 export_install leiningen lein
+export_install npm
 export_install postgresql psql
+export_install shellcheck
 export_install_yay babashka-bin bb
+export_install_yay circleci-cli-bin circleci
+export_install_yay cljfmt-bin cljfmt
+export_install_yay clj-kondo-bin clj-kondo
+
+
 
 # handled on fedora
 #export_install emacs
