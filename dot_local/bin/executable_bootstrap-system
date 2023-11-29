@@ -1,45 +1,25 @@
 #!/bin/bash
 
-if ! command -v awesome &> /dev/null
-then
-    rpm-ostree intsall awesome
-fi
+rpm_install() {
+    local bin_name="${2:-$1}"
+    if ! command -v "$bin_name" &> /dev/null
+    then
+        rpm-ostree install "$1"
+    fi
+}
 
-
-if ! command -v kitty &> /dev/null
-then
-    rpm-ostree install kitty
-fi
-
-
-if ! command -v rofi &> /dev/null
-then
-    rpm-ostree install rofi
-fi
+rpm_install awesome
+rpm_install kitty
+rpm_install rofi
+rpm_install emacs
+rpm_install flameshot
+rpm_install direnv
+rpm_install dunst
+# rpm_install tailscale no package
 
 if ! command -v zsh &> /dev/null
 then
     rpm-ostree install zsh zsh-autosuggestions zsh-syntax-highlighting
-fi
-
-if ! command -v emacs  &> /dev/null
-then
-    rpm-ostree install emacs
-fi
-
-if ! command -v flameshot  &> /dev/null
-then
-    rpm-ostree install flameshot
-fi
-
-if ! command -v direnv &> /dev/null
-then
-    rpm-ostree install direnv
-fi
-
-if ! command -v dunst &> /dev/null
-then
-    rpm-ostree install dunst
 fi
 
 # NVIDIA
@@ -63,17 +43,17 @@ fi
 # sudo rmmod pcspkr
 
 # set zsh as shell
-if ! cat /etc/passwd | grep $USER | grep zsh &> /dev/null
+if ! grep "$USER" < "/etc/passwd" | grep zsh &> /dev/null
 then
     echo "change shell to /bin/zsh"
-    sudo lchsh $USER
+    sudo lchsh "$USER"
 fi
 
 if [ ! -d /usr/share/fonts/jetbrains-mono-fonts ]
 then
     # system fonts are in /usr/share/fonts
     rpm-ostree install jetbrains-mono-fonts
-    # emacs font cache has may have to be busted after this
+    # emacs font cache may have to be busted after this
     systemctl reboot
 fi
 
@@ -87,9 +67,9 @@ fi
 # distroboxes
 
 dbox_create() {
-    if ! distrobox list | grep $1 &> /dev/null
+    if ! distrobox list | grep "$1" &> /dev/null
     then
-	distrobox create --name $1 -i archlinux:latest
+	distrobox create --name "$1" -i archlinux:latest
     fi
 }
 
@@ -107,9 +87,8 @@ distrobox-enter -n $cntr_devtools -e ~/.config/distrobox/devtools-bootstrap.sh
 # dotfiles
 
 chez_local=~/.local/share/chezmoi
-chez_remote_http=https://github.com/AdamFrey/dotfiles.git
 chez_remote_ssh=git@github.com:AdamFrey/dotfiles.git
-if ! ls $chez_local | grep dot_config &> /dev/null
+if ! ls $chez_local/*dot_config* &> /dev/null
 then
     rm -rf $chez_local
     git clone $chez_remote_ssh $chez_local
@@ -120,7 +99,7 @@ fi
 
 rm -rf ~/.emacs.d
 
-if ! cat ~/.config/emacs/README.md | grep "Doom Emacs" &> /dev/null
+if ! grep "Doom Emacs" < ~/.config/emacs/README.md &> /dev/null
 then    
     git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
     ~/.config/emacs/bin/doom install
@@ -129,23 +108,23 @@ fi
 # flatpaks
 
 flatpak_i () {
-    if ! flatpak info $1 &> /dev/null
+    if ! flatpak info "$1" &> /dev/null
     then
-        flatpak install flathub $1
+        flatpak install flathub "$1"
     fi
 }
 
 flatpak_rm () {
-    if flatpak info $1 &> /dev/null
+    if flatpak info "$1" &> /dev/null
     then
-        flatpak uninstall $1
+        flatpak uninstall "$1"
     fi
 }
 
 symlink () {
-    if [ ! -e $2 ]
+    if [ ! -e "$2" ]
     then
-        ln -s $1 $2
+        ln -s "$1" "$2"
     fi
 }
 
@@ -177,11 +156,11 @@ webpaks=(
 
 if [ "$1" = "--no-web" ]; then
     for pak in "${webpaks[@]}"; do
-        flatpak_rm $pak
+        flatpak_rm "$pak"
     done
 else
     for pak in "${webpaks[@]}"; do
-        flatpak_i $pak
+        flatpak_i "$pak"
     done
 fi
 
