@@ -37,6 +37,7 @@ export_install terraform
 yay_i google-cloud-cli gcloud
 distrobox-export --bin /opt/google-cloud-cli/bin/gcloud --export-path ~/.local/bin
 distrobox-export --bin /opt/google-cloud-cli/bin/gsutil --export-path ~/.local/bin
+distrobox-export --bin /opt/google-cloud-cli/bin/docker-credential-gcloud --export-path ~/.local/bin
 
 
 
