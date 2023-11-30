@@ -8,6 +8,14 @@ rpm_install() {
     fi
 }
 
+add_package_repo() {
+    local repo_file="/etc/yum.repos.d/$1";
+    if [ ! -f "$repo_file" ]
+    then
+        sudo curl "$2" --output "$repo_file"
+    fi
+}
+
 rpm_install awesome
 rpm_install kitty
 rpm_install rofi
@@ -15,6 +23,22 @@ rpm_install emacs
 rpm_install flameshot
 rpm_install direnv
 rpm_install dunst
+
+add_package_repo hashicorp.repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+rpm_install packer
+
+add_package_repo tailscale.repo https://pkgs.tailscale.com/unstable/fedora/tailscale.repo
+rpm_install tailscale
+
+# Install Tailscale
+# sudo dnf install tailscale
+# Enable and start tailscaled
+#sudo systemctl enable --now tailscaled
+# Start Tailscale!
+# sudo tailscale up
+
+
+
 # rpm_install tailscale no package
 
 if ! command -v zsh &> /dev/null
@@ -137,6 +161,7 @@ symlink /home/adam/.config/gtk-3.0/settings.ini ~/.var/app/org.mozilla.firefox/c
 flatpak_i com.bitwarden.desktop
 flatpak_i com.todoist.Todoist
 flatpak_i org.zealdocs.Zeal
+flatpak_i io.podman_desktop.PodmanDesktop
 
 xdg-settings set default-web-browser org.mozilla.firefox.desktop
 
