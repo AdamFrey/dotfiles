@@ -8,6 +8,7 @@ local_install openssh
 local_install kitty-terminfo
 local_install direnv
 local_install dunst
+local_install zoxide
 
 export_install restic
 export_install xorg-xset xset
