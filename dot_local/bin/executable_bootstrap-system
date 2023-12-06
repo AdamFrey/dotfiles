@@ -24,6 +24,7 @@ rpm_install flameshot
 rpm_install direnv
 rpm_install dunst
 rpm_install zoxide
+rpm_install podman-compose
 
 add_package_repo hashicorp.repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 rpm_install packer
