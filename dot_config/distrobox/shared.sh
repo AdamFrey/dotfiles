@@ -31,7 +31,10 @@ lbin=~/.local/bin
 export_install() {
     local bin_name="${2:-$1}"
     local_install $1
-    distrobox-export --bin /usr/bin/$bin_name --export-path $lbin
+    if [ -f "$lbin/$bin_name" ]
+    then
+        distrobox-export --bin /usr/bin/$bin_name --export-path $lbin
+    fi
 }
 
 export_install_yay() {
