@@ -358,6 +358,7 @@ only works for semicolons."
   (setq cider-clojure-cli-global-options "-A:performance/benchmark:performance/memory-meter:dev/debug:dev") ;; :performance/profiler
   (setq cider-print-fn 'puget)
   (setq cider-repl-use-content-types t)
+  (setq cider-enrich-classpath t)
   (setq-default cider-show-error-buffer nil)
   (setq-default cider-auto-jump-to-error nil)
   (setq cider-repl-pop-to-buffer-on-connect nil)

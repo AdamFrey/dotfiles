@@ -4,7 +4,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(safe-local-variable-values
-   '((format-all-mode)
+   '((cider-merge-sessions . project)
+     (format-all-mode)
      (clojure-tonsky-indent)
      (cider-shadow-default-options . "dev")
      (cider-default-cljs-repl . shadow))))
