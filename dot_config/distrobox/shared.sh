@@ -28,19 +28,24 @@ yay_i() {
 
 lbin=~/.local/bin
 
+distrobox_export() {
+    local executable_path="${2:-/usr/bin/$1}";
+    if [ ! -f "$lbin/$1" ]
+    then
+        distrobox-export --bin "$executable_path" --export-path $lbin
+    fi
+}
+
 export_install() {
     local bin_name="${2:-$1}"
     local_install $1
-    if [ -f "$lbin/$bin_name" ]
-    then
-        distrobox-export --bin /usr/bin/$bin_name --export-path $lbin
-    fi
+    distrobox_export "$bin_name";
 }
 
 export_install_yay() {
     local bin_name="${2:-$1}"
     yay_i $1
-    distrobox-export --bin /usr/bin/$bin_name --export-path $lbin
+    distrobox_export "$bin_name";
 }
 
 

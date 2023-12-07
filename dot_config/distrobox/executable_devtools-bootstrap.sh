@@ -36,10 +36,9 @@ export_install_yay clj-kondo-bin clj-kondo
 export_install terraform
 
 yay_i google-cloud-cli gcloud
-distrobox-export --bin /opt/google-cloud-cli/bin/gcloud --export-path ~/.local/bin
-distrobox-export --bin /opt/google-cloud-cli/bin/gsutil --export-path ~/.local/bin
-distrobox-export --bin /opt/google-cloud-cli/bin/docker-credential-gcloud --export-path ~/.local/bin
-
+distrobox_export gcloud /opt/google-cloud-cli/bin/gcloud
+distrobox_export gsutil /opt/google-cloud-cli/bin/gsutil
+distrobox_export docker-credential-gcloud /opt/google-cloud-cli/bin/docker-credential-gcloud
 
 
 # handled on fedora
