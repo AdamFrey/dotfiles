@@ -25,6 +25,7 @@ export_install clojure
 export_install clojure clj
 export_install leiningen lein
 export_install npm
+export_install jdk17-openjdk java
 export_install packer
 export_install postgresql psql
 export_install shellcheck
