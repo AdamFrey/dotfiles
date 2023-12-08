@@ -74,6 +74,11 @@
     (insert-file-contents path)
     (buffer-string)))
 
+;; Completion  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; C-u M-x list-faces-display RET vertico RET
+(set-face-foreground 'vertico-group-title "cadet blue")
+
 ;; Editing  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (global-set-key (kbd "C-t") 'forward-char)
