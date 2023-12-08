@@ -171,6 +171,7 @@ flatpak_i com.bitwarden.desktop
 flatpak_i com.todoist.Todoist
 flatpak_i org.zealdocs.Zeal
 flatpak_i io.podman_desktop.PodmanDesktop
+flatpak_i org.denemo.Denemo
 
 xdg-settings set default-web-browser org.mozilla.firefox.desktop
 

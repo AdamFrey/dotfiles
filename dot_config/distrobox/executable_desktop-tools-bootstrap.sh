@@ -12,9 +12,10 @@ local_install zoxide
 
 export_install restic
 export_install xorg-xset xset
-export_install fasd
+export_install feh
 export_install fzf
 export_install polybar
 export_install tldr
+
 
 yay_i ttf-icomoon-feather-git
