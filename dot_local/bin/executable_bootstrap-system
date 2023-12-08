@@ -32,8 +32,15 @@ rpm_install packer
 add_package_repo tailscale.repo https://pkgs.tailscale.com/unstable/fedora/tailscale.repo
 rpm_install tailscale
 
-# Install Tailscale
-# sudo dnf install tailscale
+enable_systemd_service() {
+    if [ -f "/usr/lib/systemd/system/$1.service" ]
+    then
+        sudo systemctl enable --now $1
+    fi
+}
+
+enable_systemd_service tailscaled
+
 # Enable and start tailscaled
 #sudo systemctl enable --now tailscaled
 # Start Tailscale!
