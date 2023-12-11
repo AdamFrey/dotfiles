@@ -20,6 +20,7 @@ local_install unzip
 local_install zoxide
 
 
+export_install_yay async-profiler
 export_install chezmoi
 export_install clojure
 export_install clojure clj
@@ -34,6 +35,7 @@ export_install_yay circleci-cli-bin circleci
 export_install_yay cljfmt-bin cljfmt
 export_install_yay clj-kondo-bin clj-kondo
 export_install terraform
+
 
 yay_i google-cloud-cli gcloud
 distrobox_export gcloud /opt/google-cloud-cli/bin/gcloud

@@ -29,7 +29,7 @@ yay_i() {
 lbin=~/.local/bin
 
 distrobox_export() {
-    local executable_path="${2:-/usr/bin/$1}";
+    local executable_path="$(which $1)"
     if [ ! -f "$lbin/$1" ]
     then
         distrobox-export --bin "$executable_path" --export-path $lbin
