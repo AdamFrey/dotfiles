@@ -21,6 +21,7 @@ rpm_install kitty
 rpm_install rofi
 rpm_install emacs
 rpm_install flameshot
+rpm_install fzf
 rpm_install direnv
 rpm_install dunst
 rpm_install zoxide
