@@ -215,3 +215,20 @@ rmdir ~/Templates &> /dev/null
 rmdir ~/Videos &> /dev/null
 
 mkdir -p ~/inbox
+
+if [ ! -d /mnt/hdd1 ];
+then
+   sudo mkdir -p /mnt/hdd1
+fi
+
+if [ ! -e ~/archive ]
+then
+    ln -s /mnt/hdd1/archive /home/adam/archive
+fi
+
+# auto mount HDD on boot
+# sudo blkid /dev/sda1
+# sudo nano /etc/fstab
+# UUID=your-uuid /mnt/hdd1 ext4 defaults 0 0
+
+
