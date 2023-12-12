@@ -232,3 +232,9 @@ fi
 # UUID=your-uuid /mnt/hdd1 ext4 defaults 0 0
 
 
+# Limits ##################################
+
+if [ "256" != $(sysctl -n fs.inotify.max_user_instances) ]
+then
+    sudo sysctl -w fs.inotify.max_user_instances=256
+fi
