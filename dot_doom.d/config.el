@@ -77,7 +77,7 @@
 ;; Completion  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; C-u M-x list-faces-display RET vertico RET
-(set-face-foreground 'vertico-group-title "cadet blue")
+;; (set-face-foreground 'vertico-group-title "cadet blue")
 
 ;; Editing  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
