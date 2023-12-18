@@ -238,6 +238,12 @@ mkdir -p ~/.local/share/immich
 # https://immich.app/docs/install/docker-compose
 
 
+# Debugging ###################################
+
+# from clj goes fast tutorial
+#sudo sysctl -w kernel.perf_event_paranoid=1
+#sudo sysctl -w kernel.kptr_restrict=0
+
 # Limits ##################################
 
 if [ "256" != $(sysctl -n fs.inotify.max_user_instances) ]
