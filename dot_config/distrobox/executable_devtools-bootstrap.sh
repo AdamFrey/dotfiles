@@ -7,9 +7,16 @@ install_arch_basics
 
 
 local_install direnv
+#local_install devtools installs a bunch of stuff including pkgctl
 local_install fasd
 local_install fzf
+local_install gdb
 local_install git
+# configuring JDK with debug symbols
+# https://www.reddit.com/r/archlinux/comments/erct4o/openjdk_debug_symbols/
+# https://clojurians.slack.com/archives/C03S1KBA2/p1680889420258109
+# https://github.com/async-profiler/async-profiler#installing-debug-symbols
+# gdb /usr/lib/jvm/java-17-openjdk/lib/server/libjvm.so -ex 'info address UseG1GC'
 local_install jdk17-openjdk
 local_install kitty-terminfo
 local_install openssh
