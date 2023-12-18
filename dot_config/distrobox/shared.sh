@@ -61,6 +61,9 @@ install_yay() {
     fi
 }
 
+# install_npm() {
+# }
+
 install_arch_basics () {
     install_yay
     local_install zsh
