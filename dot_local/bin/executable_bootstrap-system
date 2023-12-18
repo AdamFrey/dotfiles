@@ -88,7 +88,8 @@ if [ ! -d /usr/share/fonts/jetbrains-mono-fonts ]
 then
     # system fonts are in /usr/share/fonts
     rpm-ostree install jetbrains-mono-fonts
-    # emacs font cache may have to be busted after this
+    # emacs font cache may have to be busted after this, try sudo fc-cache -rv
+    # https://www.reddit.com/r/emacs/comments/iermhs/emacs_fails_to_start_on_font_issue_even_after/
     systemctl reboot
 fi
 
@@ -166,9 +167,9 @@ symlink () {
 # https://github.com/flatpak/flatpak/issues/3787#issuecomment-1044677820
 # TODO get this working
 mkdir -p ~/.var/app/com.slack.Slack/config/gtk-3.0
-symlink /home/adam/.config/gtk-3.0/settings.ini ~/.var/app/com.slack.Slack/config/gtk-3.0/settings.ini
+cp /home/adam/.config/gtk-3.0/settings.ini ~/.var/app/com.slack.Slack/config/gtk-3.0/settings.ini
 mkdir -p ~/.var/app/org.mozilla.firefox/config/gtk-3.0
-symlink /home/adam/.config/gtk-3.0/settings.ini ~/.var/app/org.mozilla.firefox/config/gtk-3.0/settings.ini
+cp /home/adam/.config/gtk-3.0/settings.ini ~/.var/app/org.mozilla.firefox/config/gtk-3.0/settings.ini
 flatpak_i com.bitwarden.desktop
 flatpak_i com.todoist.Todoist
 flatpak_i org.zealdocs.Zeal
