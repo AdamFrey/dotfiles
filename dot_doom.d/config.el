@@ -361,6 +361,7 @@ only works for semicolons."
   (setq cider-comment-continued-prefix "")
   (setq cider-comment-postfix "\n")
   (setq cider-clojure-cli-global-options "-A:performance/benchmark:performance/memory-meter:dev/debug:dev") ;; :performance/profiler
+  (setq cider-lein-parameters "with-profile +dbg repl :headless :host localhost")
   (setq cider-print-fn 'puget)
   (setq cider-repl-use-content-types t)
   (setq cider-enrich-classpath t)
