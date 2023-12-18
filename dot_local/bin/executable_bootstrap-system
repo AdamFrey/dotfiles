@@ -232,6 +232,12 @@ fi
 # UUID=your-uuid /mnt/hdd1 ext4 defaults 0 0
 
 
+# Immich Photos ###############################
+
+mkdir -p ~/.local/share/immich
+# https://immich.app/docs/install/docker-compose
+
+
 # Limits ##################################
 
 if [ "256" != $(sysctl -n fs.inotify.max_user_instances) ]
