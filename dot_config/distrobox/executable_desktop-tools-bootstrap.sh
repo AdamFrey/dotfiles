@@ -16,5 +16,5 @@ export_install xorg-xset xset
 export_install feh
 export_install tldr
 
-
+# icons on host system installed at /usr/share/icons
 yay_i ttf-icomoon-feather-git
