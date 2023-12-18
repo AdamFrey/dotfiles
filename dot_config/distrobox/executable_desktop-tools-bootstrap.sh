@@ -14,7 +14,6 @@ local_install zoxide
 export_install restic
 export_install xorg-xset xset
 export_install feh
-export_install polybar
 export_install tldr
 
 
