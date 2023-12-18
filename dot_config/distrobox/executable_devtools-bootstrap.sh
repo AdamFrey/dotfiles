@@ -51,6 +51,8 @@ distrobox_export gcloud /opt/google-cloud-cli/bin/gcloud
 distrobox_export gsutil /opt/google-cloud-cli/bin/gsutil
 distrobox_export docker-credential-gcloud /opt/google-cloud-cli/bin/docker-credential-gcloud
 
+# curl -L https://fly.io/install.sh | sh
+
 
 # handled on fedora
 #export_install emacs
