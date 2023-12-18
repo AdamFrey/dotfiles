@@ -33,6 +33,8 @@ export_install clojure
 export_install clojure clj
 export_install leiningen lein
 export_install npm
+distrobox_export node
+distrobox_export npx
 export_install jdk17-openjdk java
 export_install packer
 export_install postgresql psql
