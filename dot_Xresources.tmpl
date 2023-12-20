@@ -1,3 +1,8 @@
+{{ if eq .dpi "0" }}
+# use default Xfn.dpi
+{{ else }}
+Xft.dpi: {{ .dpi }}
+{{ end }}
 Xft.hinting: true
 Xft.rgba: rgb
 Xft.autohint: false
