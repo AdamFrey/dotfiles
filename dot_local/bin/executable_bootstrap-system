@@ -40,11 +40,13 @@ rpm_install rofi
 rpm_install emacs
 rpm_install flameshot
 rpm_install fzf
+rpm_install httpie http
 rpm_install direnv
 rpm_install dunst
 rpm_install zoxide
 rpm_install podman-compose
 rpm_install polybar
+rpm_install tldr
 
 add_package_repo hashicorp.repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 rpm_install packer

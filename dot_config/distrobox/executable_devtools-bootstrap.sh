@@ -12,6 +12,7 @@ local_install fasd
 local_install fzf
 local_install gdb
 local_install git
+local_install httpie
 # configuring JDK with debug symbols
 # https://www.reddit.com/r/archlinux/comments/erct4o/openjdk_debug_symbols/
 # https://clojurians.slack.com/archives/C03S1KBA2/p1680889420258109
@@ -57,7 +58,7 @@ distrobox_export docker-credential-gcloud /opt/google-cloud-cli/bin/docker-crede
 # handled on fedora
 #export_install emacs
 #export_install emacs emacsclient
-export_install httpie http
+
 export_install ripgrep rg
 # For the moment installing from source
 # export_install zig zig
