@@ -99,6 +99,8 @@ then
     sudo lchsh "$USER"
 fi
 
+## Fonts #######################################################################
+
 if [ ! -d /usr/share/fonts/jetbrains-mono-fonts ]
 then
     # system fonts are in /usr/share/fonts
@@ -107,6 +109,19 @@ then
     # https://www.reddit.com/r/emacs/comments/iermhs/emacs_fails_to_start_on_font_issue_even_after/
     systemctl reboot
 fi
+
+mkdir -p ~/.fonts
+
+if [ ! -f ~/.fonts/feather.ttf ]
+then
+    #
+    #fc-list | grep feather
+    # this doesn't work, you need a personal access token to download it
+    # curl https://github.com/adi1090x/polybar-themes/raw/master/fonts/panels/icomoon_feather.ttf -o ~/.fonts/TTF/feather.ttf
+    echo "Go to https://github.com/adi1090x/polybar-themes/raw/master/fonts/panels/icomoon_feather.ttf in your browser and save to ~/.fonts/feather.ttf"
+    echo "then reload with fc-cache -rv | grep home"
+fi
+
 
 if [ ! -f ~/.ssh/config ]
 then
