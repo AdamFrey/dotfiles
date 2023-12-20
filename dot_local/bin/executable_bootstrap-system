@@ -210,6 +210,8 @@ webpaks=(
     "us.zoom.Zoom"
 )
 
+# In order to share your screen in Zoom, toggle D-bus session bus in Flatseal for Zoom
+
 if [ "$1" = "--no-web" ]; then
     for pak in "${webpaks[@]}"; do
         flatpak_rm "$pak"
