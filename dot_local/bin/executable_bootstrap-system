@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# Distroboxes
+
+dbox_create() {
+    if ! distrobox list | grep "$1" &> /dev/null
+    then
+        distrobox create --name "$1" -i archlinux:latest
+    fi
+}
+
+cntr_desktop=desktop-tools
+dbox_create $cntr_desktop
+
+cntr_devtools=devtools
+dbox_create $cntr_devtools
+
+# Fedora Packages
+
+
 rpm_install() {
     local bin_name="${2:-$1}"
     if ! command -v "$bin_name" &> /dev/null
@@ -48,10 +66,6 @@ enable_systemd_service tailscaled
 # Start Tailscale!
 # sudo tailscale up
 
-
-
-# rpm_install tailscale no package
-
 if ! command -v zsh &> /dev/null
 then
     rpm-ostree install zsh zsh-autosuggestions zsh-syntax-highlighting
@@ -74,8 +88,7 @@ fi
 #
 # See https://universal-blue.org/images/nvidia/#video-playback
 
-# I ran this but I don't think it was necessary. The beep was coming from kitty
-# sudo rmmod pcspkr
+## Shell #######################################################################
 
 # set zsh as shell
 if ! grep "$USER" < "/etc/passwd" | grep zsh &> /dev/null
@@ -102,18 +115,6 @@ fi
 
 # distroboxes
 
-dbox_create() {
-    if ! distrobox list | grep "$1" &> /dev/null
-    then
-	distrobox create --name "$1" -i archlinux:latest
-    fi
-}
-
-cntr_desktop=desktop-tools
-dbox_create $cntr_desktop
-
-cntr_devtools=devtools
-dbox_create $cntr_devtools
 
 distrobox-enter -n $cntr_desktop -e ~/.config/distrobox/desktop-tools-bootstrap.sh
 distrobox-enter -n $cntr_devtools -e ~/.config/distrobox/devtools-bootstrap.sh
