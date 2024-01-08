@@ -20,6 +20,7 @@ local_install httpie
 # gdb /usr/lib/jvm/java-17-openjdk/lib/server/libjvm.so -ex 'info address UseG1GC'
 local_install jdk17-openjdk
 local_install kitty-terminfo
+local_install maven
 local_install openssh
 local_install podman
 local_install rlwrap
@@ -44,6 +45,7 @@ export_install_yay babashka-bin bb
 export_install_yay circleci-cli-bin circleci
 export_install_yay cljfmt-bin cljfmt
 export_install_yay clj-kondo-bin clj-kondo
+export_install_yay flyctl-bin flyctl
 export_install terraform
 
 
