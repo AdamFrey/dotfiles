@@ -258,6 +258,15 @@ mkdir -p ~/.local/share/immich
 # https://immich.app/docs/install/docker-compose
 
 
+# Ad-blocking #################################
+
+if [ ! -d ~/.local/share/blackout-hosts ]
+then
+    echo "need to make blackout hosts"
+    git clone --depth 1 https://github.com/StevenBlack/hosts ~/.local/share/blackout-hosts
+fi
+
+
 # Debugging ###################################
 
 # from clj goes fast tutorial
