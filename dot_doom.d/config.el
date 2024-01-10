@@ -368,6 +368,7 @@ only works for semicolons."
   (setq-default cider-show-error-buffer nil)
   (setq-default cider-auto-jump-to-error nil)
   (setq cider-repl-pop-to-buffer-on-connect nil)
+  (setq nrepl-sync-request-timeout 30)  ;; TODO figure out where to put this to get it to stick
   (define-key cider-mode-map (kbd "C-c C-z") 'af/cider-switch-to-repl-buffer)
   (define-key cider-mode-map (kbd "C-c x") 'af/pop-cider-error)
   (set-face-attribute 'cider-error-overlay-face nil
