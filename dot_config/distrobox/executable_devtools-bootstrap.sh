@@ -18,8 +18,12 @@ local_install httpie
 # https://clojurians.slack.com/archives/C03S1KBA2/p1680889420258109
 # https://github.com/async-profiler/async-profiler#installing-debug-symbols
 # gdb /usr/lib/jvm/java-17-openjdk/lib/server/libjvm.so -ex 'info address UseG1GC'
+local_install fontconfig
 local_install jdk17-openjdk
 local_install kitty-terminfo
+local_install libxrandr
+local_install libxcursor
+local_install libxi
 local_install maven
 local_install openssh
 local_install podman
