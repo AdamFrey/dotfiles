@@ -364,11 +364,12 @@ only works for semicolons."
   (setq cider-lein-parameters "with-profile +dbg repl :headless :host localhost")
   (setq cider-print-fn 'puget)
   (setq cider-repl-use-content-types t)
-  (setq cider-enrich-classpath t)
+  ;; (setq cider-enrich-classpath t) ;; this was causing a problem with google java libraries "this should be overridden by subclasses"
+  (setq cider-enrich-classpath nil)
   (setq-default cider-show-error-buffer nil)
   (setq-default cider-auto-jump-to-error nil)
   (setq cider-repl-pop-to-buffer-on-connect nil)
-  (setq nrepl-sync-request-timeout 30)  ;; TODO figure out where to put this to get it to stick
+  (setq nrepl-sync-request-timeout 30)
   (define-key cider-mode-map (kbd "C-c C-z") 'af/cider-switch-to-repl-buffer)
   (define-key cider-mode-map (kbd "C-c x") 'af/pop-cider-error)
   (set-face-attribute 'cider-error-overlay-face nil
