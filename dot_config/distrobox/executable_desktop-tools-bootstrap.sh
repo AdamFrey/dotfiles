@@ -11,10 +11,10 @@ local_install dunst
 local_install fzf
 local_install tldr
 local_install zoxide
-
+export_install feh
 export_install restic
 export_install xorg-xset xset
-export_install feh
+
 
 
 # icons on host system installed at /usr/share/icons

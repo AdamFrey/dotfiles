@@ -23,6 +23,7 @@ local_install jdk17-openjdk
 local_install kitty-terminfo
 local_install libxrandr
 local_install libxcursor
+local_install libxtst # used by nubank morse
 local_install libxi
 local_install maven
 local_install openssh
@@ -31,6 +32,7 @@ local_install rlwrap
 local_install tldr
 local_install unzip
 local_install zoxide
+
 
 
 export_install_yay async-profiler
