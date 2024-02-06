@@ -20,6 +20,7 @@ dbox_create $cntr_devtools
 
 rpm_install() {
     local bin_name="${2:-$1}"
+
     if ! command -v "$bin_name" &> /dev/null
     then
         rpm-ostree install "$1"
@@ -40,13 +41,17 @@ rpm_install rofi
 rpm_install emacs
 rpm_install flameshot
 rpm_install fzf
-rpm_install httpie http
+# skipping for now because of python pygments conflict
+# rpm_install httpie http
 rpm_install direnv
 rpm_install dunst
-rpm_install zoxide
+# rpm_install fontconfig-devel
+rpm_install mplayer
+rpm_install nethogs
 rpm_install podman-compose
 rpm_install polybar
 rpm_install tldr
+rpm_install zoxide
 
 add_package_repo hashicorp.repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 rpm_install packer
