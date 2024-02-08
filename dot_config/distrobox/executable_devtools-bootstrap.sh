@@ -53,6 +53,7 @@ export_install_yay cljfmt-bin cljfmt
 export_install_yay clj-kondo-bin clj-kondo
 export_install_yay flyctl-bin flyctl
 export_install terraform
+export_install_yay ucm-bin ucm # Unison Code Manager
 
 
 yay_i google-cloud-cli gcloud
