@@ -201,6 +201,7 @@ cp -u /home/adam/.config/gtk-3.0/settings.ini ~/.var/app/com.slack.Slack/config/
 mkdir -p ~/.var/app/org.mozilla.firefox/config/gtk-3.0
 cp -u /home/adam/.config/gtk-3.0/settings.ini ~/.var/app/org.mozilla.firefox/config/gtk-3.0/settings.ini &> /dev/null
 flatpak_i com.bitwarden.desktop
+flatpak_i com.calibre_ebook.calibre
 flatpak_i com.github.finefindus.eyedropper
 flatpak_i com.todoist.Todoist
 flatpak_i org.zealdocs.Zeal
