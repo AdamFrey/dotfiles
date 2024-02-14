@@ -54,6 +54,12 @@ rpm_install polybar
 rpm_install tldr
 rpm_install zoxide
 
+# Install Zoom
+# https://zoom.us/download?os=linux
+# rpm-ostree uninstall (existing version)
+# rpm-ostree install zoom_x86_64.rpm
+
+
 add_package_repo hashicorp.repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 rpm_install packer
 
@@ -214,7 +220,7 @@ webpaks=(
     "fi.skyjake.Lagrange"
     "com.slack.Slack"
     "com.valvesoftware.Steam"
-    "us.zoom.Zoom"
+    #"us.zoom.Zoom" # couldn't get screen sharing with flatpak zoom
 )
 
 # In order to share your screen in Zoom, toggle D-bus session bus in Flatseal for Zoom
