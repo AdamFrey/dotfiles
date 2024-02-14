@@ -12,7 +12,7 @@ local_install fasd
 local_install fzf
 local_install gdb
 local_install git
-local_install httpie
+export_install httpie http
 # configuring JDK with debug symbols
 # https://www.reddit.com/r/archlinux/comments/erct4o/openjdk_debug_symbols/
 # https://clojurians.slack.com/archives/C03S1KBA2/p1680889420258109
