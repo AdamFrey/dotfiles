@@ -265,11 +265,16 @@ fi
 # sudo nano /etc/fstab
 # UUID=your-uuid /mnt/hdd1 ext4 defaults 0 0
 
+# Permissions for connecting to the NAS
 
-# Immich Photos ###############################
+if [ ! $(getent group storage) ]; then
+    sudo groupadd -g 3001 storage
+fi
 
-mkdir -p ~/.local/share/immich
-# https://immich.app/docs/install/docker-compose
+if ! groups "$USER" | grep storage &> /dev/null
+then
+    sudo usermod --append --groups storage "$USER"
+fi
 
 
 # Ad-blocking #################################
