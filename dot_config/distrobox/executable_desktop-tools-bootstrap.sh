@@ -6,6 +6,7 @@ install_arch_basics
 
 local_install openssh
 local_install kitty-terminfo
+export_install_yay d2-bin d2
 local_install direnv
 local_install dunst
 local_install fzf
