@@ -15,8 +15,7 @@ dbox_create $cntr_desktop
 cntr_devtools=devtools
 dbox_create $cntr_devtools
 
-# Fedora Packages
-
+## Fedora Packages #############################################################
 
 rpm_install() {
     local bin_name="${2:-$1}"
@@ -58,7 +57,6 @@ rpm_install zoxide
 # https://zoom.us/download?os=linux
 # rpm-ostree uninstall (existing version)
 # rpm-ostree install zoom_x86_64.rpm
-
 
 add_package_repo hashicorp.repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 rpm_install packer
@@ -102,6 +100,26 @@ fi
 #
 # See https://universal-blue.org/images/nvidia/#video-playback
 
+## Distroboxes #################################################################
+
+distrobox-enter -n $cntr_desktop -e ~/.config/distrobox/desktop-tools-bootstrap.sh
+distrobox-enter -n $cntr_devtools -e ~/.config/distrobox/devtools-bootstrap.sh
+
+## NodeJS Packages #############################################################
+
+# pnpm exported from devtools distrobox
+
+pnpm_install() {
+    local bin_name="${2:-$1}"
+
+    if ! command -v "$bin_name" &> /dev/null
+    then
+        pnpm add -g "$1"
+    fi
+}
+
+pnpm_install prettier
+
 ## Shell #######################################################################
 
 # set zsh as shell
@@ -141,14 +159,6 @@ then
     echo "scp -r <old-machine>:~/.ssh ~/.ssh"
     exit 1
 fi
-
-# distroboxes
-
-
-distrobox-enter -n $cntr_desktop -e ~/.config/distrobox/desktop-tools-bootstrap.sh
-distrobox-enter -n $cntr_devtools -e ~/.config/distrobox/devtools-bootstrap.sh
-#dbox_install ripgrep $cntr_devtools rg
-# TODO add fasd to desktop tools
 
 # dotfiles
 

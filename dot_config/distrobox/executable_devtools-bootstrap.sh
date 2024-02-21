@@ -45,6 +45,7 @@ distrobox_export node
 distrobox_export npx
 export_install jdk17-openjdk java
 export_install packer
+export_install pnpm
 export_install postgresql psql
 export_install shellcheck
 export_install_yay babashka-bin bb

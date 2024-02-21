@@ -9,8 +9,6 @@
 (setq user-full-name "Adam Frey"
       user-mail-address "adam@adamfrey.me")
 
-(doom-load-envvars-file "~/.doom.d/myenv")
-
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
