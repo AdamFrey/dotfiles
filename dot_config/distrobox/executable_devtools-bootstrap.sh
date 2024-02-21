@@ -21,6 +21,7 @@ export_install httpie http
 local_install fontconfig
 local_install jdk17-openjdk
 local_install kitty-terminfo
+local_install libnotify # gives us notify-send
 local_install libxrandr
 local_install libxcursor
 local_install libxtst # used by nubank morse
