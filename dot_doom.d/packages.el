@@ -7,6 +7,8 @@
 
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
+
+(package! aggressive-indent)
 (package! sql-indent)
 (package! elisp-benchmarks)
 ;; (package! sdcv)
