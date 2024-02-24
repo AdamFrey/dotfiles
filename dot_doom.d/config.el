@@ -414,7 +414,6 @@ only works for semicolons."
 ;; ChatGPT ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (after! gptel
-  (setq gptel-api-key "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")
   ;; (setq gptel-api-key (lambda ()
   ;;                       (with-temp-buffer
   ;;                         (insert-file-contents "~/.config/chatgpt/api-key.txt")
