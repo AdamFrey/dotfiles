@@ -6,12 +6,15 @@ source $(dirname "$0")/shared.sh
 install_arch_basics
 
 
+
+local_install clang
 local_install direnv
 #local_install devtools installs a bunch of stuff including pkgctl
 local_install fasd
 local_install fzf
 local_install gdb
 local_install git
+local_install gtk4
 export_install httpie http
 # configuring JDK with debug symbols
 # https://www.reddit.com/r/archlinux/comments/erct4o/openjdk_debug_symbols/
@@ -27,6 +30,7 @@ local_install libxcursor
 local_install libxtst # used by nubank morse
 local_install libxi
 local_install maven
+local_install ninja
 local_install openssh
 local_install podman
 local_install rlwrap
@@ -40,6 +44,8 @@ export_install_yay async-profiler
 export_install chezmoi
 export_install clojure
 export_install clojure clj
+export_install cmake
+export_install_yay flutter
 export_install leiningen lein
 export_install npm
 distrobox_export node
