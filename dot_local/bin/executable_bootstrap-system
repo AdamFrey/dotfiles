@@ -303,9 +303,11 @@ fi
 #sudo sysctl -w kernel.perf_event_paranoid=1
 #sudo sysctl -w kernel.kptr_restrict=0
 
-# Limits ##################################
+# Kernel ########################################
 
-if [ "256" != $(sysctl -n fs.inotify.max_user_instances) ]
-then
-    sudo sysctl -w fs.inotify.max_user_instances=256
+# sysctl - configure kernel parameters at runtime
+user_sysctl_file="/etc/sysctl.d/60-local.conf"
+if [ ! -f "$user_sysctl_file" ]; then
+    echo "writing to $user_sysctl_file";
+    echo "fs.inotify.max_user_instances = 256" | sudo tee -a "$user_sysctl_file";
 fi
