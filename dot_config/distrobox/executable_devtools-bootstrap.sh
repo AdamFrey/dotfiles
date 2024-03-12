@@ -14,7 +14,7 @@ local_install fasd
 local_install fzf
 local_install gdb
 local_install git
-local_install gtk4
+local_install gtk3
 export_install httpie http
 # configuring JDK with debug symbols
 # https://www.reddit.com/r/archlinux/comments/erct4o/openjdk_debug_symbols/
@@ -36,9 +36,16 @@ local_install podman
 local_install rlwrap
 local_install tldr
 local_install unzip
+local_install xapp
 local_install zoxide
 
-
+export_install rustup
+if rustup show | grep -q "stable";
+then
+    echo "" ## todo remove this
+else
+    rustup default stable
+fi
 
 export_install_yay async-profiler
 export_install chezmoi
@@ -46,15 +53,20 @@ export_install clojure
 export_install clojure clj
 export_install cmake
 export_install_yay flutter
+export_install_yay gitu
 export_install leiningen lein
+export_install mlton # SML compiler
 export_install npm
 distrobox_export node
 distrobox_export npx
 export_install jdk17-openjdk java
+export_install opam
 export_install packer
 export_install pnpm
 export_install postgresql psql
 export_install shellcheck
+export_install smlnj
+distrobox_export sqlite3
 export_install_yay babashka-bin bb
 export_install_yay circleci-cli-bin circleci
 export_install_yay cljfmt-bin cljfmt
