@@ -216,6 +216,7 @@ flatpak_i com.github.finefindus.eyedropper
 flatpak_i com.github.rajsolai.textsnatcher
 flatpak_i com.logseq.Logseq
 flatpak_i com.todoist.Todoist
+flatpak_i com.usebruno.Bruno
 flatpak_i io.github.nate_xyz.Conjure
 flatpak_i io.podman_desktop.PodmanDesktop
 flatpak_i life.bolls.bolls
