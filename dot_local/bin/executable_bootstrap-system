@@ -66,6 +66,11 @@ rpm_install packer
 add_package_repo tailscale.repo https://pkgs.tailscale.com/unstable/fedora/tailscale.repo
 rpm_install tailscale
 
+if [ ! -f "/etc/auto.master" ]
+then
+    rpm-ostree install autofs
+fi
+
 enable_systemd_service() {
     if [ -f "/usr/lib/systemd/system/$1.service" ]
     then
@@ -73,6 +78,7 @@ enable_systemd_service() {
     fi
 }
 
+enable_systemd_service autofs
 enable_systemd_service tailscaled
 
 # Enable and start tailscaled
@@ -317,3 +323,27 @@ if [ ! -f "$user_sysctl_file" ]; then
     echo "writing to $user_sysctl_file";
     echo "fs.inotify.max_user_instances = 256" | sudo tee -a "$user_sysctl_file";
 fi
+
+
+# File System ####################################
+
+add_line_to_file() {
+    if ! grep -qF "$2" "$1"; then
+        echo "$2" | sudo tee -a "$1"
+    fi
+}
+
+add_nas_mount() {
+    mkdir -p "/home/adam/nas/$1";
+    add_line_to_file /etc/fstab "192.168.0.221:/mnt/pithos/$1 /home/adam/nas/$1 nfs _netdev,x-systemd.automount,x-systemd.requires=network-online.target 0 0"
+    # these two did not work when running sudo mount -a
+    #add_line_to_file /etc/fstab "192.168.0.221:/mnt/pithos/$1 /home/adam/nas/$1 nfs _netdev,noauto,x-systemd.automount,x-systemd.requires=network-online.target,x-systemd.device-timeout=4,timeo=14,hard,inter,noatime 0 0"
+    #add_line_to_file /etc/fstab "192.168.0.221:/mnt/pithos/$1 /home/adam/nas/$1 nfs _netdev,noauto,x-systemd.automount,x-systemd.device-timeout=4,timeo=14,hard,inter,noatime 0 0"
+}
+
+add_nas_mount art
+add_nas_mount episteme
+add_nas_mount techne
+add_nas_mount data
+add_nas_mount memories
+add_nas_mount logseq
