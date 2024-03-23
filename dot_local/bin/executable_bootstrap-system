@@ -68,7 +68,7 @@ add_package_repo tailscale.repo https://pkgs.tailscale.com/unstable/fedora/tails
 rpm_install tailscale
 
 add_package_repo sublime-text.repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
-rpm_install sublime-text
+rpm_install sublime-text subl
 
 if [ ! -f "/etc/auto.master" ]
 then
@@ -283,10 +283,10 @@ then
    sudo mkdir -p /mnt/hdd1
 fi
 
-if [ ! -e ~/archive ]
-then
-    ln -s /mnt/hdd1/archive /home/adam/archive
-fi
+#if [ ! -e ~/archive ]
+#then
+#    ln -s /mnt/hdd1/archive /home/adam/archive
+#fi
 
 # auto mount HDD on boot
 # sudo blkid /dev/sda1

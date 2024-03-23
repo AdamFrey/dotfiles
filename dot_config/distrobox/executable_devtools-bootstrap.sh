@@ -47,7 +47,7 @@ else
     rustup default stable
 fi
 
-export_install_yay async-profiler
+#export_install_yay async-profiler
 export_install chezmoi
 export_install clojure
 export_install clojure clj
