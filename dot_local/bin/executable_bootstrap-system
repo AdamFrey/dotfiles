@@ -34,24 +34,26 @@ add_package_repo() {
     fi
 }
 
+
 rpm_install awesome
 rpm_install kitty
 rpm_install rofi
 rpm_install emacs
 rpm_install flameshot
 rpm_install fzf
-# skipping for now because of python pygments conflict
-# rpm_install httpie http
 rpm_install direnv
 rpm_install dunst
 rpm_install flatpak-builder
 # rpm_install fontconfig-devel
 rpm_install mplayer
 rpm_install nethogs
+#rpm_install pgadmin4
 rpm_install podman-compose
 rpm_install polybar
+#rpm_install pulseaudio-utils
 rpm_install tldr
 rpm_install zoxide
+
 
 # Install Zoom
 # https://zoom.us/download?os=linux
