@@ -92,6 +92,7 @@ then
 fi
 
 # NVIDIA
+# I'm not sure the following works for silverblue
 # https://docs.fedoraproject.org/en-US/quick-docs/set-nvidia-as-primary-gpu-on-optimus-based-laptops/
 # rpm-ostree install akmod-nvidia
 # sudo akmods --force
