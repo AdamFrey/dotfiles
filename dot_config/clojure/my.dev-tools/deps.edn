@@ -1,7 +1,8 @@
 {:paths ["src"]
  :deps
+ ;; if you update anything deps here, also make sure to change ~/.lein/profiles.clj
  {djblue/portal               {:mvn/version "0.51.1"}
-  org.clojars.abhinav/snitch  {:mvn/version "0.1.14"}
+  org.clojars.abhinav/snitch  {:mvn/version "0.1.15"}
   ;; org.clojure/tools.namespace {:mvn/version "1.4.4"}
   ;; io.github.nubank/morse                    {:git/tag "v2023.10.06.02" :git/sha "88b5ff7"}
 

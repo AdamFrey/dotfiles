@@ -1,12 +1,13 @@
-(ns user)
+(ns adam.user)
 
 (require
- '[snitch.core :refer [defn* defmethod* *fn *let]]
- '[clojure.java.javadoc :refer (javadoc)]
- '[clojure.pprint :refer (pp pprint)]
- '[portal.api :as portal]
+  ;; requiring snitch interns these four methods in clojure.core
+  '[snitch.core :refer [defn* defmethod* *fn *let]]
+  '[clojure.java.javadoc :refer (javadoc)]
+  '[clojure.pprint :refer (pp pprint)]
+  '[portal.api :as portal]
   ;; '[dev.nu.morse :as morse]
- )
+  )
 
 (intern 'clojure.core (with-meta 'ppr (meta #'pprint)) #'pprint)
 (intern 'clojure.core (with-meta 'pp (meta #'pp)) #'pp)

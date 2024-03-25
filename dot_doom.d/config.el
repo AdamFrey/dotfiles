@@ -355,6 +355,7 @@ only works for semicolons."
 
 (after! cider
   ;; change cider pprint to comment so it uses the comment macro
+
   (setq cider-comment-prefix "\n#_")
   (setq cider-comment-continued-prefix "")
   (setq cider-comment-postfix "\n")
@@ -374,6 +375,9 @@ only works for semicolons."
                       :background "IndianRed"
                       :foreground "white")
 
+  (setq cider-repl-init-code
+        '("(when-let [requires (resolve 'clojure.main/repl-requires)]\n  (clojure.core/apply clojure.core/require @requires))"
+          "(require 'adam.user)"))
   (remove-hook 'cider-connected-hook 'cider--maybe-inspire-on-connect)
 
   (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
