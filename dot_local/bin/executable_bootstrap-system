@@ -1,5 +1,12 @@
 #!/bin/bash
 
+
+if ! command -v ld &> /dev/null
+then
+    mkdir -p ~/.local/bin
+    ln -s /usr/bin/ld.gold /home/adam/.local/bin/ld
+fi
+
 # Distroboxes
 
 dbox_create() {
