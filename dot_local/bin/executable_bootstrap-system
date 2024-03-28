@@ -12,7 +12,7 @@ fi
 dbox_create() {
     if ! distrobox list | grep "$1" &> /dev/null
     then
-        distrobox create --name "$1" -i archlinux:latest
+        distrobox create --name "$1" --additional-packages "archlinux-keyring" -i docker.io/library/archlinux:base-20240101.0.204074
     fi
 }
 
