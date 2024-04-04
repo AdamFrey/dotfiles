@@ -54,6 +54,7 @@ export_install clojure clj
 export_install cmake
 export_install_yay flutter
 export_install_yay gitu
+local_install imagemagick
 export_install leiningen lein
 export_install mlton # SML compiler
 export_install npm
