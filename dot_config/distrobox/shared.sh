@@ -75,4 +75,5 @@ install_arch_basics () {
     local_install neofetch
     yay_i zsh-autosuggestions-git
     yay_i zsh-syntax-highlighting-git
+    local_install archlinux-keyring
 }
