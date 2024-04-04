@@ -83,6 +83,7 @@ export_install pnpm
 export_install postgresql psql
 export_install shellcheck
 export_install smlnj
+export_install_yay smlfmt
 distrobox_export sqlite3
 export_install_yay babashka-bin bb
 export_install_yay circleci-cli-bin circleci

@@ -409,6 +409,11 @@ only works for semicolons."
 (setq-default js2-basic-offset 2)
 (add-to-list 'auto-mode-alist '("\\.cjs\\'" . js2-mode))
 
+;; SML ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(after! sml-mode
+  (set-formatter! 'smlformat '("smlfmt") :modes '(sml-mode))
+  )
 ;; Common ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 (after! company-mode
