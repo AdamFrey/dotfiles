@@ -62,6 +62,10 @@ rpm_install polybar
 rpm_install tldr
 rpm_install zoxide
 
+# Installed on my work machine for reasons
+# rpm_install docker
+# rpm_install docker-compose
+
 
 # Install Zoom
 # https://zoom.us/download?os=linux
