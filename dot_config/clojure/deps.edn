@@ -20,6 +20,10 @@
   {:extra-deps
    {io.github.clojure/tools.build {:git/tag "v0.9.5" :git/sha "24f2894"}}}
 
+  :outdated
+  { :deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
+   :main-opts ["-m" "antq.core"]}
+
   ;; clj-kondo - comprehensive and fast linter
   ;; https://github.com/borkdude/clj-kondo/
   :lint/clj-kondo
