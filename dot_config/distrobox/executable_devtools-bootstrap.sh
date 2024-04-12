@@ -23,6 +23,7 @@ export_install httpie http
 # gdb /usr/lib/jvm/java-17-openjdk/lib/server/libjvm.so -ex 'info address UseG1GC'
 local_install fontconfig
 local_install jdk17-openjdk
+distrobox_export javac
 local_install kitty-terminfo
 local_install libnotify # gives us notify-send
 local_install libxrandr
@@ -40,6 +41,17 @@ local_install xapp
 local_install zoxide
 
 export_install rustup
+distrobox_export cargo
+distrobox_export cargo-clippy
+distrobox_export cargo-fmt
+distrobox_export cargo-miri
+distrobox_export clippy-driver
+distrobox_export rust-gdb
+distrobox_export rust-lldb
+distrobox_export rustc
+distrobox_export rustdoc
+distrobox_export rustfmt
+
 if rustup show | grep -q "stable";
 then
     echo "" ## todo remove this
