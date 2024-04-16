@@ -7,6 +7,7 @@ install_arch_basics
 
 
 
+local_install ansible
 local_install clang
 local_install direnv
 #local_install devtools installs a bunch of stuff including pkgctl
