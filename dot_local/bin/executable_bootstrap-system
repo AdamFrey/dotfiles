@@ -1,13 +1,29 @@
 #!/bin/bash
 
-
+# I was hitting a weird issue where there was no ld binary present. My fix was
+# to create a link to ld.gold
 if ! command -v ld &> /dev/null
 then
     mkdir -p ~/.local/bin
-    ln -s /usr/bin/ld.gold /home/adam/.local/bin/ld
+    ln -s /usr/bin/ld.gold ~/.local/bin/ld
 fi
 
-# Distroboxes
+## Helpers #####################################################################
+
+enable_systemd_service() {
+    if [ -f "/usr/lib/systemd/system/$1.service" ]
+    then
+        sudo systemctl enable --now $1
+    fi
+}
+
+add_line_to_file() {
+    if ! grep -qF "$2" "$1"; then
+        echo "$2" | sudo tee -a "$1"
+    fi
+}
+
+## Distroboxes #################################################################
 
 dbox_create() {
     if ! distrobox list | grep "$1" &> /dev/null
@@ -15,6 +31,8 @@ dbox_create() {
         distrobox create --name "$1" --additional-packages "archlinux-keyring" -i docker.io/library/archlinux:base-20240101.0.204074
     fi
 }
+
+# I'm creating two distroboxes, one for software development packages and another for desktop packages.
 
 cntr_desktop=desktop-tools
 dbox_create $cntr_desktop
@@ -42,7 +60,6 @@ add_package_repo() {
     fi
 }
 
-
 rpm_install awesome
 rpm_install kitty
 rpm_install rofi
@@ -66,7 +83,6 @@ rpm_install zoxide
 # rpm_install docker
 # rpm_install docker-compose
 
-
 # Install Zoom
 # https://zoom.us/download?os=linux
 # rpm-ostree uninstall (existing version)
@@ -85,13 +101,6 @@ if [ ! -f "/etc/auto.master" ]
 then
     rpm-ostree install autofs
 fi
-
-enable_systemd_service() {
-    if [ -f "/usr/lib/systemd/system/$1.service" ]
-    then
-        sudo systemctl enable --now $1
-    fi
-}
 
 enable_systemd_service autofs
 enable_systemd_service tailscaled
@@ -184,7 +193,7 @@ then
     exit 1
 fi
 
-# dotfiles
+## Dotfiles ####################################################################
 
 chez_local=~/.local/share/chezmoi
 chez_remote_ssh=git@github.com:AdamFrey/dotfiles.git
@@ -205,7 +214,7 @@ then
     ~/.config/emacs/bin/doom install
 fi
 
-# flatpaks
+## Flatpaks ####################################################################
 
 flatpak_i () {
     if ! flatpak info "$1" &> /dev/null
@@ -246,12 +255,9 @@ flatpak_i io.podman_desktop.PodmanDesktop
 flatpak_i life.bolls.bolls
 flatpak_i org.denemo.Denemo
 flatpak_i org.zealdocs.Zeal
+flatpak_i com.jetbrains.IntelliJ-IDEA-Community
 
 xdg-settings set default-web-browser org.mozilla.firefox.desktop
-
-# Systemd services
-
-systemctl enable --user emacs
 
 webpaks=(
     "com.google.Chrome"
@@ -275,8 +281,15 @@ else
     done
 fi
 
+# Systemd services
 
-# Folders
+systemctl enable --user emacs
+
+## Appimages ###################################################################
+
+
+
+## File System #################################################################
 
 rmdir ~/Desktop &> /dev/null
 rmdir ~/Documents &> /dev/null
@@ -315,6 +328,21 @@ then
     sudo usermod --append --groups storage "$USER"
 fi
 
+add_nas_mount() {
+    mkdir -p "/home/adam/nas/$1";
+    add_line_to_file /etc/fstab "192.168.0.221:/mnt/pithos/$1 /home/adam/nas/$1 nfs _netdev,x-systemd.automount,x-systemd.requires=network-online.target,x-systemd.device-timeout=500ms 0 0"
+    # these two did not work when running sudo mount -a
+    #add_line_to_file /etc/fstab "192.168.0.221:/mnt/pithos/$1 /home/adam/nas/$1 nfs _netdev,noauto,x-systemd.automount,x-systemd.requires=network-online.target,x-systemd.device-timeout=4,timeo=14,hard,inter,noatime 0 0"
+    #add_line_to_file /etc/fstab "192.168.0.221:/mnt/pithos/$1 /home/adam/nas/$1 nfs _netdev,noauto,x-systemd.automount,x-systemd.device-timeout=4,timeo=14,hard,inter,noatime 0 0"
+}
+
+add_nas_mount art
+add_nas_mount episteme
+add_nas_mount techne
+add_nas_mount data
+add_nas_mount memories
+add_nas_mount logseq
+
 
 # Ad-blocking #################################
 
@@ -339,27 +367,3 @@ if [ ! -f "$user_sysctl_file" ]; then
     echo "writing to $user_sysctl_file";
     echo "fs.inotify.max_user_instances = 256" | sudo tee -a "$user_sysctl_file";
 fi
-
-
-# File System ####################################
-
-add_line_to_file() {
-    if ! grep -qF "$2" "$1"; then
-        echo "$2" | sudo tee -a "$1"
-    fi
-}
-
-add_nas_mount() {
-    mkdir -p "/home/adam/nas/$1";
-    add_line_to_file /etc/fstab "192.168.0.221:/mnt/pithos/$1 /home/adam/nas/$1 nfs _netdev,x-systemd.automount,x-systemd.requires=network-online.target,x-systemd.device-timeout=500ms 0 0"
-    # these two did not work when running sudo mount -a
-    #add_line_to_file /etc/fstab "192.168.0.221:/mnt/pithos/$1 /home/adam/nas/$1 nfs _netdev,noauto,x-systemd.automount,x-systemd.requires=network-online.target,x-systemd.device-timeout=4,timeo=14,hard,inter,noatime 0 0"
-    #add_line_to_file /etc/fstab "192.168.0.221:/mnt/pithos/$1 /home/adam/nas/$1 nfs _netdev,noauto,x-systemd.automount,x-systemd.device-timeout=4,timeo=14,hard,inter,noatime 0 0"
-}
-
-add_nas_mount art
-add_nas_mount episteme
-add_nas_mount techne
-add_nas_mount data
-add_nas_mount memories
-add_nas_mount logseq
