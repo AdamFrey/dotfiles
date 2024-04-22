@@ -397,6 +397,12 @@ only works for semicolons."
               (message "cider test report!")
               (afrey/pop-current-window-into-frame))))
 
+(use-package! neil
+  :config
+  (setq neil-prompt-for-version-p nil
+        neil-inject-dep-to-project-p t))
+
+
 
 ;; JavaScript ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq js-indent-level 2)

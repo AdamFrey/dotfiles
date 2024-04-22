@@ -288,6 +288,13 @@ systemctl enable --user emacs
 ## Appimages ###################################################################
 
 
+## Other Executables ###########################################################
+
+if [ ! -f ~/.local/bin/neil ]
+then
+   curl https://raw.githubusercontent.com/babashka/neil/main/neil -o ~/.local/bin/neil
+   chmod +x ~/.local/bin/neil
+fi
 
 ## File System #################################################################
 

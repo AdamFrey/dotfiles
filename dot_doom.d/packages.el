@@ -23,8 +23,6 @@
   :recipe (:host github :repo "warreq/friar" :branch "master"
 	   :files (:defaults "*.lua" "*.fnl")))
 
-
-
 (package! gptel
   :recipe (:host github :repo "karthink/gptel"))
 
@@ -33,6 +31,10 @@
 (package! chezmoi)
 (package! tide :disable t)
 (package! unisonlang-mode)
+
+;; clojure deps tool
+(package! neil :recipe (:host github :repo "babashka/neil" :files ("*.el")))
+
 (package! zoxide)
 
 ;; To install a package directly from a remote git repo, you must specify a
