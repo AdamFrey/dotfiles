@@ -69,6 +69,7 @@ export_install_yay docker-credential-gcr-bin docker-credential-gcr
 export_install_yay flutter
 export_install_yay gitu
 local_install imagemagick
+export_install_yay koka-bin koka
 export_install leiningen lein
 export_install mlton # SML compiler
 export_install npm
