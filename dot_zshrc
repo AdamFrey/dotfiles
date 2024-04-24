@@ -79,7 +79,6 @@ if [ -f '/home/adam/10-19.Software/14.Open-Source/google-cloud-sdk/google-cloud-
 
 # babashka
 _bb_tasks() {
-   echo "calcing bb"
    local matches=(`bb tasks | tail -n +3 | cut -f1 -d ' '`)
    compadd -a matches
    _files # autocomplete filenames as well
