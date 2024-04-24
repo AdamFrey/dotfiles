@@ -21,7 +21,7 @@
    {io.github.clojure/tools.build {:git/tag "v0.9.5" :git/sha "24f2894"}}}
 
   :outdated
-  { :deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
+  {:deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
    :main-opts ["-m" "antq.core"]}
 
   ;; clj-kondo - comprehensive and fast linter
@@ -53,9 +53,10 @@
   :performance/profiler
   {:jvm-opts ["-agentpath:/home/adam/10-19.Software/14.Open-Source/yourkit/YourKit-JavaProfiler-2021.11/bin/linux-x86-64/libyjpagent.so=exceptions=disable,delay=10000"]}
 
-  :check {:extra-deps {athos/clj-check {:git/url "https://github.com/athos/clj-check.git"
-                                        :sha     "0ca84df1357d71429243b99908303f45a934654c"}}
-          :main-opts  ["-m" "clj-check.check"]}
+  :check
+  {:extra-deps {athos/clj-check {:git/url "https://github.com/athos/clj-check.git"
+                                 :sha     "0ca84df1357d71429243b99908303f45a934654c"}}
+   :main-opts  ["-m" "clj-check.check"]}
 
   :dev/debug
   {:extra-deps {adam/my.dev-tools {:local/root "/home/adam/.config/clojure/my.dev-tools/"}}}
