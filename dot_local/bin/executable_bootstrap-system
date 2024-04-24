@@ -61,6 +61,7 @@ add_package_repo() {
 }
 
 rpm_install awesome
+rpm_install clojure
 rpm_install kitty
 rpm_install rofi
 rpm_install emacs

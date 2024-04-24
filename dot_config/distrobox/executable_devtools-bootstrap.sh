@@ -63,8 +63,8 @@ fi
 
 #export_install_yay async-profiler
 export_install chezmoi
-export_install clojure
-export_install clojure clj
+local_install clojure
+local_install clojure clj
 export_install cmake
 export_install_yay docker-credential-gcr-bin docker-credential-gcr
 export_install_yay flutter
