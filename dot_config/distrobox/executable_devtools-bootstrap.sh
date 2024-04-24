@@ -24,6 +24,7 @@ export_install httpie http
 # gdb /usr/lib/jvm/java-17-openjdk/lib/server/libjvm.so -ex 'info address UseG1GC'
 local_install fontconfig
 local_install jdk17-openjdk
+distrobox_export jar
 distrobox_export javac
 local_install kitty-terminfo
 local_install libnotify # gives us notify-send
