@@ -78,12 +78,13 @@ if [ -f '/home/adam/10-19.Software/14.Open-Source/google-cloud-sdk/google-cloud-
 if [ -f '/home/adam/10-19.Software/14.Open-Source/google-cloud-sdk/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/adam/10-19.Software/14.Open-Source/google-cloud-sdk/google-cloud-sdk/completion.zsh.inc'; fi
 
 # babashka
-#_bb_tasks() {
-#    local matches=(`bb tasks |tail -n +3 |cut -f1 -d ' '`)
-#    compadd -a matches
-#    _files # autocomplete filenames as well
-#}
-#compdef _bb_tasks bb
+_bb_tasks() {
+   echo "calcing bb"
+   local matches=(`bb tasks | tail -n +3 | cut -f1 -d ' '`)
+   compadd -a matches
+   _files # autocomplete filenames as well
+}
+compdef _bb_tasks bb
 
 # zoxide
 # provides z alias
