@@ -298,6 +298,8 @@ only works for semicolons."
   (put-clojure-indent '-> 0)
   (put-clojure-indent '->> 0)
 
+  (put-clojure-indent '*let 1)
+
   (add-to-list 'clojure-align-cond-forms "assoc")
   (add-to-list 'clojure-align-cond-forms "given")
   (add-to-list 'clojure-align-cond-forms "set-env!")
