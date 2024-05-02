@@ -62,3 +62,11 @@
       `(~time* ~duration (fn [] ~@body)))))
 
 (intern 'clojure.core (with-meta 'time+ (meta #'time+)) #'time+)
+
+(defmacro dspy
+  [sym & body]
+  `(let [out# ~@(do body)]
+     (def ~sym out#)
+     out#))
+
+(intern 'clojure.core (with-meta 'dspy (meta #'dspy)) #'dspy)
