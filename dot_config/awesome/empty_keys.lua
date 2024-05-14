@@ -67,6 +67,12 @@ keys.globalkeys = gears.table.join(
 keys.clientkeys = gears.table.join(
   awful.key({mod}, 'x', function(c) c:kill() end),
   awful.key({mod}, 'space', function(c) c.fullscreen = not c.fullscreen; c:raise() end),
+  awful.key({ mod, 'Shift' }, "m",
+    function (c)
+        c.maximized = not c.maximized
+        c:raise()
+    end,
+    {description = "toggle maximized", group = "client"}),
   awful.key({mod}, 'Tab', function() awful.client.floating.toggle() end),
   awful.key({mod}, 'n', function(c) c.minimized = true end),
   awful.key({ mod, "Control"   }, "n",

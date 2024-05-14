@@ -60,7 +60,10 @@ awful.rules.rules = {
            keys = keys.clientkeys,
            buttons = keys.clientbuttons,
            screen = awful.screen.preferred,
-           placement = awful.placement.no_overlap+awful.placement.no_offscreen
+           placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+           -- https://awesomewm.org/apidoc/documentation/90-FAQ.md.html why some floating clients can not be tiled?
+           maximized_vertical   = false,
+           maximized_horizontal = false
            }
   },
 
