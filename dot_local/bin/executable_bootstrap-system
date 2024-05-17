@@ -78,6 +78,7 @@ rpm_install podman-compose
 rpm_install polybar
 #rpm_install pulseaudio-utils
 rpm_install tldr
+rpm_install waybar
 rpm_install zoxide
 
 # Installed on my work machine for reasons
