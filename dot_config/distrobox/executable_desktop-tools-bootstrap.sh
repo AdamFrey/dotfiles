@@ -5,6 +5,7 @@ source $(dirname "$0")/shared.sh
 install_arch_basics
 
 local_install openssh
+export_install_yay k2pdfopt
 local_install kitty-terminfo
 export_install_yay d2-bin d2
 local_install direnv

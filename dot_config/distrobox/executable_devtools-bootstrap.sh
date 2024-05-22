@@ -69,17 +69,18 @@ export_install cmake
 export_install_yay docker-credential-gcr-bin docker-credential-gcr
 export_install_yay flutter
 export_install_yay gitu
+export_install gradle
 local_install imagemagick
 export_install_yay koka-bin koka
 export_install leiningen lein
 export_install mlton # SML compiler
-export_install npm
-distrobox_export node
-distrobox_export npx
+# export_install npm
+# distrobox_export node
+# distrobox_export npx
 export_install jdk17-openjdk java
 export_install opam
 export_install packer
-export_install pnpm
+# export_install pnpm
 export_install postgresql psql
 export_install shellcheck
 export_install smlnj
@@ -90,6 +91,7 @@ export_install_yay circleci-cli-bin circleci
 export_install_yay cljfmt-bin cljfmt
 export_install_yay clj-kondo-bin clj-kondo
 export_install_yay flyctl-bin flyctl
+export_install_yay temporal-cli temporal
 export_install terraform
 export_install_yay ucm-bin ucm # Unison Code Manager
 
