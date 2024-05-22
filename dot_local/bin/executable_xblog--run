@@ -2,4 +2,5 @@
 
 (require '[babashka.process :as p])
 
-(p/shell {:dir "/home/adam/src/mycorp/interfaces/interface.personal-blog"} "ls")
+(p/shell {:dir "/home/adam/src/mycorp/interfaces/interface.personal-blog"}
+  "clj" "-X:run")
