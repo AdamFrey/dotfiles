@@ -3,11 +3,13 @@
 {{- $browser := promptStringOnce . "browser" "Web Browser Application" -}}
 {{- $editor := promptStringOnce . "editor" "Text Editor Application" -}}
 {{- $dpi := promptIntOnce . "dpi" "Dots Per Inch" -}}
+{{- $emacs_font_size := promptIntOnce . "emacs_font_size" "Emacs font size" -}}
 
 # terminal: kitty
 # browser: flatpak run org.mozilla.firefox
-# editor: emacsclient --create-frame -a emacs
-# dpi: 150 on desktop, ? on laptop
+# editor: emacsclient --create-frame --no-wait
+# dpi: 150 on desktop, 200 on laptop
+# emacs_font_size: 18 on desktop, 12 on laptop
 
 [data]
     email = {{ $email | quote }}
@@ -15,3 +17,4 @@
     browser = {{ $browser | quote }}
     editor = {{ $editor | quote }}
     dpi = {{ $dpi | quote }}
+    emacs_font_size = {{ $emacs_font_size | quote }}

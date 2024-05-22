@@ -25,9 +25,12 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 18 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "sans" :size 18)
-      doom-unicode-font (font-spec :family "Noto Color Emoji"))
+
+(let ((font-size (string-to-number (or (getenv "EMACS_FONT_SIZE")
+                                       "18"))))
+  (setq doom-font (font-spec :family "JetBrains Mono" :size font-size :weight 'semi-light)
+        doom-variable-pitch-font (font-spec :family "sans" :size font-size)
+        doom-unicode-font (font-spec :family "Noto Color Emoji")))
 
 (setq doom-theme 'doom-solarized-light)
 
