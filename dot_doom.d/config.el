@@ -75,6 +75,8 @@
     (insert-file-contents path)
     (buffer-string)))
 
+(global-set-key (kbd "C-x C-c") 'save-some-buffers)
+
 ;; Completion  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; C-u M-x list-faces-display RET vertico RET
@@ -376,6 +378,8 @@ only works for semicolons."
   (setq nrepl-sync-request-timeout 30)
   (define-key cider-mode-map (kbd "C-c C-z") 'af/cider-switch-to-repl-buffer)
   (define-key cider-mode-map (kbd "C-c x") 'af/pop-cider-error)
+  ;; TODO get ctrl - return working for eval
+  (define-key cider-mode-map (kbd "C-RET") 'cider-eval-last-sexp)
   (set-face-attribute 'cider-error-overlay-face nil
                       :background "IndianRed"
                       :foreground "white")
