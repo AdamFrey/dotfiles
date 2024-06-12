@@ -448,7 +448,8 @@ only works for semicolons."
   ;;                         (buffer-string))))
   )
 
+;; '(recentf-exclude
+   ;; '("/\\(\\(\\(COMMIT\\|NOTES\\|PULLREQ\\|MERGEREQ\\|TAG\\)_EDIT\\|MERGE_\\|\\)MSG\\|\\(BRANCH\\|EDIT\\)_DESCRIPTION\\)\\'" "^/run/user/1000" "^/var/home/adam/nas"))
 
-
-;; - '(recentf-exclude
-;; -   '("/\\(\\(\\(COMMIT\\|NOTES\\|PULLREQ\\|MERGEREQ\\|TAG\\)_EDIT\\|MERGE_\\|\\)MSG\\|\\(BRANCH\\|EDIT\\)_DESCRIPTION\\)\\'" "^/run/user/1000" "^/var/home/adam/nas"))
+(after! writeroom-mode
+  (setq writeroom-width 40))
