@@ -15,6 +15,7 @@ local_install tldr
 local_install zoxide
 export_install feh
 export_install restic
+export_install unrar
 export_install xorg-xset xset
 
 
