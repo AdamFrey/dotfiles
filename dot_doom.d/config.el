@@ -107,7 +107,11 @@ only works for semicolons."
 (use-package! multiple-cursors
   :config
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this))
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+
+  ;; to remove a function accidentally marked as run only once,
+  ;; ~/.config/emacs/.local/cache/.mc-lists.el and change mc/cmds-to-run-once
+  )
 
 (defun whack-whitespace (arg)
   "Delete all white space from point to the next word.  With prefix ARG
@@ -443,3 +447,8 @@ only works for semicolons."
   ;;                         (insert-file-contents "~/.config/chatgpt/api-key.txt")
   ;;                         (buffer-string))))
   )
+
+
+
+;; - '(recentf-exclude
+;; -   '("/\\(\\(\\(COMMIT\\|NOTES\\|PULLREQ\\|MERGEREQ\\|TAG\\)_EDIT\\|MERGE_\\|\\)MSG\\|\\(BRANCH\\|EDIT\\)_DESCRIPTION\\)\\'" "^/run/user/1000" "^/var/home/adam/nas"))
