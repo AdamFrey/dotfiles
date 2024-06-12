@@ -7,7 +7,7 @@ install_arch_basics
 
 
 
-local_install ansible
+export_install ansible ansible-playbook
 local_install clang
 local_install direnv
 #local_install devtools installs a bunch of stuff including pkgctl
@@ -60,6 +60,7 @@ then
 else
     rustup default stable
 fi
+
 
 #export_install_yay async-profiler
 export_install chezmoi
