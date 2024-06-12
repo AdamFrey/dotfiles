@@ -74,7 +74,6 @@ rpm_install hyprland hyprctl
 # rpm_install fontconfig-devel
 rpm_install mplayer
 rpm_install nethogs
-#rpm_install pgadmin4
 rpm_install pnpm
 rpm_install podman-compose
 rpm_install polybar
@@ -300,6 +299,13 @@ if [ ! -f ~/.local/bin/neil ]
 then
    curl https://raw.githubusercontent.com/babashka/neil/main/neil -o ~/.local/bin/neil
    chmod +x ~/.local/bin/neil
+fi
+
+# asdf
+
+if [ ! -d ~/.local/share/asdf ]
+then
+    git clone https://github.com/asdf-vm/asdf.git ~/.local/share/asdf
 fi
 
 ## File System #################################################################
