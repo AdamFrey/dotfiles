@@ -14,11 +14,7 @@ local_install fzf
 local_install tldr
 local_install zoxide
 export_install feh
+export_install pulsemixer
 export_install restic
 export_install unrar
 export_install xorg-xset xset
-
-
-
-# icons on host system installed at /usr/share/icons
-yay_i ttf-icomoon-feather-git
