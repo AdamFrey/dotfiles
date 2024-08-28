@@ -24,6 +24,16 @@
   (def p (portal/open))
   (add-tap #'portal/submit))
 
+(defn t>
+  ([x] (tap> x) x)
+  ([label x]
+   (tap> [label x])
+   x))
+
+(intern 'clojure.core (with-meta 'portal! (meta #'portal!)) #'portal!)
+(intern 'clojure.core (with-meta 't> (meta #'t>)) #'t>)
+
+
 (let [time*
       (fn [^long duration-in-ms f]
         (let [^com.sun.management.ThreadMXBean bean (java.lang.management.ManagementFactory/getThreadMXBean)
