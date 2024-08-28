@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Podman Desktop (Wayland)
+Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=run.sh --file-forwarding io.podman_desktop.PodmanDesktop @@u %U @@ --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WaylandWindowDecorations
+Terminal=false
+Type=Application
+Icon=io.podman_desktop.PodmanDesktop
+StartupWMClass=Podman Desktop
+Categories=Development;
+X-Flatpak=io.podman_desktop.PodmanDesktop
