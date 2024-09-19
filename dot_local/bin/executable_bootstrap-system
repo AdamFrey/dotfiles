@@ -107,6 +107,7 @@ fi
 
 enable_systemd_service autofs
 enable_systemd_service tailscaled
+enable_systemd_service docker
 
 # Enable and start tailscaled
 #sudo systemctl enable --now tailscaled
@@ -290,6 +291,7 @@ fi
 # Systemd services
 
 systemctl enable --user emacs
+systemctl enable --user lifedb-postgres
 
 ## Appimages ###################################################################
 

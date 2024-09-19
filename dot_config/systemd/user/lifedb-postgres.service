@@ -1,0 +1,12 @@
+[Unit]
+Description=LifeDB Postgres
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/docker run --name postgres-lifedb -v /home/adam/data/life-db/pg:/var/lib/postgresql/data:z -e POSTGRES_DB=lifedb -e POSTGRES_USER=adam -e POSTGRES_PASSWORD=pwd -p 5555:5432 --user 1000:1000 postgres:16.4
+ExecStop=/usr/bin/docker stop postgres-lifedb
+ExecStopPost=/usr/bin/docker rm postgres-lifedb
+Restart=always
+
+[Install]
+WantedBy=default.target
