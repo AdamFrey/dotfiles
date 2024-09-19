@@ -53,13 +53,13 @@
                       bytes-after (.getCurrentThreadAllocatedBytes bean)
                       t (/ (- now start) i')]
                   (println
-                   (format "Time per call: %s   Alloc per call: %,.0fb   Iterations: %d"
-                           (cond (< t 1e3) (format "%.0f ns" t)
-                                 (< t 1e6) (format "%.2f us" (/ t 1e3))
-                                 (< t 1e9) (format "%.2f ms" (/ t 1e6))
-                                 :else (format "%.2f s" (/ t 1e9)))
-                           (/ (- bytes-after bytes-before) i')
-                           i))
+                    (format "Time per call: %s   Alloc per call: %,.0fb   Iterations: %d"
+                      (cond (< t 1e3) (format "%.0f ns" t)
+                            (< t 1e6) (format "%.2f us" (/ t 1e3))
+                            (< t 1e9) (format "%.2f ms" (/ t 1e6))
+                            :else (format "%.2f s" (/ t 1e9)))
+                      (/ (- bytes-after bytes-before) i')
+                      i))
                   first-res))))))]
   (defmacro time+
     "Like `time`, but runs the supplied body for 2000 ms and prints the average
