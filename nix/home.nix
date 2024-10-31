@@ -7,6 +7,7 @@
 
     packages = with pkgs; [
       antares
+      nyxt
       pavucontrol
       ripgrep
       slack
