@@ -41,4 +41,13 @@
           pull = { rebase = true; };
         };
      };
+
+  stylix = {
+    image = "~/Downloads/aerial-forest-wallpaper.jpg";
+    # image = pkgs.fetchurl {
+    #   url = "https://images.unsplash.com/photo-1542919242-b32f2a7bce8d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb";
+    #   sha256 = "foobar";
+    # };
+    enable = false;
+  };
 }
