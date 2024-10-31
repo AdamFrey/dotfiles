@@ -16,18 +16,19 @@
 
 (doom! :input
        :completion
-       company ; the ultimate code completion backend
+       ;; company ; the ultimate code completion backend
+       (corfu +orderless)
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       ;; ivy              ; a search engine for love and life
+       ;;ivy              ; a search engine for love and life
        vertico                          ; the search engine of the future
 
        :ui
        ;;deft              ; notational velocity for Emacs
-       doom                   ; what makes DOOM look the way it does
-       doom-dashboard         ; a nifty splash screen for Emacs
-       doom-quit              ; DOOM quit-message prompts when you quit Emacs
+       doom                      ; what makes DOOM look the way it does
+       doom-dashboard            ; a nifty splash screen for Emacs
        ;;fill-column       ; a `fill-column' indicator
+       (emoji +unicode)
        hl-todo                ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        ;;indent-guides     ; highlighted indent columns
@@ -98,7 +99,7 @@
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
-       terraform  ; infrastructure as code
+       terraform                        ; infrastructure as code
        tree-sitter
        ;;tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
@@ -130,7 +131,7 @@
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        json                 ; At least it ain't XML
-       (java +meghanada)    ; the poster child for carpal tunnel syndrome
+       (java +lsp)          ; the poster child for carpal tunnel syndrome
        (javascript)         ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
@@ -141,23 +142,23 @@
        lua              ; one-based indices? one-based indices
        markdown         ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
-       ;;nix               ; I hereby declare "nix geht mehr!"
-       ;;ocaml             ; an objective camel
+       nix              ; I hereby declare "nix geht mehr!"
+       ocaml            ; an objective camel
        org              ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        python           ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
-       ;;racket           ; a DSL for DSLs
+       racket           ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
        rest                             ; Emacs as a REST client
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       (rust +lsp)              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       (rust +lsp)                   ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
-       ;;(scheme +racket)     ; a fully conniving family of lisps
-       sh                   ; she sells {ba,z,fi}sh shells on the C xor
+       (scheme +guile)               ; a fully conniving family of lisps
+       sh                            ; she sells {ba,z,fi}sh shells on the C xor
        sml
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
@@ -165,6 +166,7 @@
        (web +lsp +tree-sitter)          ; the tubes
        yaml                             ; JSON, but readable
        (zig +lsp)
+
        :email
        ;;(mu4e +gmail)
        notmuch

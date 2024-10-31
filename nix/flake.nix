@@ -10,16 +10,15 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    stylix.url = "github:danth/stylix/cf8b6e2d4e8aca8ef14b839a906ab5eb98b08561";
+    stylix.url = "github:danth/stylix/release-24.05";
   };
 
   outputs = {
     self,
-    nixpkgs,
-    home-manager,
-    niri,
-    stylix
+      nixpkgs,
+      home-manager,
+      niri,
+      stylix
   }@inputs: {
 
     nixpkgs.overlays = [ niri.overlays.niri ];
@@ -31,21 +30,22 @@
         ./configuration.nix
 
         home-manager.nixosModules.home-manager
-	      {
-	        home-manager.useGlobalPkgs = true;
-	        home-manager.useUserPackages = true;
-	        home-manager.users.adam = import ./home.nix;
-	      }
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.adam = import ./home.nix;
+        }
 
         niri.nixosModules.niri
-	      {
-	        programs.niri.enable = true;
-	        environment.variables.NIXOS_OZONE_WL = "1";
-	        
+        {
+          programs.niri.enable = true;
+          environment.variables.NIXOS_OZONE_WL = "1";
+
         }
         stylix.nixosModules.stylix
+
+        ./style.nix
       ];
     };
-
   };
 }

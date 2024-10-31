@@ -415,8 +415,6 @@ only works for semicolons."
   (setq neil-prompt-for-version-p nil
         neil-inject-dep-to-project-p t))
 
-
-
 ;; JavaScript ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq js-indent-level 2)
 (setq-default js2-basic-offset 2)
@@ -441,15 +439,8 @@ only works for semicolons."
 
 ;; ChatGPT ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(after! gptel
-  ;; (setq gptel-api-key (lambda ()
-  ;;                       (with-temp-buffer
-  ;;                         (insert-file-contents "~/.config/chatgpt/api-key.txt")
-  ;;                         (buffer-string))))
-  )
-
 ;; '(recentf-exclude
-   ;; '("/\\(\\(\\(COMMIT\\|NOTES\\|PULLREQ\\|MERGEREQ\\|TAG\\)_EDIT\\|MERGE_\\|\\)MSG\\|\\(BRANCH\\|EDIT\\)_DESCRIPTION\\)\\'" "^/run/user/1000" "^/var/home/adam/nas"))
+;; '("/\\(\\(\\(COMMIT\\|NOTES\\|PULLREQ\\|MERGEREQ\\|TAG\\)_EDIT\\|MERGE_\\|\\)MSG\\|\\(BRANCH\\|EDIT\\)_DESCRIPTION\\)\\'" "^/run/user/1000" "^/var/home/adam/nas"))
 
 (after! writeroom-mode
   (setq writeroom-width 40))
