@@ -95,22 +95,18 @@
     description = "Adam Frey";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    	     beeper
+       beeper
 	     bitwarden
 	     git
 	     google-chrome
 	     httpie
-    	 podman
+       podman
 	     podman-compose
 	     podman-desktop
 	     psst
 	     todoist-electron
-
     ];
   };
-
-  # Install Niri
-  # programs.niri.enable = true;
 
   # Install firefox.
   programs.firefox.enable = true;

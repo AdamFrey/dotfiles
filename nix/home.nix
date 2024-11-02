@@ -7,11 +7,16 @@
 
     packages = with pkgs; [
       antares
+      fd
       nyxt
+
       pavucontrol
       ripgrep
       slack
-      fd
+
+      #music
+      orca-c
+      vital
     ];
 
     sessionPath = [
@@ -37,6 +42,14 @@
   };
 
   programs.home-manager.enable = true;
+
+  services.emacs = {
+    enable = true;
+    defaultEditor = true;
+  };
+
+  services.flameshot.enable = true;
+
   programs.git = {
     enable = true;
     userName = "Adam Frey";
@@ -45,6 +58,17 @@
       pull = { rebase = true; };
     };
   };
+
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.zsh = {
+    enable = true;
+  };
+
 
   stylix.targets.niri.enable = false;
 }
