@@ -10,7 +10,6 @@
       fd
       logseq
       nyxt
-
       pavucontrol
       ripgrep
       slack
@@ -55,7 +54,6 @@
     };
   };
 
-
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
@@ -63,10 +61,25 @@
 
   programs.tealdeer.enable = true;
 
-  programs.zsh = {
+  programs.zoxide = {
     enable = true;
+    enableZshIntegration = true;
   };
 
+  #environment.pathsToLink = [ "/share/zsh" ];
+
+  programs.zsh = {
+    enable = true;
+    autosuggestion.enable = true;
+    defaultKeymap = "emacs";
+    dotDir = ".config/zsh";
+    history = {
+      path = "${config.xdg.dataHome}/zsh/zsh_history";
+      save = 10000000;
+      size = 10000000;
+      expireDuplicatesFirst = true;
+    };
+  };
 
   stylix.targets.niri.enable = false;
 }
