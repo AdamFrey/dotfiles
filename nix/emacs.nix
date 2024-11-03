@@ -11,16 +11,12 @@
       Type      = "forking";
       # Running Emacs this way ensures environment variable are accessible:
       ExecStart = "${pkgs.bash}/bin/bash -c 'source ${config.system.build.setEnvironment}; exec ${pkgs.emacs29-pgtk}/bin/emacs --daemon'";
-      #ExecStart = "${pkgs.bash}/bin/bash -c 'exec ${pkgs.emacs29-pgtk}/bin/emacs --daemon'";
       ExecStop  = "${pkgs.emacs29-pgtk}/bin/emacsclient --eval (kill-emacs)";
       Restart   = "always";
 
     };
 
     environment = {
-      # Give Emacs a chance to use ssh-agent and gpg-agent
-      #SSH_AUTH_SOCK   = "%h/.gnupg/S.gpg-agent.ssh";
-
       # Some variables for GTK applications I could launch from Emacs
       #GTK_DATA_PREFIX        = config.system.path;
       #GTK_PATH               = "${config.system.path}/lib/gtk-3.0:${config.system.path}/lib/gtk-2.0";
