@@ -8,6 +8,7 @@
     packages = with pkgs; [
       antares
       fd
+      logseq
       nyxt
 
       pavucontrol
