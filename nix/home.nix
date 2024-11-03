@@ -44,11 +44,6 @@
 
   programs.home-manager.enable = true;
 
-  services.emacs = {
-    enable = true;
-    defaultEditor = true;
-  };
-
   services.flameshot.enable = true;
 
   programs.git = {
