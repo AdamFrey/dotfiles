@@ -19,7 +19,7 @@
 
     environment = {
       # Give Emacs a chance to use ssh-agent and gpg-agent
-      SSH_AUTH_SOCK   = "%h/.gnupg/S.gpg-agent.ssh";
+      #SSH_AUTH_SOCK   = "%h/.gnupg/S.gpg-agent.ssh";
 
       # Some variables for GTK applications I could launch from Emacs
       #GTK_DATA_PREFIX        = config.system.path;
