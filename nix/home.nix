@@ -57,6 +57,11 @@
     extraConfig = {
       pull = { rebase = true; };
     };
+    aliases = {
+      co = "checkout";
+      b  = "branch";
+      l  = "!git log --oneline | head";
+    };
   };
 
   programs.starship = {
