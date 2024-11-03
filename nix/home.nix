@@ -66,6 +66,8 @@
     enableZshIntegration = true;
   };
 
+  programs.tealdeer.enable = true;
+
   programs.zsh = {
     enable = true;
   };

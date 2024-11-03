@@ -122,19 +122,18 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  clojure
-  emacs29-pgtk
-  direnv
-	fuzzel
-	glxinfo
-  just
-	kitty
-	mako
-	pciutils
-  tldr
-	waybar
-  zenith
-  zoxide
+    clojure
+    emacs29-pgtk
+    direnv
+    fuzzel
+    glxinfo
+    just
+    kitty
+    mako
+    pciutils
+    waybar
+    zenith
+    zoxide
   ];
 
   # install fonts
