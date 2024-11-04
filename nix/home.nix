@@ -7,6 +7,7 @@
 
     packages = with pkgs; [
       antares
+      devenv
       fd
       logseq
       nyxt
@@ -42,6 +43,11 @@
   };
 
   programs.home-manager.enable = true;
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   services.flameshot.enable = true;
 
