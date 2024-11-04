@@ -98,4 +98,9 @@
   };
 
   stylix.targets.niri.enable = false;
+
+  xdg.desktopEntries.antares = {
+    name = "Antares";
+    exec = "antares  --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WaylandWindowDecorations";
+  };
 }
