@@ -13,6 +13,7 @@
       ./hardware-configuration.nix
       ./filesystem.nix
       ./emacs.nix
+      ./podman.nix
     ];
 
   # Bootloader.
@@ -102,9 +103,6 @@
 	     git
 	     google-chrome
 	     httpie
-       podman
-	     podman-compose
-	     podman-desktop
 	     psst
 	     todoist-electron
     ];
