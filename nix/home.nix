@@ -10,6 +10,7 @@
       devenv
       fd
       logseq
+      nodePackages.prettier
       nyxt
       pavucontrol
       ripgrep
