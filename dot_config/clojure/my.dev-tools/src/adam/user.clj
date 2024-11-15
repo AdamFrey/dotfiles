@@ -6,6 +6,7 @@
   '[clojure.java.javadoc :refer (javadoc)]
   '[clojure.pprint :refer (pp pprint)]
   '[portal.api :as portal]
+  '[clj-java-decompiler.core :refer [decompile]]
   ;; '[dev.nu.morse :as morse]
   )
 
@@ -32,6 +33,8 @@
 
 (intern 'clojure.core (with-meta 'portal! (meta #'portal!)) #'portal!)
 (intern 'clojure.core (with-meta 't> (meta #'t>)) #'t>)
+
+(intern 'clojure.core (with-meta 'decomp (meta #'decompile)) #'decompile)
 
 
 (let [time*
