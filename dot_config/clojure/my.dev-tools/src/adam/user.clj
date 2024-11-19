@@ -26,13 +26,26 @@
   (add-tap #'portal/submit))
 
 (defn t>
-  ([x] (tap> x) x)
-  ([label x]
-   (tap> [label x])
-   x))
+  ([& args]
+   (if (= 1 (count args))
+     (tap> (first args))
+     (tap> (into
+             (vector
+               (second args)
+               (first args))
+             (drop 2 args))))
+   (first args)))
+
+(defn t>>
+  [& args]
+  (if (= 1 (count args))
+    (tap> (first args))
+    (tap> (vec args)))
+  (last args))
 
 (intern 'clojure.core (with-meta 'portal! (meta #'portal!)) #'portal!)
 (intern 'clojure.core (with-meta 't> (meta #'t>)) #'t>)
+(intern 'clojure.core (with-meta 't>> (meta #'t>>)) #'t>>)
 
 (intern 'clojure.core (with-meta 'decomp (meta #'decompile)) #'decompile)
 
