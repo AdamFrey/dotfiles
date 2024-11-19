@@ -1,10 +1,14 @@
+# build with:
+# NIXPKGS_ALLOW_UNFREE=1 nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
+# and then to run:
+# ./result/bin/mochi --no-sandbox --enable-features=UseOzonePlatform --ozone-platform=wayland
 { lib, appimageTools, fetchurl, asar }: let
   pname = "mochi";
   version = "1.17.15";
 
   src = fetchurl {
     url = "https://mochi.cards/releases/Mochi-${version}.AppImage";
-    hash = "sha256-ZuoeeQ7SusRhr5BXBYEWCZ9pjdcWClKoR0mnom1XkPg=";
+    hash = "sha256-Bk0/XbLQMoV/T8iLRbcE2SzzgfzHmfm+dbbVhpbGloo=";
   };
 
   appimageContents = (appimageTools.extract { inherit pname version src; }).overrideAttrs (oA: {
@@ -22,7 +26,10 @@ in appimageTools.wrapAppImage {
   inherit pname version;
   src = appimageContents;
 
-  extraPkgs = pkgs: [ pkgs.hidapi ];
+  extraPkgs = pkgs: [
+    pkgs.hidapi
+    pkgs.electron_32
+  ];
 
   extraInstallCommands = ''
     # Add desktop convencience stuff
