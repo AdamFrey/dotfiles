@@ -26,7 +26,8 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 
-(let ((font-size (string-to-number (or (getenv "EMACS_FONT_SIZE")
+(let ((font-size (string-to-number (or "12"
+                                       (getenv "EMACS_FONT_SIZE")
                                        "18"))))
   (setq doom-font (font-spec :family "JetBrains Mono" :size font-size :weight 'semi-light)
         doom-variable-pitch-font (font-spec :family "sans" :size font-size)
