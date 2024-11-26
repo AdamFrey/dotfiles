@@ -1,5 +1,6 @@
 {:user {:dependencies
         [[djblue/portal "0.51.1"]
+         [io.github.paintparty/fireworks "0.10.4"]
          [org.clojars.abhinav/snitch "0.1.15"]
          [com.clojure-goes-fast/clj-java-decompiler "0.3.3"]
          [cider/cider-nrepl "0.45.0"]
