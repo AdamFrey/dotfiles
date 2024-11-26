@@ -1,8 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
     stylix = {
         base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-forest-light.yaml";
         image = config.lib.stylix.pixel "base0A";
+        polarity = "dark";
 
         # image = "~/Downloads/aerial-forest-wallpaper.jpg";
         # image = pkgs.fetchurl {
@@ -10,5 +11,11 @@
         #   sha256 = "foobar";
         # };
         enable = true;
+    };
+
+    specialisation.day.configuration = {
+      stylix = {
+        polarity = lib.mkForce "light";
+      };
     };
 }
