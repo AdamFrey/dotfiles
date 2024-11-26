@@ -10,6 +10,7 @@
       devenv
       fd
       logseq
+      mozart2-binary
       nodePackages.prettier
       nyxt
       pavucontrol
