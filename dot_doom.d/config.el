@@ -100,6 +100,9 @@ Signals an error if there is no current project."
 
 (global-set-key (kbd "C-x C-c") 'save-some-buffers)
 
+(after! ivy
+  (global-set-key (kbd "M-F b") 'ivy-switch-buffer))
+
 ;; Completion  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package! corfu
