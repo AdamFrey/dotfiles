@@ -416,6 +416,15 @@ only works for semicolons."
       ;; ctrl + l
       :n "C-l" #'portal.api/clear)
 
+(after! lsp-mode
+  (require 'lsp-mode)
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "zen-lsp")
+                    :major-modes '(clojure-mode)
+                    :add-on? t
+                    :activation-fn (lsp-activate-on "clojure")
+                    :server-id 'zen-lang)))
+
 
 (after! cider
   ;; change cider pprint to comment so it uses the comment macro
