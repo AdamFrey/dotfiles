@@ -1,7 +1,8 @@
 {:user {:dependencies
         [[djblue/portal "0.51.1"]
          [io.github.paintparty/fireworks "0.10.4"]
-         [org.clojars.abhinav/snitch "0.1.15"]
+         [org.clojars.abhinav/snitch "0.1.15"
+          :exclusions [org.clojure/clojurescript]]
          [com.clojure-goes-fast/clj-java-decompiler "0.3.3"]
          [cider/cider-nrepl "0.45.0"]
          [refactor-nrepl/refactor-nrepl "3.9.1"]
