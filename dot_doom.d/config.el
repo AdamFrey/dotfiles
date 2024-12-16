@@ -100,8 +100,7 @@ Signals an error if there is no current project."
 
 (global-set-key (kbd "C-x C-c") 'save-some-buffers)
 
-(after! ivy
-  (global-set-key (kbd "M-F b") 'ivy-switch-buffer))
+(global-set-key (kbd "M-B") 'ivy-switch-buffer)
 
 ;; Completion  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -394,6 +393,11 @@ only works for semicolons."
 	(lambda (_) completion))
        :annotation-function #'cider-annotate-symbol))))
 
+(defun af/repl-go ()
+  (interactive)
+  (cider-nrepl-sync-request:eval
+   "(do (require 'repl) (repl/go))"))
+
 ;; Leverage an existing cider nrepl connection to evaluate portal.api functions
 ;; and map them to convenient key bindings.
 
@@ -401,7 +405,7 @@ only works for semicolons."
 (defun portal.api/open ()
   (interactive)
   (cider-nrepl-sync-request:eval
-    "(do (ns dev) (def portal ((requiring-resolve 'portal.api/open))) (add-tap (requiring-resolve 'portal.api/submit)))"))
+   "(do (ns dev) (def portal ((requiring-resolve 'portal.api/open))) (add-tap (requiring-resolve 'portal.api/submit)))"))
 
 (defun portal.api/clear ()
   (interactive)
