@@ -96,3 +96,11 @@
      out#))
 
 (intern 'clojure.core (with-meta 'dspy (meta #'dspy)) #'dspy)
+
+(defmacro doas
+  [binding x & body]
+  `(let [~binding ~x]
+    (do ~@body)
+    ~binding))
+
+(intern 'clojure.core (with-meta 'doas (meta #'doas)) #'doas)
