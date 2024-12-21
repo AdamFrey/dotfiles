@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+sudo nixos-rebuild switch --flake ~/src/dotfiles/nix#desktop

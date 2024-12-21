@@ -23,7 +23,7 @@
     ];
 
     sessionPath = [
-      ".local/bin"
+      "/home/adam/.local/bin"
     ];
 
     sessionVariables = envVars;
