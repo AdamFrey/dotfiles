@@ -1,3 +1,19 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bb
 
-sudo nixos-rebuild switch --flake ~/src/dotfiles/nix#desktop
+(require '[babashka.process :refer [sh shell]])
+(require '[clojure.string :as string])
+
+(defn hostname
+  []
+  (-> (sh "hostname")
+      (:out)
+      (string/trim)))
+
+(defn flake-path
+  []
+  (case (hostname)
+    "matte-black-cadillac"   "/home/adam/src/dotfiles/nix#desktop"
+    "stylitics-laptop-nixos" "/home/adam/src/dotfiles/nix#laptop"))
+
+(shell "sudo nixos-rebuild switch --flake" (flake-path))
+(System/exit 0)
