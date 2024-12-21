@@ -9,9 +9,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
     
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./filesystem.nix
+    [ ./filesystem.nix
       ./emacs.nix
       ./podman.nix
     ];
@@ -20,7 +18,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "stylitics-laptop-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
