@@ -81,6 +81,13 @@
     enableZshIntegration = true;
   };
 
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+  };
+
+  services.ssh-agent.enable = true;
+
   programs.tealdeer.enable = true;
 
   programs.zoxide = {
