@@ -7,6 +7,7 @@
 
     packages = with pkgs; [
       antares
+      babashka
       devenv
       fd
       logseq

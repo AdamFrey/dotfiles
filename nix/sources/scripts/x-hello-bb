@@ -1,0 +1,4 @@
+#!/usr/bin/env bb
+
+(println "Hello from babashka")
+(System/exit 0)
