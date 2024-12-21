@@ -15,9 +15,12 @@
     # outputs is a function taking inputs, and destructuring
   outputs = { self, nixpkgs, home-manager, niri, stylix }@inputs:
     let
-      makeSystem = extraModules: nixpkgs.lib.nixosSystem {
+      makeSystem = { extraModules, envVars }: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        # specialArgs is passed as an argument set to every module in the module list
+        specialArgs = {
+          inherit inputs;
+        };
 
         modules = [
           ./configuration.nix
@@ -27,6 +30,9 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.adam = import ./home.nix;
+            home-manager.extraSpecialArgs = {
+              inherit envVars;
+            };
           }
 
           niri.nixosModules.niri
@@ -45,14 +51,25 @@
       nixpkgs.overlays = [ niri.overlays.niri ];
 
       nixosConfigurations = {
-        desktop = makeSystem [
-          ./desktop-hardware-configuration.nix
-          ./desktop.nix
-        ];
-        laptop  = makeSystem [
-          ./laptop-hardware-configuration.nix
-          ./laptop.nix
-        ];
+        desktop = makeSystem {
+          extraModules = [
+            ./desktop-hardware-configuration.nix
+            ./desktop.nix
+          ];
+
+          envVars = {
+            EMACS_FONT_SIZE = 12;
+          };
+        };
+        laptop = makeSystem {
+          extraModules = [
+            ./laptop-hardware-configuration.nix
+            ./laptop.nix
+          ];
+          envVars = {
+            EMACS_FONT_SIZE = 18;
+          };
+        };
       };
     };
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, envVars, ... }:
 {
   home = {
     username = "adam";
@@ -25,6 +25,8 @@
     sessionPath = [
       ".local/bin"
     ];
+
+    sessionVariables = envVars;
 
     shellAliases = {
       ls = "ls -1 --color";
