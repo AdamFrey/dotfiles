@@ -114,6 +114,15 @@
 
   xdg.desktopEntries.antares = {
     name = "Antares";
-    exec = "antares  --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WaylandWindowDecorations";
+    exec = "antares --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WaylandWindowDecorations";
+    icon = "antares";
+  };
+
+  xdg.desktopEntries.todoist-wayland = {
+    name = "Todoist Wayland";
+    exec = "todoist-electron --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WaylandWindowDecorations";
+    icon = "todoist";
+    mimeType = ["x-scheme-handler/todoist"
+                "x-scheme-handler/com.todoist"];
   };
 }
