@@ -35,9 +35,6 @@
   ;; (require '[criterium.core :refer [bench quick-bench]]) ; require criterium
   ;; (bench (adhoc-expression)) ; timing of a self contained expression
   ;;
-  ;; (require '[practicalli/namespace-name]) ; require project source code
-  ;; (in-ns 'practicalli/namespace-name)
-  ;; (quick-bench (project-function args))
   :performance/benchmark
   {:extra-deps {criterium/criterium                      {:mvn/version "0.4.6"}
                 com.clojure-goes-fast/clj-async-profiler {:mvn/version "1.1.1"}}}
@@ -59,7 +56,7 @@
    :main-opts  ["-m" "clj-check.check"]}
 
   :dev/debug
-  {:extra-deps {adam/my.dev-tools {:local/root "/home/adam/.config/clojure/my.dev-tools/"}}}
+  {:extra-deps {adam/my.dev-tools {:local/root "/home/adam/src/dotfiles/nix/sources/clojure/my.dev-tools"}}}
 
   ;; kaocha - comprehensive test runner for Clojure/Script
   ;; tests.edn should be created for each project

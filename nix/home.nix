@@ -40,11 +40,17 @@
         recursive = true;
       };
 
-      ".config/niri/config.kdl".source = ./sources/niri.kdl;
+      ".config/clojure/deps.edn" = {
+        source = ./sources/clojure/deps.edn;
+        force = true;
+      };
+
       ".config/doom/init.el".source = ./sources/doom/init.el;
       ".config/doom/config.el".source = ./sources/doom/config.el;
       ".config/doom/packages.el".source = ./sources/doom/packages.el;
       ".config/kitty/kitty.conf".source = ./sources/kitty.conf;
+      ".config/niri/config.kdl".source = ./sources/niri.kdl;
+
     };
   };
 
