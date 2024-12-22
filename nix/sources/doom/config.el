@@ -339,6 +339,14 @@ only works for semicolons."
     (message
      "no cider error buffer")))
 
+(defun af/repl-go ()
+  (interactive)
+  (let* ((current-ns (cider-current-ns)))
+    (cider-interactive-eval "(do (require 'repl) (repl/go))"
+                            nil
+                            nil
+                            `(("ns" ,current-ns)))))
+
 ;; https://github.com/clojure-emacs/cider/issues/3019#issuecomment-1330342147
 (defun af/cider-complete-at-point ()
   "Complete the symbol at point."
@@ -382,6 +390,8 @@ only works for semicolons."
   (setq nrepl-sync-request-timeout 30)
   (define-key cider-mode-map (kbd "C-c C-z") 'af/cider-switch-to-repl-buffer)
   (define-key cider-mode-map (kbd "C-c x") 'af/pop-cider-error)
+  (define-key cider-mode-map (kbd "C-c r") 'af/repl-go)
+
   ;; TODO get ctrl - return working for eval
   (define-key cider-mode-map (kbd "C-RET") 'cider-eval-last-sexp)
   (set-face-attribute 'cider-error-overlay-face nil
