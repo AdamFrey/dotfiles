@@ -348,20 +348,20 @@ only works for semicolons."
              (not (cider-in-string-p)))
     (when-let*
         ((bounds
-	  (bounds-of-thing-at-point
-	   'symbol))
-	 (beg (car bounds))
-	 (end (cdr bounds))
-	 (completion
-	  (append
-	   (cider-complete
-	    (buffer-substring beg end))
-	   (get-text-property (point) 'cider-locals))))
+          (bounds-of-thing-at-point
+           'symbol))
+         (beg (car bounds))
+         (end (cdr bounds))
+         (completion
+          (append
+           (cider-complete
+            (buffer-substring beg end))
+           (get-text-property (point) 'cider-locals))))
       (list
        beg
        end
        (completion-table-dynamic
-	(lambda (_) completion))
+        (lambda (_) completion))
        :annotation-function #'cider-annotate-symbol))))
 
 (after! cider
