@@ -15,5 +15,9 @@
     "matte-black-cadillac"   "/home/adam/src/dotfiles/nix#desktop"
     "stylitics-laptop-nixos" "/home/adam/src/dotfiles/nix#laptop"))
 
-(shell "sudo nixos-rebuild switch --flake" (flake-path))
+(try
+  (shell "sudo nixos-rebuild switch --flake" (flake-path))
+  (catch Exception _
+    (System/exit 1)))
+
 (System/exit 0)
