@@ -177,10 +177,6 @@ only works for semicolons."
                        "url"))
            (magit-get-current-branch))))
 
-;; Dotfiles ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package! chezmoi)
-
 ;; Projects ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (global-set-key (kbd "M-r") 'projectile-find-file)
@@ -215,12 +211,12 @@ only works for semicolons."
 (after! ob
   (add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj")))
 
-(defun af/open-journal-file ()
-  (interactive)
-  (find-file "~/10-19.Software/software-journal.org"))
+;; (defun af/open-journal-file ()
+;;   (interactive)
+;;   (find-file "~/10-19.Software/software-journal.org"))
 
-(global-unset-key (kbd "C-o"))
-(global-set-key (kbd "C-o 1") 'af/open-journal-file)
+;; (global-unset-key (kbd "C-o"))
+;; (global-set-key (kbd "C-o 1") 'af/open-journal-file)
 
 ;; Lisp ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
