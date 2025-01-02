@@ -127,6 +127,7 @@
     kitty
     mako
     pciutils
+    unzip
     waybar
     zenith
     zoxide
