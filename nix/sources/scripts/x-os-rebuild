@@ -3,6 +3,27 @@
 (require '[babashka.process :refer [sh shell]])
 (require '[babashka.fs :as fs])
 (require '[clojure.string :as string])
+(require '[clojure.tools.logging :as log])
+
+;; Filesystem helpers ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn ensure-git-repo-exists!
+  [repo-url output-path & {:keys [shallow?]}]
+  (when-not (fs/exists? output-path)
+    (let [git-clone (if shallow?
+                      "git clone --depth 1"
+                      "git clone")]
+      (sh git-clone repo-url output-path))))
+
+(defn delete-directories-if-exist!
+  [& paths]
+  (doseq [path paths]
+    (when (fs/exists? path)
+      (if (empty? (fs/list-dir path))
+        (fs/delete (fs/file path))
+        (log/warnf "Will not delete non-empty directory '%s'" path)))))
+
+;; Nix helpers ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn hostname
   []
@@ -16,18 +37,22 @@
     "matte-black-cadillac"   "/home/adam/src/dotfiles/nix#desktop"
     "stylitics-laptop-nixos" "/home/adam/src/dotfiles/nix#laptop"))
 
-(defn ensure-git-repo-exists!
-  [repo-url output-path & {:keys [shallow?]}]
-  (when-not (fs/exists? output-path)
-    (let [git-clone (if shallow?
-                      "git clone --depth 1"
-                      "git clone")]
-      (sh git-clone repo-url output-path))))
+;; Config ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (ensure-git-repo-exists!
   "https://github.com/doomemacs/doomemacs"
   "/home/adam/.config/emacs"
   :shallow? true)
+
+(delete-directories-if-exist!
+  "/home/adam/Desktop"
+  "/home/adam/Documents"
+  "/home/adam/Downloads"
+  "/home/adam/Music"
+  "/home/adam/Pictures"
+  "/home/adam/Public"
+  "/home/adam/Templates"
+  "/home/adam/Videos")
 
 (try
   (shell "sudo nixos-rebuild switch --flake" (flake-path))
