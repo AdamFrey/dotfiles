@@ -1,6 +1,7 @@
 #!/usr/bin/env bb
 
 (require '[babashka.process :refer [sh shell]])
+(require '[babashka.fs :as fs])
 (require '[clojure.string :as string])
 
 (defn hostname
@@ -14,6 +15,19 @@
   (case (hostname)
     "matte-black-cadillac"   "/home/adam/src/dotfiles/nix#desktop"
     "stylitics-laptop-nixos" "/home/adam/src/dotfiles/nix#laptop"))
+
+(defn ensure-git-repo-exists!
+  [repo-url output-path & {:keys [shallow?]}]
+  (when-not (fs/exists? output-path)
+    (let [git-clone (if shallow?
+                      "git clone --depth 1"
+                      "git clone")]
+      (sh git-clone repo-url output-path))))
+
+(ensure-git-repo-exists!
+  "https://github.com/doomemacs/doomemacs"
+  "/home/adam/.config/emacs"
+  :shallow? true)
 
 (try
   (shell "sudo nixos-rebuild switch --flake" (flake-path))
