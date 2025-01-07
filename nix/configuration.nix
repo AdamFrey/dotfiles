@@ -5,9 +5,12 @@
 { config, pkgs, ... }:
 
 {
+  # secret decryption
+  age.identityPaths = [ "/home/adam/.ssh/id_ed25519" ];
+  age.secrets.ssh-config-entries.file = secrets/ssh-config-entries.age;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-    
+
   imports =
     [ ./filesystem.nix
       ./emacs.nix

@@ -1,5 +1,6 @@
 {
   inputs = {
+    agenix.url = "github:ryantm/agenix";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -13,7 +14,7 @@
   };
 
     # outputs is a function taking inputs, and destructuring
-  outputs = { self, nixpkgs, home-manager, niri, stylix }@inputs:
+  outputs = { self, nixpkgs, home-manager, niri, stylix, agenix }@inputs:
     let
       makeSystem = { extraModules, envVars }: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -24,6 +25,9 @@
 
         modules = [
           ./configuration.nix
+
+          agenix.nixosModules.default # secrets
+          # agenix.homeManagerModules.default
 
           home-manager.nixosModules.home-manager
           {
