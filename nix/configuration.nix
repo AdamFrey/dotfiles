@@ -125,17 +125,22 @@
   ];
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
+    bash
     clojure
     emacs29-pgtk
     direnv
     fuzzel
     glxinfo
+    gnumake
     just
     kitty
+    impala
     mako
     pciutils
+    postgresql
+    pulsemixer
     unzip
     waybar
     zenith
