@@ -1,5 +1,7 @@
 {
   "credHelpers": {
+    "gcr.io": "gcloud",
+    "us.gcr.io": "gcloud",
     "us-east4-docker.pkg.dev": "gcloud"
   }
 }

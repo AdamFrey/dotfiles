@@ -45,6 +45,7 @@
         force = true;
       };
 
+      ".config/containers/config.json".source = ./sources/docker/config.json;
       ".config/docker/config.json".source = ./sources/docker/config.json;
       ".config/doom/init.el".source = ./sources/doom/init.el;
       ".config/doom/config.el".source = ./sources/doom/config.el;
