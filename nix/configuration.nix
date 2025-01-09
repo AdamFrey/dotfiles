@@ -105,12 +105,13 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
        beeper
-	     bitwarden
-	     git
-	     google-chrome
-	     httpie
-	     psst
-	     todoist-electron
+       bitwarden
+       git
+       google-chrome
+       httpie
+       pgcli
+       psst
+       todoist-electron
     ];
   };
 
@@ -144,6 +145,7 @@
     unzip
     waybar
     zenith
+    zip
     zoxide
   ];
 
