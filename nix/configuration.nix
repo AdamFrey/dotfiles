@@ -68,6 +68,7 @@
     XDG_DATA_HOME   = "$HOME/.local/share";
     XDG_STATE_HOME  = "$HOME/.local/state";
     BROWSER         = "firefox";
+    EDITOR          = "emacsclient --create frame";
   };
   
   # Enable CUPS to print documents.
