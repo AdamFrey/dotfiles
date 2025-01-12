@@ -108,6 +108,7 @@
        beeper
        beets
        bitwarden
+       #deltachat-desktop
        git
        httpie
        lagrange
