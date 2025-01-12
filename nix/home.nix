@@ -45,6 +45,7 @@
         force = true;
       };
 
+      ".config/beets/config.yaml".source = ./sources/beets/config.yaml;
       ".config/containers/config.json".source = ./sources/docker/config.json;
       ".config/docker/config.json".source = ./sources/docker/config.json;
       ".config/doom/init.el".source = ./sources/doom/init.el;
