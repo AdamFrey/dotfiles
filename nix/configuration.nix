@@ -106,9 +106,11 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
        beeper
+       beets
        bitwarden
        git
        httpie
+       lagrange
        pgcli
        psst
        todoist-electron
