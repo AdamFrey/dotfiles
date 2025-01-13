@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 podman run --pull always --rm -it -v /etc/hosts:/etc/hosts \
--v "../hosts/myhosts:/hosts/myhosts" \
+-v "/home/adam/src/dotfiles/nix/sources/hosts/myhosts:/hosts/myhosts" \
 ghcr.io/stevenblack/hosts:latest updateHostsFile.py --auto \
 --replace --extensions gambling porn
