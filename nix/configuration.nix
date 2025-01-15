@@ -62,13 +62,15 @@
   };
 
   environment.sessionVariables = {
-    NIXOS_OZONE_WL  = "1";
-    XDG_CACHE_HOME  = "$HOME/.cache";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME   = "$HOME/.local/share";
-    XDG_STATE_HOME  = "$HOME/.local/state";
-    BROWSER         = "firefox";
-    EDITOR          = "emacsclient --create frame";
+    GDK_BACKEND        = "wayland";
+    NIXOS_OZONE_WL     = "1";
+    MOX_ENABLE_WAYLAND = "1";
+    XDG_CACHE_HOME     = "$HOME/.cache";
+    XDG_CONFIG_HOME    = "$HOME/.config";
+    XDG_DATA_HOME      = "$HOME/.local/share";
+    XDG_STATE_HOME     = "$HOME/.local/state";
+    BROWSER            = "firefox";
+    EDITOR             = "emacsclient --create frame";
   };
   
   # Enable CUPS to print documents.
