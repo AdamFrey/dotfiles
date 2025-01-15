@@ -143,6 +143,7 @@
     gnumake
     just
     kitty
+    leiningen
     impala
     mako
     pciutils
