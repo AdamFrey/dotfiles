@@ -1,0 +1,122 @@
+{
+  "isEnabled": true,
+  "mode": "whitelist",
+  "action": "blockTab",
+  "framesType": [
+    "main_frame",
+    "sub_frame"
+  ],
+  "message": "",
+  "displayBlankPage": false,
+  "displayBlockedLink": false,
+  "redirectUrl": "",
+  "enableLogs": false,
+  "logsLength": 100,
+  "hideReportIssueButton": false,
+  "showAddWebsitePrompt": false,
+  "enableOnBrowserStartup": false,
+  "schedule": {
+    "isEnabled": true,
+    "days": {
+      "monday": [
+        {
+          "time": {
+            "start": "05:00",
+            "end": "17:00"
+          },
+          "type": "blocking"
+        }
+      ],
+      "tuesday": [
+        {
+          "time": {
+            "start": "05:00",
+            "end": "17:00"
+          },
+          "type": "blocking"
+        }
+      ],
+      "wednesday": [
+        {
+          "time": {
+            "start": "05:00",
+            "end": "17:00"
+          },
+          "type": "blocking"
+        }
+      ],
+      "thursday": [
+        {
+          "time": {
+            "start": "05:00",
+            "end": "17:00"
+          },
+          "type": "blocking"
+        }
+      ],
+      "friday": [
+        {
+          "time": {
+            "start": "05:00",
+            "end": "17:00"
+          },
+          "type": "blocking"
+        }
+      ],
+      "saturday": [],
+      "sunday": []
+    }
+  },
+  "password": {
+    "isEnabled": false,
+    "allowActivationWithoutPassword": false,
+    "allowAddingWebsitesWithoutPassword": false,
+    "blockAccessToExtensionsPage": false,
+    "hash": ""
+  },
+  "unblock": {
+    "isEnabled": false,
+    "requirePassword": false,
+    "unblockOnceTimeout": 10,
+    "displayNotificationOnTimeout": true,
+    "autoReblockOnTimeout": false
+  },
+  "timer": {
+    "isEnabled": true,
+    "defaultValue": "00:30",
+    "allowStoppingTimer": true,
+    "displayNotificationOnComplete": true,
+    "allowUsingTimerWithoutPassword": false,
+    "runtime": {
+      "duration": 0,
+      "endDate": 0
+    }
+  },
+  "blacklist": [
+    "*.instagram.com",
+    "pitchfork.com",
+    "news.ycombinator.com",
+    "facebook.com",
+    "www.reddit.com",
+    "www.youtube.com"
+  ],
+  "whitelist": [
+    "*.circleci.com",
+    "circleci.com",
+    "*.mozilla.org",
+    "*.cloudflare.com",
+    "*.stylitics.com",
+    "*.rippling.com",
+    "mail.google.com",
+    "claude.ai",
+    "chatgpt.com",
+    "www.digitalocean.com",
+    "*.github.com"
+  ],
+  "blacklistKeywords": [],
+  "whitelistKeywords": [],
+  "blacklistLastModifiedDate": 1736277909006,
+  "whitelistLastModifiedDate": 1736954407486,
+  "blacklistKeywordsLastModifiedDate": null,
+  "whitelistKeywordsLastModifiedDate": null
+}
