@@ -146,6 +146,7 @@
     pciutils
     postgresql
     pulsemixer
+    rlwrap
     unzip
     waybar
     zenith
