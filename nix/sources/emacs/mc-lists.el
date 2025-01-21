@@ -6,10 +6,13 @@
         +web/indent-or-yas-or-emmet-expand
         lispy-braces
         lispy-brackets
+        lispy-colon
         lispy-delete
+        lispy-delete-backward
         lispy-kill
         lispy-parens
         lispy-quotes
+        lispy-space
         special-digit-argument
         special-lh-knight/body
         special-lispy-ace-char
