@@ -101,6 +101,20 @@
     "www.youtube.com"
   ],
   "whitelist": [
+    "accounts.google.com",
+    "storage.googleapis.com",
+    "console.cloud.google.com",
+    "*.soundcloud.com",
+    "javadoc.io",
+    "jcpenney.scene7.com",
+    "*.jcpenney.com",
+    "gitlab.com",
+    "cljdoc.org",
+    "*.mochi.cards",
+    "calendar.google.com",
+    "*.zoom.us",
+    "codeberg.org",
+    "192.168.0.221:10079",
     "*.circleci.com",
     "circleci.com",
     "*.mozilla.org",
@@ -116,7 +130,7 @@
   "blacklistKeywords": [],
   "whitelistKeywords": [],
   "blacklistLastModifiedDate": 1736277909006,
-  "whitelistLastModifiedDate": 1736954407486,
+  "whitelistLastModifiedDate": 1737465228113,
   "blacklistKeywordsLastModifiedDate": null,
   "whitelistKeywordsLastModifiedDate": null
 }
