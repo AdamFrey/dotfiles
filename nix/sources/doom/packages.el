@@ -31,6 +31,7 @@
 (package! chezmoi)
 (package! tide :disable t)
 (package! unisonlang-mode)
+(package! shen-mode)
 
 ;; clojure deps tool
 (package! neil :recipe (:host github :repo "babashka/neil" :files ("*.el")))
