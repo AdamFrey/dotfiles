@@ -136,6 +136,7 @@
   environment.systemPackages = with pkgs; [
     bash
     clojure
+    cljfmt
     emacs29-pgtk
     direnv
     fuzzel
