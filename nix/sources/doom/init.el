@@ -42,7 +42,8 @@
        ;;tabs              ; a tab bar for Emacs
        ;;treemacs          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages
-       (vc-gutter +pretty)    ; vcs diff in the fringe
+       ;; (vc-gutter +pretty) ;; this was slow in collage
+                                        ; vcs diff in the fringe
        vi-tilde-fringe        ; fringe tildes to mark beyond EOB
        ;;window-select     ; visually switch windows
        workspaces             ; tab emulation, persistence & separate workspaces
