@@ -153,6 +153,7 @@
     rlwrap
     unzip
     waybar
+    zeal
     zenith
     zip
     zoxide
