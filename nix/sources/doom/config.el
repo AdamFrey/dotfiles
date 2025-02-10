@@ -247,8 +247,7 @@ only works for semicolons."
 (defun af/set-clojure-indent-style-hook ()
   (interactive)
   ;; https://stackoverflow.com/a/5148435
-  (add-hook 'hack-local-variables-hook 'af/set-clojure-indent-style nil t)
-  )
+  (add-hook 'hack-local-variables-hook 'af/set-clojure-indent-style nil t))
 
 (if (boundp '+format-on-save-enabled-modes)
     (progn
