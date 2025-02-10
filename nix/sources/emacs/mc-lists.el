@@ -4,6 +4,7 @@
 (setq mc/cmds-to-run-for-all
       '(
         +web/indent-or-yas-or-emmet-expand
+        cljr-slash
         lispy-braces
         lispy-brackets
         lispy-colon
