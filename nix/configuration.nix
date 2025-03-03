@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # secret decryption
@@ -135,6 +135,7 @@
   # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
     bash
+    calibre
     clojure
     cljfmt
     emacs29-pgtk
@@ -142,6 +143,7 @@
     fuzzel
     glxinfo
     gnumake
+    ispell
     just
     kitty
     leiningen
@@ -157,6 +159,7 @@
     zenith
     zip
     zoxide
+    inputs.zen-browser.packages.${pkgs.system}.default
   ];
 
   # install fonts

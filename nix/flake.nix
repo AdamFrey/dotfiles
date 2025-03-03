@@ -11,10 +11,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:danth/stylix/release-24.11";
+
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
     # outputs is a function taking inputs, and destructuring
-  outputs = { self, nixpkgs, home-manager, niri, stylix, agenix }@inputs:
+  outputs = { self, nixpkgs, home-manager, niri, stylix, agenix, zen-browser }@inputs:
     let
       makeSystem = { extraModules, envVars }: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -36,6 +41,7 @@
             home-manager.users.adam = import ./home.nix;
             home-manager.extraSpecialArgs = {
               inherit envVars;
+              inherit inputs;
             };
           }
 
