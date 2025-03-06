@@ -149,6 +149,7 @@
     leiningen
     impala
     mako
+    pandoc
     pciutils
     postgresql
     pulsemixer
