@@ -138,8 +138,9 @@
     calibre
     clojure
     cljfmt
-    emacs29-pgtk
     direnv
+    duckdb
+    emacs29-pgtk
     fuzzel
     glxinfo
     gnumake
