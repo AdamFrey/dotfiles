@@ -266,7 +266,7 @@ binds {
     Mod+Return { spawn "kitty"; }
     Mod+R { spawn "fuzzel"; }
     Mod+E { spawn "emacsclient" "--create-frame";  }
-    Mod+B { spawn "firefox"; }
+    Mod+B { spawn "zen"; }
     Mod+S { spawn "slack"; }
 
     Super+Alt+L { spawn "swaylock"; }
