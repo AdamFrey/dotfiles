@@ -135,6 +135,7 @@
   # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
     bash
+    bluetui
     calibre
     clojure
     cljfmt
