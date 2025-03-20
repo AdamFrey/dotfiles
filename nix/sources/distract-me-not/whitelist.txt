@@ -15,11 +15,12 @@ console.cloud.google.com
 mail.google.com
 storage.googleapis.com
 javadoc.io
-jcpenney.scene7.com
 gitlab.com
 *.mochi.cards
 *.mozilla.org
+*.notion.so
 *.rippling.com
+jcpenney.scene7.com
 *.soundcloud.com
 *.stylitics.com
 *.zoom.us
