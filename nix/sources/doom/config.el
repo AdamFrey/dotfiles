@@ -77,6 +77,13 @@
 
 (global-set-key (kbd "C-x C-c") 'save-some-buffers)
 
+;; Browser ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setenv "DISPLAY" "wayland-1")
+
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "zen")
+
 ;; Completion  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; C-u M-x list-faces-display RET vertico RET
