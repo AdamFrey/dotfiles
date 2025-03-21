@@ -32,7 +32,7 @@
         doom-variable-pitch-font (font-spec :family "sans" :size font-size)
         doom-unicode-font (font-spec :family "Noto Color Emoji")))
 
-(setq doom-theme 'doom-solarized-light)
+(setq doom-theme 'doom-oksolar-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
