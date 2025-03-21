@@ -8,7 +8,7 @@
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 
-(package! aidermacs :recipe (:host github :repo "MatthewZMD/aidermacs" :files ("*.el")))
+;;(package! aidermacs :recipe (:host github :repo "MatthewZMD/aidermacs" :files ("*.el")))
 (package! aggressive-indent)
 (package! sql-indent)
 (package! elisp-benchmarks)
