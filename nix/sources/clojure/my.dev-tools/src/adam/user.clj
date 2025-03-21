@@ -2,13 +2,18 @@
 
 (require
   ;; requiring snitch interns these four methods in clojure.core
-  '[snitch.core :refer [defn* defmethod* *fn *let]]
-  '[clojure.java.javadoc :refer (javadoc)]
-  '[clojure.pprint :refer (pp pprint)]
-  '[portal.api :as portal]
-  '[clj-java-decompiler.core :refer [decompile]]
+ '[snitch.core :refer [defn* defmethod* *fn *let]]
+ '[clojure.java.javadoc :refer (javadoc)]
+ '[clojure.pprint :refer (pp pprint)]
+ '[clojure+.error]
+ '[clojure+.test]
+ '[portal.api :as portal]
+ '[clj-java-decompiler.core :refer [decompile]]
   ;; '[dev.nu.morse :as morse]
-  )
+ )
+
+(clojure+.error/install!)
+(clojure+.test/install!)
 
 (intern 'clojure.core (with-meta 'ppr (meta #'pprint)) #'pprint)
 (intern 'clojure.core (with-meta 'pp (meta #'pp)) #'pp)
@@ -30,10 +35,10 @@
    (if (= 1 (count args))
      (tap> (first args))
      (tap> (into
-             (vector
-               (second args)
-               (first args))
-             (drop 2 args))))
+            (vector
+             (second args)
+             (first args))
+            (drop 2 args))))
    (first args)))
 
 (defn t>>
@@ -48,7 +53,6 @@
 (intern 'clojure.core (with-meta 't>> (meta #'t>>)) #'t>>)
 
 (intern 'clojure.core (with-meta 'decomp (meta #'decompile)) #'decompile)
-
 
 (let [time*
       (fn [^long duration-in-ms f]
@@ -69,13 +73,13 @@
                       bytes-after (.getCurrentThreadAllocatedBytes bean)
                       t (/ (- now start) i')]
                   (println
-                    (format "Time per call: %s   Alloc per call: %,.0fb   Iterations: %d"
-                      (cond (< t 1e3) (format "%.0f ns" t)
-                            (< t 1e6) (format "%.2f us" (/ t 1e3))
-                            (< t 1e9) (format "%.2f ms" (/ t 1e6))
-                            :else (format "%.2f s" (/ t 1e9)))
-                      (/ (- bytes-after bytes-before) i')
-                      i))
+                   (format "Time per call: %s   Alloc per call: %,.0fb   Iterations: %d"
+                           (cond (< t 1e3) (format "%.0f ns" t)
+                                 (< t 1e6) (format "%.2f us" (/ t 1e3))
+                                 (< t 1e9) (format "%.2f ms" (/ t 1e6))
+                                 :else (format "%.2f s" (/ t 1e9)))
+                           (/ (- bytes-after bytes-before) i')
+                           i))
                   first-res))))))]
   (defmacro time+
     "Like `time`, but runs the supplied body for 2000 ms and prints the average
@@ -100,7 +104,7 @@
 (defmacro doas
   [binding x & body]
   `(let [~binding ~x]
-    (do ~@body)
-    ~binding))
+     (do ~@body)
+     ~binding))
 
 (intern 'clojure.core (with-meta 'doas (meta #'doas)) #'doas)
