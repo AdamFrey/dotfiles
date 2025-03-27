@@ -145,12 +145,15 @@
     fuzzel
     glxinfo
     gnumake
+    gpt4all
     ispell
     just
     kitty
     leiningen
+    libnotify
     impala
-    mako
+    mako # notifications
+    ollama
     pandoc
     pciutils
     postgresql
