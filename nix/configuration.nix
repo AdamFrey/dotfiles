@@ -183,6 +183,7 @@
   # started in user sessions.
   # programs.mtr.enable = true;
 
+  programs.fish.enable = true;
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
