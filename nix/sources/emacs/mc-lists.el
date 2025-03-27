@@ -11,9 +11,11 @@
         lispy-delete
         lispy-delete-backward
         lispy-kill
+        lispy-kill-word
         lispy-parens
         lispy-quotes
         lispy-space
+        paredit-forward-slurp-sexp
         special-digit-argument
         special-lh-knight/body
         special-lispy-ace-char

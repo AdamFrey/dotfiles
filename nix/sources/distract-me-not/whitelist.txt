@@ -1,12 +1,15 @@
 192.168.0.221:10079
+*.anthropic.com
 *.atlassian.com
 *.atlassian.net
 chatgpt.com
 *.circleci.com
 claude.ai
+clojure.org
 *.cloudflare.com
 cljdoc.org
 codeberg.org
+devenv.sh
 www.digitalocean.com
 *.github.com
 *.github.io
