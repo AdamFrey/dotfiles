@@ -23,10 +23,13 @@ javadoc.io
 gitlab.com
 *.mochi.cards
 *.mozilla.org
+*.netsuite.com
 *.notion.so
+*.openai.com
 *.rippling.com
 jcpenney.scene7.com
 *.slack.com
 *.soundcloud.com
+*.stripe.com
 *.stylitics.com
 *.zoom.us
