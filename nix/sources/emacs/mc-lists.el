@@ -12,8 +12,11 @@
         lispy-delete-backward
         lispy-kill
         lispy-kill-word
+        lispy-move-beginning-of-line
+        lispy-move-end-of-line
         lispy-parens
         lispy-quotes
+        lispy-raise-sexp
         lispy-space
         paredit-forward-slurp-sexp
         special-digit-argument
