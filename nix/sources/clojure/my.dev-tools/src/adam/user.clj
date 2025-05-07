@@ -9,6 +9,7 @@
  '[clojure+.test]
  '[portal.api :as portal]
  '[clj-java-decompiler.core :refer [decompile]]
+ '[criterium.core :as cr]
   ;; '[dev.nu.morse :as morse]
  )
 
@@ -54,6 +55,8 @@
 
 (intern 'clojure.core (with-meta 'decomp (meta #'decompile)) #'decompile)
 
+;; Benchmarking ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (let [time*
       (fn [^long duration-in-ms f]
         (let [^com.sun.management.ThreadMXBean bean (java.lang.management.ManagementFactory/getThreadMXBean)
@@ -92,6 +95,17 @@
       `(~time* ~duration (fn [] ~@body)))))
 
 (intern 'clojure.core (with-meta 'time+ (meta #'time+)) #'time+)
+
+(defmacro compare-bench-mean
+  [& args]
+  (->> (partition 2 args)
+       (map (fn [[k expr]]
+              [k `(let [mean#           (first (:sample-mean (cr/quick-benchmark ~expr {})))
+                        [factor# unit#] (cr/scale-time mean#)]
+                    [mean# (cr/format-value mean# factor# unit#)])]))
+       (into {})))
+
+;; Observability ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defmacro dspy
   [sym & body]

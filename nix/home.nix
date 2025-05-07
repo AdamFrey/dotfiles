@@ -54,6 +54,7 @@
       ".config/emacs/.local/cache/.mc-lists.el".source = ./sources/emacs/mc-lists.el;
       ".config/kitty/kitty.conf".source = ./sources/kitty.conf;
       ".config/niri/config.kdl".source = ./sources/niri.kdl;
+      ".lein/profiles.clj".source = ./sources/lein/profiles.clj;
 
     };
   };
