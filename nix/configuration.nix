@@ -162,6 +162,7 @@
     unzip
     waybar
     zeal
+    zed-editor
     zenith
     zip
     zoxide
