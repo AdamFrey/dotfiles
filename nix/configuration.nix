@@ -141,7 +141,7 @@
     cljfmt
     direnv
     duckdb
-    emacs29-pgtk
+    emacs-pgtk
     fuzzel
     glxinfo
     gnumake
