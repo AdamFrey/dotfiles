@@ -404,6 +404,8 @@ only works for semicolons."
         '("(when-let [requires (resolve 'clojure.main/repl-requires)]\n  (clojure.core/apply clojure.core/require @requires))"
           "(require 'adam.user)"))
   (remove-hook 'cider-connected-hook 'cider--maybe-inspire-on-connect)
+  (setq cider-inspector-fill-frame t)
+  (setq cider-inspector-pretty-print t)
 
   (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
   (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion)
