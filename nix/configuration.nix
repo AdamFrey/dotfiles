@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, pkgs-unstable, inputs, ... }:
 
 {
   # secret decryption
@@ -141,7 +141,6 @@
     cljfmt
     direnv
     duckdb
-    emacs-pgtk
     fuzzel
     glxinfo
     gnumake
@@ -153,6 +152,7 @@
     libnotify
     impala
     mako # notifications
+    nodejs_22
     ollama
     pandoc
     pciutils
@@ -162,12 +162,15 @@
     unzip
     waybar
     zeal
-    zed-editor
     zenith
     zip
     zoxide
     inputs.zen-browser.packages.${pkgs.system}.default
-  ];
+  ] ++ [
+    pkgs-unstable.emacs-pgtk
+    pkgs-unstable.zed-editor
+  ]
+  ;
 
   # install fonts
   fonts.packages = with pkgs; [
