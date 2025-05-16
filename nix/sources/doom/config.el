@@ -203,7 +203,13 @@ only works for semicolons."
   (setq projectile-create-missing-test-files t)
   (define-key doom-leader-map (kbd "p t") 'af/open-implementation-or-test-in-new-frame)
   (define-key projectile-mode-map (kbd "C-c p t") 'af/open-implementation-or-test-in-new-frame)
-  (define-key projectile-mode-map (kbd "C-c p T") 'magit-todos-list))
+  (define-key projectile-mode-map (kbd "C-c p T") 'magit-todos-list)
+  (projectile-register-project-type
+   'af-clojure
+   '("deps.edn")
+   :test-suffix "-test"))
+
+
 
 ;; After running project search, 'C-o' for search options, then 'a' to open
 ;; every match, then the above commands for next/previous project buffer
