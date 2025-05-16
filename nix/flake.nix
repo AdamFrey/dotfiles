@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs.url        = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url        = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     agenix.url         = "github:ryantm/agenix";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -23,17 +23,21 @@
   outputs =
     { self,
       nixpkgs,
-      nixpkgs-stable,
+      nixpkgs-unstable,
       home-manager,
       niri,
       stylix,
       agenix,
       zen-browser }@inputs:
     let
+      system = "x86_64-linux";
       makeSystem = { extraModules, envVars }: nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         # specialArgs is passed as an argument set to every module in the module list
         specialArgs = {
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
           inherit inputs;
         };
 
@@ -52,7 +56,12 @@
               inherit envVars;
               inherit inputs;
             };
+            # sharedModules = [
+            #   inputs.agenix.homeManagerModules.default
+            # ];
           }
+
+
 
           niri.nixosModules.niri
           {

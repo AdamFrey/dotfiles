@@ -129,6 +129,7 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-27.3.11" # used by logseq
+    "emacs-pgtk-29.4"
   ];
 
   # List packages installed in system profile. To search, run:
