@@ -1,7 +1,7 @@
 {:user {:dependencies
         [[djblue/portal "0.51.1"]
          [io.github.paintparty/fireworks "0.10.4"]
-         [io.github.tonsky/clojure-plus "1.3.1"]
+         [io.github.tonsky/clojure-plus "1.5.0"]
          [org.clojars.abhinav/snitch "0.1.16"
           :exclusions [org.clojure/clojurescript]]
          [com.clojure-goes-fast/clj-java-decompiler "0.3.3"]

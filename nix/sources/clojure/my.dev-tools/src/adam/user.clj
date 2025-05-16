@@ -7,12 +7,14 @@
  '[clojure.pprint :refer (pp pprint)]
  '[clojure+.error]
  '[clojure+.test]
+ '[clojure+.hashp]
  '[portal.api :as portal]
  '[clj-java-decompiler.core :refer [decompile]]
  '[criterium.core :as cr]
   ;; '[dev.nu.morse :as morse]
  )
 
+(clojure+.hashp/install!)
 (clojure+.error/install!)
 (clojure+.test/install!)
 
