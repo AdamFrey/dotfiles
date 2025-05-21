@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+mkdir -p ~/.local/share/claude
+cd ~/.local/share/claude
+npm install @anthropic-ai/claude-code
+ln -s ~/.local/share/claude/node_modules/@anthropic-ai/claude-code/cli.js ~/.local/bin/claude
