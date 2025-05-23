@@ -30,6 +30,7 @@
 
     shellAliases = {
       ls = "ls -1 --color";
+      claude = "~/.claude/local/claude";
     };
 
     file = {
