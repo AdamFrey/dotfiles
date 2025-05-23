@@ -171,6 +171,7 @@
     inputs.zen-browser.packages.${pkgs.system}.default
   ] ++ [
     pkgs-unstable.emacs-pgtk
+    pkgs-unstable.spotify
     pkgs-unstable.zed-editor
   ]
   ;

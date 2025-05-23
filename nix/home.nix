@@ -17,8 +17,6 @@
       pavucontrol
       ripgrep
       slack
-      spotify
-
       #music
       orca-c
       vital
