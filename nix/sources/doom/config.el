@@ -205,9 +205,9 @@ only works for semicolons."
   (define-key projectile-mode-map (kbd "C-c p t") 'af/open-implementation-or-test-in-new-frame)
   (define-key projectile-mode-map (kbd "C-c p T") 'magit-todos-list)
   (projectile-register-project-type
-   'af-clojure
-   '("deps.edn")
-   :test-suffix "-test"))
+   'clojure-components
+   '(".clojure-components.edn")
+   :test-suffix "_test"))
 
 
 
