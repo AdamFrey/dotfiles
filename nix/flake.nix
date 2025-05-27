@@ -1,17 +1,28 @@
 {
   inputs = {
-    nixpkgs.url        = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url          = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    agenix.url         = "github:ryantm/agenix";
+    flake-utils.url      = "github:numtide/flake-utils";
+
+    agenix.url = "github:ryantm/agenix";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     stylix.url = "github:danth/stylix/release-24.11";
+
+    claude-desktop = {
+      url = "github:k3d3/claude-desktop-linux-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
 
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
@@ -24,10 +35,12 @@
     { self,
       nixpkgs,
       nixpkgs-unstable,
+      flake-utils,
       home-manager,
       niri,
       stylix,
       agenix,
+      claude-desktop,
       zen-browser }@inputs:
     let
       system = "x86_64-linux";
