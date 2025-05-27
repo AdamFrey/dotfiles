@@ -3,8 +3,7 @@
  {org.clojure/clojure {:mvn/version "1.11.2"}}
 
  :aliases
- {
-  ;; find-deps - fuzzy search Maven & Clojars and add deps to deps.edn
+ {;; find-deps - fuzzy search Maven & Clojars and add deps to deps.edn
   ;; https://github.com/hagmonk/find-deps
   ;; clojure -M:project/find-deps http-kit  # fuzzy search for dependency
   ;; clojure -M:project/find-deps http-kit ring compojure # multiple deps
@@ -21,7 +20,7 @@
    {io.github.clojure/tools.build {:git/tag "v0.9.5" :git/sha "24f2894"}}}
 
   :outdated
-  {:deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
+  {:deps      {com.github.liquidz/antq {:mvn/version "RELEASE"}}
    :main-opts ["-m" "antq.core"]}
 
   ;; clj-kondo - comprehensive and fast linter
@@ -55,6 +54,13 @@
                                  :sha     "0ca84df1357d71429243b99908303f45a934654c"}}
    :main-opts  ["-m" "clj-check.check"]}
 
+  :mcp
+  {:extra-deps {org.slf4j/slf4j-nop     {:mvn/version "2.0.16"}
+                com.bhauman/clojure-mcp {:git/url "https://github.com/bhauman/clojure-mcp.git"
+                                         :git/sha "ba8549078d2946b246ab07091c330e22c8866a2a"}}
+   :exec-fn    clojure-mcp.main/start-mcp-server
+   :exec-args  {:port 7888}}
+
   :dev/debug
   {:extra-deps {adam/my.dev-tools {:local/root "/home/adam/src/dotfiles/nix/sources/clojure/my.dev-tools"}}}
 
@@ -80,7 +86,4 @@
    :exec-fn     kaocha.runner/exec-fn
    :exec-args   {:watch?     true
                  :randomize? false
-                 :fail-fast? true}}
-
-  }
- }
+                 :fail-fast? true}}}}
