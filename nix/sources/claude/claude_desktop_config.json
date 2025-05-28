@@ -4,7 +4,7 @@
       "command": "/bin/sh",
       "args": [
         "-c",
-        "clojure -A:mcp -X clojure-mcp.main/start-mcp-server :port 7888"
+        "cd /home/adam && clojure -A:mcp -X clojure-mcp.main/start-mcp-server :port 7888"
       ]
     }
   }
