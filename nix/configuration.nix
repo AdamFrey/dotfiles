@@ -161,6 +161,7 @@
     pciutils
     postgresql
     pulsemixer
+    python3
     rlwrap
     unzip
     uv
