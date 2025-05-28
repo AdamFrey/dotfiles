@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Claude Desktop
+Comment=AI assistant by Anthropic
+Exec=claude-desktop
+Icon=claude-desktop
+Type=Application
+Categories=Office;Utility;
+StartupNotify=true

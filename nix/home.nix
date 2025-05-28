@@ -45,6 +45,7 @@
       };
 
       ".config/beets/config.yaml".source = ./sources/beets/config.yaml;
+      ".config/Claude/claude_desktop_config.json".source = ./sources/claude/claude_desktop_config.json;
       ".config/containers/config.json".source = ./sources/docker/config.json;
       ".config/docker/config.json".source = ./sources/docker/config.json;
       ".config/doom/init.el".source = ./sources/doom/init.el;
@@ -54,7 +55,7 @@
       ".config/kitty/kitty.conf".source = ./sources/kitty.conf;
       ".config/niri/config.kdl".source = ./sources/niri.kdl;
       ".lein/profiles.clj".source = ./sources/lein/profiles.clj;
-
+      ".local/share/applications/claude-desktop.desktop".source = ./sources/claude/claude-desktop.desktop;
     };
   };
 
