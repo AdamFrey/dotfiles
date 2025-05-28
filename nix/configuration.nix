@@ -163,6 +163,7 @@
     pulsemixer
     rlwrap
     unzip
+    uv
     waybar
     zeal
     zenith
