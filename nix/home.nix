@@ -26,7 +26,9 @@
       "/home/adam/.local/bin"
     ];
 
-    sessionVariables = envVars;
+    sessionVariables = envVars // {
+      UV_PYTHON_DOWNLOADS = "never";
+    };
 
     shellAliases = {
       ls = "ls -1 --color";
