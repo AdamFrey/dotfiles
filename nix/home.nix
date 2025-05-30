@@ -13,7 +13,6 @@
       logseq
       mozart2-binary
       nodePackages.prettier
-      nyxt
       pavucontrol
       ripgrep
       slack
