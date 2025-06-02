@@ -183,11 +183,8 @@
   fonts.packages = with pkgs; [
     jetbrains-mono
     dejavu_fonts
-    (nerdfonts.override { fonts = [
-     "JetBrainsMono"
-     "DejaVuSansMono"
-     ];
-   })
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.dejavu-sans-mono
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
