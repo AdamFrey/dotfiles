@@ -108,7 +108,7 @@
   users.users.adam = {
     isNormalUser = true;
     description = "Adam Frey";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "podman" ];
     packages = with pkgs; [
        beeper
        beets
