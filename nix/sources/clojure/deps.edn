@@ -61,10 +61,10 @@
    :exec-fn    clojure-mcp.main/start-mcp-server
    :exec-args  {:port 7888}}
 
+  ;; clojure -M:nrepl
   :nrepl
   {:extra-deps {nrepl/nrepl {:mvn/version "1.1.2"}}
-   :exec-fn    nrepl.server/start-server
-   :exec-args  {:port 7888}}
+   :main-opts ["-m" "nrepl.cmdline" "--port" "7888"]}
 
   :dev/debug
   {:extra-deps {adam/my.dev-tools {:local/root "/home/adam/src/dotfiles/nix/sources/clojure/my.dev-tools"}}}
