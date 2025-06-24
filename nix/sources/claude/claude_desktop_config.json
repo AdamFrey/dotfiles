@@ -6,6 +6,14 @@
         "-c",
         "cd /home/adam && clojure -Sdeps '{:deps {org.slf4j/slf4j-nop {:mvn/version \"2.0.16\"} com.bhauman/clojure-mcp {:git/url \"https://github.com/bhauman/clojure-mcp.git\" :git/sha \"ba8549078d2946b246ab07091c330e22c8866a2a\"}}}' -A:mcp -X clojure-mcp.main/start-mcp-server :port 7888"
       ]
+    },
+    "postgres": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://app:app@localhost:5432/cljcollage_dev"
+      ]
     }
   }
 }
