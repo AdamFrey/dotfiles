@@ -219,6 +219,12 @@ only works for semicolons."
    '(("a" (lambda (_path) (mapc #'counsel-git-grep-action ivy--all-candidates))
       "Open all matches"))))
 
+(defun af/grep-current-dir (regexp)
+  "Ripgrep for REGEXP in files at or under the current file's directory.
+Respects .gitignore and other ignore files."
+  (interactive "sRegexp: ")
+  (ripgrep-regexp regexp (file-name-directory (buffer-file-name)) nil))
+
 ;; Org Mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (after! ob
