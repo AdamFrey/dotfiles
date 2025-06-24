@@ -32,6 +32,7 @@
 (package! chezmoi)
 (package! tide :disable t)
 (package! unisonlang-mode)
+(package! ripgrep)
 (package! shen-mode)
 
 ;; clojure deps tool
