@@ -112,6 +112,15 @@
             EMACS_FONT_SIZE = 18;
           };
         };
+        framework-laptop = makeSystem {
+          extraModules = [
+            ./framework-laptop-hardware-configuration.nix 
+            ./framework-laptop.nix
+          ];
+          envVars = {
+            EMACS_FONT_SIZE = 12;
+          };
+        };
       };
     };
 }
