@@ -144,6 +144,7 @@
     cljfmt
     direnv
     duckdb
+    emote
     fuzzel
     glxinfo
     gnumake
