@@ -4,6 +4,7 @@ localhost:8233
 *.anthropic.com
 *.atlassian.com
 *.atlassian.net
+*.babashka.org
 chatgpt.com
 *.circleci.com
 claude.ai
