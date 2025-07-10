@@ -149,6 +149,7 @@
     glxinfo
     gnumake
     gpt4all
+    htop
     ispell
     just
     kitty
