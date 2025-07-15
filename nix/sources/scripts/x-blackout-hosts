@@ -2,5 +2,6 @@
 
 podman run --pull always --rm -it -v /etc/hosts:/etc/hosts \
 -v "/home/adam/src/dotfiles/nix/sources/hosts/myhosts:/hosts/myhosts" \
+-v "/home/adam/src/dotfiles/nix/sources/hosts/whitelist:/hosts/whitelist" \
 ghcr.io/stevenblack/hosts:latest updateHostsFile.py --auto \
 --replace --extensions gambling porn
