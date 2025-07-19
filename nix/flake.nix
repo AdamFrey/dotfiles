@@ -19,7 +19,7 @@
     stylix.url = "github:danth/stylix/release-25.05";
 
     claude-desktop = {
-      url = "github:k3d3/claude-desktop-linux-flake";
+      url = "github:k3d3/claude-desktop-linux-flake/a8f6fc6edeeb49a817443559f2b5e2a3da924b91";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };

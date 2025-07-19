@@ -104,6 +104,7 @@
       "original": {
         "owner": "k3d3",
         "repo": "claude-desktop-linux-flake",
+        "rev": "a8f6fc6edeeb49a817443559f2b5e2a3da924b91",
         "type": "github"
       }
     },
