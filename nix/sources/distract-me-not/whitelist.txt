@@ -20,6 +20,7 @@ www.digitalocean.com
 accounts.google.com
 calendar.google.com
 console.cloud.google.com
+drive.google.com
 merchants.google.com
 mail.google.com
 support.google.com
