@@ -6,6 +6,7 @@ localhost:8233
 *.atlassian.net
 *.babashka.org
 chatgpt.com
+docs.cider.mx
 *.circleci.com
 claude.ai
 clojure.org
@@ -23,6 +24,7 @@ console.cloud.google.com
 drive.google.com
 merchants.google.com
 mail.google.com
+*.rollbar.com
 support.google.com
 storage.googleapis.com
 javadoc.io
