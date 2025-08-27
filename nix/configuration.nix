@@ -148,6 +148,7 @@
     fuzzel
     glxinfo
     gnumake
+    google-chrome
     gpt4all
     htop
     ispell
