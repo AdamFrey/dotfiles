@@ -3,6 +3,7 @@
 (require
   ;; requiring snitch interns these four methods in clojure.core
  '[snitch.core :refer [defn* defmethod* *fn *let]]
+ '[sc.api]
  '[clojure.java.javadoc :refer (javadoc)]
  '[clojure.pprint :refer (pp pprint)]
  '[clojure+.error]
@@ -124,3 +125,7 @@
      ~binding))
 
 (intern 'clojure.core (with-meta 'doas (meta #'doas)) #'doas)
+
+(intern 'clojure.core (with-meta 'spy (meta #'sc.api/spy)) #'sc.api/spy)
+(intern 'clojure.core (with-meta 'letsc (meta #'sc.api/letsc)) #'sc.api/letsc)
+(intern 'clojure.core (with-meta 'defsc (meta #'sc.api/defsc)) #'sc.api/defsc)
