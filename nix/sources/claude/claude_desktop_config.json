@@ -8,12 +8,19 @@
       ]
     },
     "postgres": {
-      "command": "npx",
+      "command": "podman",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-postgres",
-        "postgresql://app:app@localhost:5432/cljcollage_dev"
-      ]
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "DATABASE_URI",
+        "crystaldba/postgres-mcp",
+        "--access-mode=unrestricted"
+      ],
+      "env": {
+        "DATABASE_URI": "postgresql://app:app@localhost:5432/cljcollage_dev"
+      }
     }
   }
 }
