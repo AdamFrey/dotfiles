@@ -80,7 +80,7 @@ output "DP-1" {
 output "HDMI-A-1" {
    mode "1920x1200@59.950"
 
-   transform "90"
+   transform "270"
 
    // Position of the output in the global coordinate space.
     // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
@@ -233,14 +233,14 @@ animations {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 
-// Work around WezTerm's initial configure bug
-// by setting an empty default-column-width.
 window-rule {
-    // This regular expression is intentionally made as specific as possible,
-    // since this is the default config, and we want no false positives.
-    // You can get away with just app-id="wezterm" if you want.
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
+    match app-id="Todoist"
+
+    // Force the window to open on HDMI-A-1
+    open-on-output "HDMI-A-1"
+
+    // Make the window take up full width
+    default-column-width { proportion 1.0; }
 }
 
 // Example: block out two password managers from screen capture.
