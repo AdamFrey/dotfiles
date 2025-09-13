@@ -74,7 +74,7 @@
     BROWSER            = "firefox";
     EDITOR             = "emacsclient --create frame";
   };
-  
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -100,7 +100,7 @@
     #media-session.enable = true;
   };
 
-   
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -149,6 +149,8 @@
     glxinfo
     gnumake
     google-chrome
+    google-cloud-sdk
+    graphviz
     gpt4all
     htop
     ispell
@@ -165,6 +167,7 @@
     postgresql
     pulsemixer
     python3
+    rclone
     rlwrap
     unzip
     uv
@@ -173,7 +176,7 @@
     zenith
     zip
     zoxide
-    inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
+    #inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
     inputs.zen-browser.packages.${pkgs.system}.default
   ] ++ [
     pkgs-unstable.emacs-pgtk

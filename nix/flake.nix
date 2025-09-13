@@ -118,7 +118,7 @@
             ./framework-laptop.nix
           ];
           envVars = {
-            EMACS_FONT_SIZE = 13;
+            EMACS_FONT_SIZE = 12;
           };
         };
       };
