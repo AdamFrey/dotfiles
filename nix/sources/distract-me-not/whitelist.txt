@@ -1,5 +1,4 @@
-localhost:3000
-localhost:8233
+localhost:*
 192.168.0.221:10079
 *.anthropic.com
 *.atlassian.com
@@ -18,6 +17,7 @@ www.digitalocean.com
 *.github.com
 *.github.io
 *.jcpenney.com
+cloudlogging.app.goo.gl
 accounts.google.com
 calendar.google.com
 console.cloud.google.com
@@ -34,10 +34,13 @@ gitlab.com
 *.netsuite.com
 *.notion.so
 *.openai.com
+docs.oracle.com
 *.rippling.com
 jcpenney.scene7.com
 *.slack.com
 *.soundcloud.com
 *.stripe.com
 *.stylitics.com
+*.temporal.io
+*.travelperk.com
 *.zoom.us
