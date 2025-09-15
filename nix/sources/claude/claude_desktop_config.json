@@ -8,16 +8,8 @@
       ]
     },
     "postgres": {
-      "command": "podman",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "-e",
-        "DATABASE_URI",
-        "crystaldba/postgres-mcp",
-        "--access-mode=unrestricted"
-      ],
+      "command": "uv",
+      "args": ["run", "postgres-mcp", "--access-mode=unrestricted"],
       "env": {
         "DATABASE_URI": "postgresql://app:app@localhost:5432/cljcollage_dev"
       }
