@@ -176,10 +176,9 @@
     zenith
     zip
     zoxide
-    #inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
+    inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
     inputs.zen-browser.packages.${pkgs.system}.default
   ] ++ [
-    #pkgs-unstable.emacs-pgtk
     pkgs-unstable.spotify
     pkgs-unstable.zed-editor
   ]

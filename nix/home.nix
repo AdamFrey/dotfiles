@@ -59,7 +59,6 @@
       ".config/kitty/kitty.conf".source = ./sources/kitty.conf;
       ".config/niri/config.kdl".source = ./sources/niri.kdl;
       ".lein/profiles.clj".source = ./sources/lein/profiles.clj;
-      ".local/share/applications/claude-desktop.desktop".source = ./sources/claude/claude-desktop.desktop;
     };
   };
 
