@@ -1,6 +1,6 @@
 {:deps
  ;; Clojure standard library
- {org.clojure/clojure {:mvn/version "1.11.2"}}
+ {org.clojure/clojure {:mvn/version "1.12.0"}}
 
  :aliases
  {;; find-deps - fuzzy search Maven & Clojars and add deps to deps.edn
@@ -62,7 +62,7 @@
   {:extra-deps {org.slf4j/slf4j-nop     {:mvn/version "2.0.16"}
                 com.bhauman/clojure-mcp {:git/url "https://github.com/bhauman/clojure-mcp.git"
                                          :git/tag "v0.1.9-alpha"
-                                         :git/sha "ef212ed"}}
+                                         :git/sha "e3e0e9b"}}
    :exec-fn    clojure-mcp.main/start-mcp-server
    :exec-args  {:port 7888}}
 
