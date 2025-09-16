@@ -6,3 +6,11 @@ First time run:
 sudo nixos-rebuild switch --flake flake.nix
 ```
 
+## Updates
+
+``` sh
+nix flake update
+```
+
+
+
