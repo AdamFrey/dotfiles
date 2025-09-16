@@ -131,7 +131,6 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-27.3.11" # used by logseq
-    "emacs-pgtk-29.4"
   ];
 
   # List packages installed in system profile. To search, run:
@@ -145,6 +144,7 @@
     direnv
     duckdb
     emote
+    emacs-pgtk
     fuzzel
     glxinfo
     gnumake
@@ -179,7 +179,7 @@
     #inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
     inputs.zen-browser.packages.${pkgs.system}.default
   ] ++ [
-    pkgs-unstable.emacs-pgtk
+    #pkgs-unstable.emacs-pgtk
     pkgs-unstable.spotify
     pkgs-unstable.zed-editor
   ]

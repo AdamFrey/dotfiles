@@ -10,7 +10,7 @@
     serviceConfig               = {
       Type      = "forking";
       # Running Emacs this way ensures environment variable are accessible:
-      ExecStart = "${pkgs.bash}/bin/bash -c 'source ${config.system.build.setEnvironment}; exec ${pkgs.emacs30-pgtk}/bin/emacs --daemon'";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'source ${config.system.build.setEnvironment}; exec ${pkgs.emacs-pgtk}/bin/emacs --daemon'";
       ExecStop  = "${pkgs.emacs30-pgtk}/bin/emacsclient --eval (kill-emacs)";
       Restart   = "always";
 
