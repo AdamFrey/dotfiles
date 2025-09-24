@@ -148,7 +148,6 @@
     fuzzel
     glxinfo
     gnumake
-    google-chrome
     google-cloud-sdk
     graphviz
     gpt4all
