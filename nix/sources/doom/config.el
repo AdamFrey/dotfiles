@@ -359,7 +359,7 @@ Respects .gitignore and other ignore files."
     (cider-interactive-eval "(do (require 'repl) (repl/go))"
                             nil
                             nil
-                            `(("ns" ,current-ns)))))
+                            `("ns" ,current-ns))))
 
 ;; https://github.com/clojure-emacs/cider/issues/3019#issuecomment-1330342147
 (defun af/cider-complete-at-point ()
