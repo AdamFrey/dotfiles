@@ -9,7 +9,13 @@
     },
     "postgres": {
       "command": "uv",
-      "args": ["run", "postgres-mcp", "--access-mode=unrestricted"],
+      "args": [
+        "run",
+        "--with",
+        "postgres-mcp",
+        "postgres-mcp",
+        "--access-mode=unrestricted"
+      ],
       "env": {
         "DATABASE_URI": "postgresql://app:app@localhost:5432/cljcollage_dev"
       }
