@@ -30,8 +30,9 @@
     };
 
     shellAliases = {
-      ls = "ls -1 --color";
+      ls     = "ls -1 --color";
       claude = "~/.claude/local/claude";
+      duct   = "clojure -M:duct";
       # mkdir -p ~/.claude/local
       # ln -s ~/.local/share/claude/node_modules/@anthropic-ai/claude-code/cli.js ~/.claude/local/claude
 
