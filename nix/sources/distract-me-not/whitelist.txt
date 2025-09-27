@@ -11,11 +11,13 @@ docs.cider.mx
 claude.ai
 clojars.org
 clojure.org
+*.clojuredocs.org
 *.cloudflare.com
 cljdoc.org
 codeberg.org
 devenv.sh
 www.digitalocean.com
+*.dockerhub.com
 *.github.com
 *.github.io
 *.jcpenney.com
