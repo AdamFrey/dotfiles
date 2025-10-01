@@ -17,6 +17,7 @@ cljdoc.org
 codeberg.org
 devenv.sh
 www.digitalocean.com
+*.docker.com
 *.dockerhub.com
 *.github.com
 *.github.io
@@ -26,6 +27,7 @@ cloudlogging.app.goo.gl
 accounts.google.com
 developers.google.com
 calendar.google.com
+cloud.google.com
 console.cloud.google.com
 drive.google.com
 merchants.google.com
@@ -50,6 +52,7 @@ docs.oracle.com
 *.stripe.com
 *.stylitics.com
 *.temporal.io
+*.terraform.io
 *.travelperk.com
 *.zoom.us
 *.zulipchat.com
