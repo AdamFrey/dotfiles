@@ -46,6 +46,7 @@ notion.so
 *.openai.com
 docs.oracle.com
 *.rippling.com
+*.run.app
 *.slack.com
 *.soundcloud.com
 *.stackoverflow.com
