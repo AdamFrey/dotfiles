@@ -169,6 +169,7 @@
     python3
     rclone
     rlwrap
+    shortwave # internet radio
     unzip
     uv
     waybar
