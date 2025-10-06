@@ -15,7 +15,6 @@
       nodePackages.prettier
       pavucontrol
       ripgrep
-      slack
       #music
       orca-c
       vital

@@ -173,6 +173,7 @@ in
     python3
     rclone
     rlwrap
+    slack
     shortwave # internet radio
     unzip
     uv
