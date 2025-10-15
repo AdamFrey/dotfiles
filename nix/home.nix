@@ -122,7 +122,7 @@
       expireDuplicatesFirst = true;
     };
     # babashka tab completion
-    initExtra = ''
+    initContent = ''
     _bb_tasks() {
       local matches=(`bb tasks |tail -n +3 |cut -f1 -d ' '`)
       compadd -a matches
