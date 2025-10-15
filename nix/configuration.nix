@@ -177,6 +177,7 @@
     zenith
     zip
     zoxide
+    inputs.mcp-servers-nix.packages.${system}.mcp-server-filesystem
     inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
     inputs.zen-browser.packages.${pkgs.system}.default
   ] ++ [
