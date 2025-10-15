@@ -29,6 +29,7 @@ developers.google.com
 calendar.google.com
 cloud.google.com
 console.cloud.google.com
+docs.google.com
 drive.google.com
 merchants.google.com
 mail.google.com
@@ -39,6 +40,7 @@ javadoc.io
 gitlab.com
 *.mochi.cards
 *.mozilla.org
+*.nixos.org
 *.netsuite.com
 *.notion.com
 notion.so
