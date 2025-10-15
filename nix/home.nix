@@ -171,6 +171,15 @@
           "/home/adam/src/dotfiles"
         ];
       };
+      beads = {
+        command = "uv";
+        args = [
+          "run"
+          "--with"
+          "beads-mcp"
+          "beads-mcp"
+        ];
+      };
       clojure-mcp = {
         command = "/bin/sh";
         args = [
