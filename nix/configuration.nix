@@ -4,6 +4,9 @@
 
 { config, pkgs, pkgs-unstable, inputs, ... }:
 
+let
+  beads = pkgs.callPackage ./packages/beads { };
+in
 {
   # secret decryption
   age.identityPaths = [ "/home/adam/.ssh/id_ed25519" ];
@@ -114,7 +117,6 @@
        beets
        bitwarden
        #deltachat-desktop
-       git
        httpie
        lagrange
        pgcli
@@ -137,6 +139,7 @@
   # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
     bash
+    beads
     bluetui
     calibre
     clojure
@@ -146,6 +149,7 @@
     emote
     emacs-pgtk
     fuzzel
+    git
     glxinfo
     gnumake
     google-chrome
