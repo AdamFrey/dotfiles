@@ -4,7 +4,7 @@
       "command": "/bin/sh",
       "args": [
         "-c",
-        "cd /home/adam && clojure -Sdeps '{:deps {org.slf4j/slf4j-nop {:mvn/version \"2.0.16\"} com.bhauman/clojure-mcp {:git/url \"https://github.com/bhauman/clojure-mcp.git\" :git/tag \"v0.1.9-alpha\" :git/sha \"e3e0e9b\"}}}' -A:mcp -X clojure-mcp.main/start-mcp-server :port 7888"
+        "cd /home/adam && clojure -Sdeps '{:deps {org.slf4j/slf4j-nop {:mvn/version \"2.0.16\"} com.bhauman/clojure-mcp {:git/url \"https://github.com/bhauman/clojure-mcp.git\" :git/tag \"v0.1.10-alpha\" :git/sha \"8bd96c3\"}}}' -A:mcp -X clojure-mcp.main/start-mcp-server :port 7888"
       ]
     },
     "postgres": {
