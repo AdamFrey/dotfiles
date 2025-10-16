@@ -1,4 +1,60 @@
 { config, pkgs, envVars, inputs, ... }:
+
+let
+  mcpConfig = inputs.mcp-servers-nix.lib.mkConfig pkgs {
+    # Configure built-in modules
+    programs = {
+      # Cannot find package 'zod-to-json-schema'
+      # filesystem = {
+      #   enable = true;
+      #   args = [ "/home/adam/src/dotfiles" ];
+      # };
+      fetch.enable = true;
+    };
+
+    # Add custom MCP servers
+    settings.servers = {
+      # Use npx version of filesystem server as a workaround
+      filesystem = {
+        command = "${pkgs.lib.getExe' pkgs.nodejs "npx"}";
+        args = [
+          "-y"
+          "@modelcontextprotocol/server-filesystem"
+          "/home/adam/src/dotfiles"
+        ];
+      };
+      beads = {
+        command = "uv";
+        args = [
+          "run"
+          "--with"
+          "beads-mcp"
+          "beads-mcp"
+        ];
+      };
+      clojure-mcp = {
+        command = "/bin/sh";
+        args = [
+          "-c"
+          "cd /home/adam && clojure -Sdeps '{:deps {org.slf4j/slf4j-nop {:mvn/version \"2.0.16\"} com.bhauman/clojure-mcp {:git/url \"https://github.com/bhauman/clojure-mcp.git\" :git/tag \"v0.1.10-alpha\" :git/sha \"8bd96c3\"}}}' -A:mcp -X clojure-mcp.main/start-mcp-server :port 7888"
+        ];
+      };
+      postgres = {
+        command = "uv";
+        args = [
+          "run"
+          "--with"
+          "postgres-mcp"
+          "postgres-mcp"
+          "--access-mode=unrestricted"
+        ];
+        env = {
+          DATABASE_URI = "postgresql://app:app@localhost:5432/cljcollage_dev";
+        };
+      };
+    };
+  };
+in
 {
   home = {
     username = "adam";
@@ -148,58 +204,14 @@
                 "x-scheme-handler/com.todoist"];
   };
 
-  # MCP Servers configuration
-  xdg.configFile."Claude/claude_desktop_config.json".source = inputs.mcp-servers-nix.lib.mkConfig pkgs {
-    # Configure built-in modules
-    programs = {
-      # Cannot find package 'zod-to-json-schema'
-      # filesystem = {
-      #   enable = true;
-      #   args = [ "/home/adam/src/dotfiles" ];
-      # };
-      fetch.enable = true;
-    };
-
-    # Add custom MCP servers
-    settings.servers = {
-      # Use npx version of filesystem server as a workaround
-      filesystem = {
-        command = "${pkgs.lib.getExe' pkgs.nodejs "npx"}";
-        args = [
-          "-y"
-          "@modelcontextprotocol/server-filesystem"
-          "/home/adam/src/dotfiles"
-        ];
-      };
-      beads = {
-        command = "uv";
-        args = [
-          "run"
-          "--with"
-          "beads-mcp"
-          "beads-mcp"
-        ];
-      };
-      clojure-mcp = {
-        command = "/bin/sh";
-        args = [
-          "-c"
-          "cd /home/adam && clojure -Sdeps '{:deps {org.slf4j/slf4j-nop {:mvn/version \"2.0.16\"} com.bhauman/clojure-mcp {:git/url \"https://github.com/bhauman/clojure-mcp.git\" :git/tag \"v0.1.10-alpha\" :git/sha \"8bd96c3\"}}}' -A:mcp -X clojure-mcp.main/start-mcp-server :port 7888"
-        ];
-      };
-      postgres = {
-        command = "uv";
-        args = [
-          "run"
-          "--with"
-          "postgres-mcp"
-          "postgres-mcp"
-          "--access-mode=unrestricted"
-        ];
-        env = {
-          DATABASE_URI = "postgresql://app:app@localhost:5432/cljcollage_dev";
-        };
-      };
-    };
+  xdg.desktopEntries.slack-wayland = {
+    name = "Slack Wayland";
+    exec = "slack --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WaylandWindowDecorations";
+    icon = "slack";
+    mimeType = ["x-scheme-handler/slack"
+                "x-scheme-handler/com.slack"];
   };
+
+  # MCP Servers configuration
+  xdg.configFile."Claude/claude_desktop_config.json".source = mcpConfig;
 }
