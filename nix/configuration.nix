@@ -6,6 +6,7 @@
 
 let
   beads = pkgs.callPackage ./packages/beads { };
+  hashcards = pkgs.callPackage ./packages/hashcards { };
 in
 {
   # secret decryption
@@ -143,6 +144,7 @@ in
     beads
     bluetui
     calibre
+    hashcards
     clojure
     cljfmt
     direnv
