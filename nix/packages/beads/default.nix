@@ -5,19 +5,22 @@
 
 buildGoModule rec {
   pname = "beads";
-  version = "unstable-2024-10-15";
+  version = "0.9.11";
 
   src = fetchFromGitHub {
     owner = "steveyegge";
     repo = "beads";
-    rev = "953858b853bb9d477215966665851406eccb8183";
-    hash = "sha256-AAZed/mI/0mVRaQO+PsTzOSrWnmfSAi+eQcEFSywv/o=";
+    rev = "01aeed6997ec7c4cc014f72ad8dde98dd0f6d11a";
+    hash = "sha256-opsWmeXzPwTihnTEhWboSginYM0XvFGwtnr6MS974qs=";
   };
 
-  vendorHash = "sha256-WvwT48izxMxx9qQmZp/6zwv7hHgTVd9KmOJFm7RWvrI=";
+  vendorHash = "sha256-9xtp1ZG7aYXatz02PDTmSRXwBDaW0kM7AMQa1RUau4U=";
 
   # Enable CGO for C bindings
   env.CGO_ENABLED = 1;
+
+  # Skip tests that require filesystem access not available in Nix sandbox
+  doCheck = false;
 
   # Build only the bd binary from cmd/bd subdirectory
   subPackages = [ "cmd/bd" ];
