@@ -153,6 +153,7 @@ in
   programs.ssh = {
     enable = true;
     addKeysToAgent = "yes";
+    matchBlocks = inputs.private-nix.sshHosts or {};
   };
 
   services.ssh-agent.enable = true;

@@ -32,6 +32,10 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    private-nix = {
+      url = "git+ssh://git@github.com/AdamFrey/private-nix.git";
+    };
   };
 
     # outputs is a function taking inputs, and destructuring
@@ -46,7 +50,8 @@
       agenix,
       claude-desktop,
       mcp-servers-nix,
-      zen-browser }@inputs:
+      zen-browser,
+      private-nix }@inputs:
     let
       system = "x86_64-linux";
       makeSystem = { extraModules, envVars }: nixpkgs.lib.nixosSystem {
