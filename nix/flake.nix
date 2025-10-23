@@ -34,7 +34,7 @@
     };
 
     private-nix = {
-      url = "git+ssh://git@github.com/AdamFrey/private-nix.git";
+      url = "git+ssh://git@github.com/AdamFrey/private-nix.git?ref=master";
     };
   };
 
