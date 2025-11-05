@@ -8,9 +8,10 @@ let
   root = "/home/adam/nas";
 in
 {
-  fileSystems."${root}/art"      = nasMount "art";
-  fileSystems."${root}/immich"   = nasMount "immich";
-  fileSystems."${root}/episteme" = nasMount "episteme";
-  fileSystems."${root}/logseq"   = nasMount "logseq";
-  fileSystems."${root}/techne"   = nasMount "techne";
+  fileSystems."${root}/art"        = nasMount "art";
+  fileSystems."${root}/immich"     = nasMount "immich";
+  fileSystems."${root}/episteme"   = nasMount "episteme";
+  fileSystems."${root}/logseq"     = nasMount "logseq";
+  fileSystems."${root}/techne"     = nasMount "techne";
+  fileSystems."${root}/prosopikos" = nasMount "prosopikos";
 }
