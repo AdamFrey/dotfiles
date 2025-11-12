@@ -276,6 +276,7 @@ binds {
     Mod+E { spawn "emacsclient" "--create-frame";  }
     Mod+B { spawn "zen"; }
     Mod+S { spawn "slack"; }
+    Mod+Q { spawn "makoctl" "dismiss" "--all"; }
 
     Super+Alt+L { spawn "swaylock"; }
 
