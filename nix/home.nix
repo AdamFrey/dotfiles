@@ -196,10 +196,6 @@ in
       window_padding_width = 15;
       # Stylix will override the colors, but we can set other preferences
     };
-    font = {
-      name = "JetBrains Mono Medium";
-      size = 10;
-    };
     keybindings = {
       "ctrl+plus" = "change_font_size all +2.0";
       "ctrl+minus" = "change_font_size all -2.0";
