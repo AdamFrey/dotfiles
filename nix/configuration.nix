@@ -145,6 +145,7 @@ in
     bluetui
     calibre
     hashcards
+    claude-code
     clojure
     cljfmt
     direnv

@@ -18,6 +18,11 @@
 
     stylix.url = "github:danth/stylix/release-25.05";
 
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     claude-desktop = {
       url = "github:k3d3/claude-desktop-linux-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,6 +53,7 @@
       niri,
       stylix,
       agenix,
+      claude-code,
       claude-desktop,
       mcp-servers-nix,
       zen-browser,
@@ -100,7 +106,10 @@
         ] ++ extraModules;
       };
     in  {
-      nixpkgs.overlays = [ niri.overlays.niri ];
+      nixpkgs.overlays = [
+        niri.overlays.niri
+        claude-code.overlays.default
+      ];
 
       nixosConfigurations = {
         desktop = makeSystem {
