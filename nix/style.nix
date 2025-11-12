@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 {
     stylix = {
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-forest-light.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/selenized-light.yaml";
         image = config.lib.stylix.pixel "base0A";
-        polarity = "dark";
+        polarity = "light";
 
         # image = "~/Downloads/aerial-forest-wallpaper.jpg";
         # image = pkgs.fetchurl {
