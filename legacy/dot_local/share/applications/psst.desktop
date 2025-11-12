@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=Psst
-Exec=/home/adam/.local/bin/psst-gui
-Terminal=false
-Type=Application
-Comment=Alternative Spotify frontend

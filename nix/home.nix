@@ -111,7 +111,7 @@ in
       ".config/doom/config.el".source = ./sources/doom/config.el;
       ".config/doom/packages.el".source = ./sources/doom/packages.el;
       ".config/emacs/.local/cache/.mc-lists.el".source = ./sources/emacs/mc-lists.el;
-      ".config/kitty/kitty.conf".source = ./sources/kitty.conf;
+      # ".config/kitty/kitty.conf".source = ./sources/kitty.conf; # Now managed by stylix
       ".config/niri/config.kdl".source = ./sources/niri.kdl;
       ".lein/profiles.clj".source = ./sources/lein/profiles.clj;
     };
@@ -190,6 +190,26 @@ in
   };
 
   stylix.targets.niri.enable = false;
+  stylix.targets.kitty.enable = true;
+
+  programs.kitty = {
+    enable = true;
+    settings = {
+      enable_audio_bell = false;
+      confirm_os_window_close = 0;
+      window_padding_width = 15;
+      # Stylix will override the colors, but we can set other preferences
+    };
+    font = {
+      name = "JetBrains Mono Medium";
+      size = 10;
+    };
+    keybindings = {
+      "ctrl+plus" = "change_font_size all +2.0";
+      "ctrl+minus" = "change_font_size all -2.0";
+      "ctrl+backspace" = "change_font_size all 0";
+    };
+  };
 
   xdg.desktopEntries.antares = {
     name = "Antares";

@@ -1,3 +1,0 @@
-#!/usr/bin/env bb
-
-(println "new post")

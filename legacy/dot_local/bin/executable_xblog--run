@@ -1,6 +1,0 @@
-#!/usr/bin/env bb
-
-(require '[babashka.process :as p])
-
-(p/shell {:dir "/home/adam/src/mycorp/interfaces/interface.personal-blog"}
-  "clj" "-X:run")
