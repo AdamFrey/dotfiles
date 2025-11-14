@@ -106,6 +106,19 @@ in
     #media-session.enable = true;
   };
 
+  # Wallpaper daemon with wbg
+  # systemd.user.services.wbg-wallpaper = {
+  #   description = "wbg wallpaper daemon";
+  #   after = [ "graphical-session.target" ];
+  #   partOf = [ "graphical-session.target" ];
+  #   wantedBy = [ "graphical-session.target" ];
+    
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.wbg}/bin/wbg ${config.stylix.image}";
+  #     Restart = "on-failure";
+  #     RestartSec = "1";
+  #   };
+  # };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
