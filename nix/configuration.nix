@@ -19,6 +19,7 @@ in
     [ ./filesystem.nix
       ./emacs.nix
       ./podman.nix
+      ./browsers.nix
     ];
 
   # Bootloader.
@@ -75,7 +76,7 @@ in
     XDG_CONFIG_HOME    = "$HOME/.config";
     XDG_DATA_HOME      = "$HOME/.local/share";
     XDG_STATE_HOME     = "$HOME/.local/state";
-    BROWSER            = "firefox";
+    # BROWSER is now set conditionally in browsers.nix
     EDITOR             = "emacsclient --create frame";
   };
 
@@ -127,9 +128,6 @@ in
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -156,7 +154,7 @@ in
     git
     glxinfo
     gnumake
-    google-chrome
+    # google-chrome moved to browsers.nix
     google-cloud-sdk
     graphviz
     gpt4all
@@ -188,7 +186,7 @@ in
     zoxide
     inputs.mcp-servers-nix.packages.${system}.mcp-server-filesystem
     inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
-    inputs.zen-browser.packages.${pkgs.system}.default
+    # zen-browser moved to browsers.nix
   ] ++ [
     pkgs-unstable.spotify
     pkgs-unstable.zed-editor

@@ -85,24 +85,6 @@ in
       UV_PYTHON_DOWNLOADS = "never";
     };
 
-  systemd.user.services.wbg-wallpaper = {
-    Unit = {
-      Description = "wbg wallpaper daemon";
-      After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-    
-    Service = {
-      ExecStart = "${pkgs.wbg}/bin/wbg %h/.config/stylix/wallpaper.png";
-      Restart = "on-failure";
-      RestartSec = "1";
-    };
-    
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
-  };
-
     shellAliases = {
       ls     = "ls -1 --color";
       duct   = "clojure -M:duct";

@@ -6,6 +6,8 @@
   ${pkgs.kmod}/bin/modprobe -r mt7925e || true
 '';
 
+  services.browsersEnabled = false;
+
   powerManagement.resumeCommands = ''
   ${pkgs.kmod}/bin/modprobe mt7925e || true
 '';
