@@ -7,6 +7,7 @@
 let
   beads = pkgs.callPackage ./packages/beads { };
   hashcards = pkgs.callPackage ./packages/hashcards { };
+  fastmail = pkgs.callPackage ./packages/fastmail { };
 in
 {
   # secret decryption
@@ -155,6 +156,7 @@ in
     beads
     bluetui
     calibre
+    fastmail
     hashcards
     claude-code
     clojure
