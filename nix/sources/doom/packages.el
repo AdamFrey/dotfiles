@@ -18,6 +18,8 @@
 
 (package! map :pin "bb50dbaafc0f71743bd9ffd5784258a9fd682c20")
 
+(package! eca :recipe (:host github :repo "editor-code-assistant/eca-emacs" :files ("*.el")))
+
 (package! fennel-mode)
 
 (package! friar
