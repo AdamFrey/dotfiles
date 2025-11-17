@@ -205,6 +205,7 @@ in
     inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
     # zen-browser moved to browsers.nix
   ] ++ [
+    pkgs-unstable.babashka
     pkgs-unstable.spotify
     pkgs-unstable.zed-editor
   ]
