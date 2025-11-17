@@ -154,6 +154,7 @@ in
   environment.systemPackages = with pkgs; [
     bash
     beads
+    bbin # Babashka bin
     bluetui
     calibre
     fastmail
@@ -176,6 +177,7 @@ in
     htop
     ispell
     just
+    kakounePlugins.parinfer-rust
     kitty
     leiningen
     libnotify
