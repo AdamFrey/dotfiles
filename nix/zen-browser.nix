@@ -38,12 +38,6 @@
           Status = "default";
         };
         
-        # Enable custom keyboard shortcuts extension API
-        "extensions.shortcuts.enabled" = {
-          Value = true;
-          Status = "default";
-        };
-        
         # Example: Set homepage
         "browser.startup.homepage" = {
           Value = "about:home";
@@ -87,23 +81,6 @@
         # Performance
         "browser.tabs.unloadOnLowMemory" = {
           Value = true;
-          Status = "default";
-        };
-        
-        # Navigation keyboard shortcuts
-        # Alt+B for back, Alt+F for forward
-        "browser.backspace_action" = {
-          Value = 2;  # Disable backspace navigation
-          Status = "default";
-        };
-        
-        # Custom key bindings via ui.key
-        "ui.key.accelKey" = {
-          Value = 18;  # Alt key
-          Status = "default";
-        };
-        "ui.key.menuAccessKey" = {
-          Value = 0;  # Disable menu access key to free up Alt
           Status = "default";
         };
       };

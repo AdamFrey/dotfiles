@@ -114,6 +114,10 @@ in
       # ".config/kitty/kitty.conf".source = ./sources/kitty.conf; # Now managed by stylix
       ".config/niri/config.kdl".source = ./sources/niri.kdl;
       ".lein/profiles.clj".source = ./sources/lein/profiles.clj;
+      ".zen/onltmz18.Default Profile/zen-keyboard-shortcuts.json" = {
+        source = ./sources/zen/zen-keyboard-shortcuts.json;
+        force = true;
+      };
     };
   };
 
