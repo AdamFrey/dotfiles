@@ -1506,7 +1506,7 @@
             "modifiers": {
                 "control": false,
                 "alt": true,
-                "shift": true,
+                "shift": false,
                 "meta": false,
                 "accel": false
             },

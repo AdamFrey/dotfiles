@@ -15,6 +15,7 @@
       
       # Privacy settings
       DisableTelemetry = true;
+      DisablePocket = true;
       EnableTrackingProtection = {
         Value = true;
         Locked = true;
