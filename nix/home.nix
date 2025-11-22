@@ -56,6 +56,10 @@ let
   };
 in
 {
+  imports = [
+    ./zen-browser.nix
+  ];
+
   home = {
     username = "adam";
     homeDirectory = "/home/adam";
