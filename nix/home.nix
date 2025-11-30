@@ -119,6 +119,7 @@ in
         source = ./sources/zen/zen-keyboard-shortcuts.json;
         force = true;
       };
+      ".zprintrc".source = ./sources/zprint/.zprintrc;
     };
   };
 
