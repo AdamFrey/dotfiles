@@ -61,16 +61,19 @@
     let
       system = "x86_64-linux";
       makeSystem = { extraModules, envVars }: nixpkgs.lib.nixosSystem {
+        inherit system;
         # specialArgs is passed as an argument set to every module in the module list
         specialArgs = {
           pkgs-unstable = import nixpkgs-unstable {
             inherit system;
             config.allowUnfree = true;
+            overlays = [ claude-code.overlays.default ];
           };
           inherit inputs;
         };
 
         modules = [
+          { nixpkgs.overlays = [ niri.overlays.niri claude-code.overlays.default ]; }
           ./configuration.nix
 
           agenix.nixosModules.default # secrets
@@ -106,11 +109,6 @@
         ] ++ extraModules;
       };
     in  {
-      nixpkgs.overlays = [
-        niri.overlays.niri
-        claude-code.overlays.default
-      ];
-
       nixosConfigurations = {
         desktop = makeSystem {
           extraModules = [
