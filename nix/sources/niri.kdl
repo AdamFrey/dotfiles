@@ -274,7 +274,7 @@ binds {
     Mod+Return { spawn "kitty"; }
     Mod+R { spawn "fuzzel"; }
     Mod+E { spawn "emacsclient" "--create-frame";  }
-    Mod+B { spawn "zen"; }
+    Mod+B { spawn "zen-beta"; }
     Mod+S { spawn "slack"; }
     Mod+Q { spawn "makoctl" "dismiss" "--all"; }
 
