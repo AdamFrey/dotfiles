@@ -188,6 +188,7 @@ in
     ollama
     pandoc
     pciutils
+    polylith
     postgresql
     pulsemixer
     python3
