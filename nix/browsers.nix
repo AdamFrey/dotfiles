@@ -24,7 +24,7 @@ in
   config = {
     # Conditionally set BROWSER environment variable
     environment.sessionVariables = mkIf cfg {
-      BROWSER = "zen";  # or "google-chrome-stable" if you prefer
+      BROWSER = "zen-beta";
     };
 
     # Conditionally include browser packages
