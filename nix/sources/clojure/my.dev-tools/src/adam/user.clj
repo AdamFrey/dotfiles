@@ -10,6 +10,7 @@
  '[clojure+.test]
  '[clojure+.hashp]
  '[portal.api :as portal]
+ '[portal.runtime.browser :as portal.browser]
  '[clj-java-decompiler.core :refer [decompile]]
  '[criterium.core :as cr]
   ;; '[dev.nu.morse :as morse]
@@ -31,7 +32,9 @@
 (defn portal!
   []
   (prn "starting portal...")
-  (def p (portal/open))
+  (def p (portal/open {::portal.browser/flags
+                       (fn [url]
+                         ["--ozone-platform=wayland" (str "--app=" url)])}))
   (add-tap #'portal/submit))
 
 (defn t>

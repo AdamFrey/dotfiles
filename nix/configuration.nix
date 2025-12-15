@@ -22,6 +22,7 @@ in
       ./podman.nix
       ./browsers.nix
       ./audio.nix
+      ./clojure.nix
     ];
 
   # Bootloader.
