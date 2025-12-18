@@ -155,6 +155,7 @@ in
     emacs-pgtk
     fuzzel
     git
+    git-filter-repo
     glxinfo
     gnumake
     # google-chrome moved to browsers.nix
