@@ -64,6 +64,7 @@
         force = true;
       };
       ".zprintrc".source = ./sources/zprint/.zprintrc;
+      ".claude/settings.json".source = ./sources/claude/settings.json;
     };
   };
 
