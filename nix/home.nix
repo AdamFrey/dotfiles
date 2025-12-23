@@ -75,6 +75,8 @@
     enableZshIntegration = true;
   };
 
+  
+  services.batsignal.enable = true; # battery life notifier
   services.flameshot.enable = true;
 
   programs.fzf = {
