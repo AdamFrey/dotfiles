@@ -29,10 +29,6 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
-    mcp-servers-nix = {
-      url = "github:natsukium/mcp-servers-nix";
-    };
-
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -55,7 +51,6 @@
       agenix,
       claude-code,
       claude-desktop,
-      mcp-servers-nix,
       zen-browser,
       private-nix }@inputs:
     let
