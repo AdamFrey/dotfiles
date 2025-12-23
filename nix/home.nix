@@ -12,7 +12,6 @@
 
     packages = with pkgs; [
       antares
-      devenv
       fd
       forge-mtg
       logseq
