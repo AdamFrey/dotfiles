@@ -5,7 +5,6 @@
 { config, pkgs, pkgs-unstable, inputs, ... }:
 
 let
-  beads = pkgs.callPackage ./packages/beads { };
   hashcards = pkgs.callPackage ./packages/hashcards { };
   fastmail = pkgs.callPackage ./packages/fastmail { };
 in
@@ -141,7 +140,6 @@ in
   environment.systemPackages = with pkgs; [
     acpi
     bash
-    beads
     bbin # Babashka bin
     bluetui
     calibre
@@ -196,6 +194,7 @@ in
     # zen-browser moved to browsers.nix
   ] ++ [
     pkgs-unstable.babashka
+    pkgs-unstable.beads
     pkgs-unstable.spotify
     pkgs-unstable.zed-editor
   ]
