@@ -1,0 +1,61 @@
+services:
+  grampsweb:
+    image: ghcr.io/gramps-project/grampsweb:latest
+    container_name: grampsweb
+    ports:
+      - "5004:5000"
+    environment:
+      GRAMPSWEB_TREE: "Family Tree"
+      GRAMPSWEB_CELERY_CONFIG__broker_url: "redis://grampsweb-redis:6379/0"
+      GRAMPSWEB_CELERY_CONFIG__result_backend: "redis://grampsweb-redis:6379/0"
+      GRAMPSWEB_RATELIMIT_STORAGE_URI: "redis://grampsweb-redis:6379/1"
+    depends_on:
+      - grampsweb-redis
+    volumes:
+      - /mnt/pithos/containers/container-data/grampsweb/users:/app/users
+      - /mnt/pithos/containers/container-data/grampsweb/index:/app/indexdir
+      - /mnt/pithos/containers/container-data/grampsweb/thumb_cache:/app/thumbnail_cache
+      - /mnt/pithos/containers/container-data/grampsweb/cache:/app/cache
+      - /mnt/pithos/containers/container-data/grampsweb/secret:/app/secret
+      - /mnt/pithos/containers/container-data/grampsweb/db:/root/.gramps/grampsdb
+      - /mnt/pithos/containers/container-data/grampsweb/media:/app/media
+      - /mnt/pithos/containers/container-data/grampsweb/tmp:/tmp
+    restart: unless-stopped
+    networks:
+      - apps
+
+  grampsweb-celery:
+    image: ghcr.io/gramps-project/grampsweb:latest
+    container_name: grampsweb-celery
+    environment:
+      GRAMPSWEB_TREE: "Family Tree"
+      GRAMPSWEB_CELERY_CONFIG__broker_url: "redis://grampsweb-redis:6379/0"
+      GRAMPSWEB_CELERY_CONFIG__result_backend: "redis://grampsweb-redis:6379/0"
+      GRAMPSWEB_RATELIMIT_STORAGE_URI: "redis://grampsweb-redis:6379/1"
+    depends_on:
+      - grampsweb
+      - grampsweb-redis
+    volumes:
+      - /mnt/pithos/containers/container-data/grampsweb/users:/app/users
+      - /mnt/pithos/containers/container-data/grampsweb/index:/app/indexdir
+      - /mnt/pithos/containers/container-data/grampsweb/thumb_cache:/app/thumbnail_cache
+      - /mnt/pithos/containers/container-data/grampsweb/cache:/app/cache
+      - /mnt/pithos/containers/container-data/grampsweb/secret:/app/secret
+      - /mnt/pithos/containers/container-data/grampsweb/db:/root/.gramps/grampsdb
+      - /mnt/pithos/containers/container-data/grampsweb/media:/app/media
+      - /mnt/pithos/containers/container-data/grampsweb/tmp:/tmp
+    command: celery -A gramps_webapi.celery worker --loglevel=INFO --concurrency=2
+    restart: unless-stopped
+    networks:
+      - apps
+
+  grampsweb-redis:
+    image: redis:7-alpine
+    container_name: grampsweb-redis
+    restart: unless-stopped
+    networks:
+      - apps
+
+networks:
+  apps:
+    external: true
