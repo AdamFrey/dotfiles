@@ -1,0 +1,15 @@
+services:
+  datalevin:
+    image: huahaiy/datalevin:0.9.22
+    container_name: datalevin
+    ports:
+      - 8898:8898
+    volumes:
+      - /mnt/pithos/containers/container-data/datalevin:/data
+    restart: unless-stopped
+    networks:
+      - apps
+
+networks:
+  apps:
+    external: true
