@@ -1,0 +1,23 @@
+services:
+  emby:
+    image: emby/embyserver:latest
+    container_name: emby
+    ports:
+      - 10079:8096
+    environment:
+      - UID=568
+      - GID=568
+    volumes:
+      - /mnt/pithos/containers/container-data/emby:/config
+      - /mnt/pithos/art/movies:/data/movies:ro
+      - /mnt/pithos/art/tv:/data/tv:ro
+      - /mnt/pithos/art/music-recordings:/data/music:ro
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
+    networks:
+      - apps
+
+networks:
+  apps:
+    external: true
