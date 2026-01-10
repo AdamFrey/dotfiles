@@ -11,5 +11,11 @@ services:
       - /mnt/pithos/containers/container-data/postgres:/var/lib/postgresql
     ports:
       - 5432:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
 networks:
   apps: {}
