@@ -1,0 +1,25 @@
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    ports:
+      - 5003:5003 # Web UI
+      - 6881:6881 # Torrent TCP
+      - 6881:6881/udp # Torrent UDP
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=America/New_York
+      - WEBUI_PORT=5003
+    volumes:
+      - /mnt/pithos/containers/container-data/qbittorrent:/config
+      - /mnt/pithos/art:/art
+      - /mnt/pithos/episteme:/episteme
+      - /mnt/pithos/techne:/techne
+    restart: unless-stopped
+    networks:
+      - apps
+
+networks:
+  apps:
+    external: true
