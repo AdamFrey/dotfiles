@@ -3,8 +3,6 @@ services:
     image: postgres:18-alpine
     container_name: postgres
     environment:
-      - PUID=568
-      - PGID=568
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
@@ -12,10 +10,65 @@ services:
     ports:
       - 5432:5432
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
+      test:
+        - CMD
+        - pg_isready
+        - -U
+        - ${POSTGRES_USER}
       interval: 10s
       timeout: 5s
       retries: 5
     restart: unless-stopped
+    networks:
+      - apps
+
+  db-init:
+    image: postgres:18-alpine
+    container_name: postgres-init
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - PGPASSWORD=${POSTGRES_PASSWORD}
+      - PGHOST=postgres
+      - POSTGRES_DATABASES=${POSTGRES_DATABASES}
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        echo "Waiting for postgres to be ready..."
+        until pg_isready -h postgres -U $$POSTGRES_USER; do
+          echo "Postgres not ready, waiting..."
+          sleep 2
+        done
+        echo "Postgres is ready. Creating databases..."
+
+        echo "$$POSTGRES_DATABASES" | tr ',' '\n' | while IFS=: read -r dbname dbuser dbpass; do
+          if [ -n "$$dbname" ]; then
+            echo "Setting up database '$$dbname' for user '$$dbuser'..."
+            
+            psql -h postgres -U $$POSTGRES_USER -d postgres -tc \
+              "SELECT 1 FROM pg_roles WHERE rolname='$$dbuser'" | grep -q 1 || \
+              psql -h postgres -U $$POSTGRES_USER -d postgres -c \
+              "CREATE USER \"$$dbuser\" WITH PASSWORD '$$dbpass';"
+            
+            psql -h postgres -U $$POSTGRES_USER -d postgres -tc \
+              "SELECT 1 FROM pg_database WHERE datname='$$dbname'" | grep -q 1 || \
+              psql -h postgres -U $$POSTGRES_USER -d postgres -c \
+              "CREATE DATABASE \"$$dbname\" OWNER \"$$dbuser\";"
+            
+            psql -h postgres -U $$POSTGRES_USER -d postgres -c \
+              "GRANT ALL PRIVILEGES ON DATABASE \"$$dbname\" TO \"$$dbuser\";"
+            
+            echo "✓ Database '$$dbname' ready"
+          fi
+        done
+
+        echo "All databases initialized!"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - apps
+    restart: "no"
+
 networks:
-  apps: {}
+  apps:
+    name: apps
