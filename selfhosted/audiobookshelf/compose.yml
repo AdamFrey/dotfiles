@@ -1,0 +1,19 @@
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
+    ports:
+      - 5005:80
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - /mnt/pithos/containers/container-data/audiobookshelf/config:/config
+      - /mnt/pithos/containers/container-data/audiobookshelf/metadata:/metadata
+      - /mnt/pithos/art:/art
+    restart: unless-stopped
+    networks:
+      - apps
+
+networks:
+  apps:
+    external: true
