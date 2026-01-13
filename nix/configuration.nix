@@ -143,7 +143,7 @@ in
     bbin # Babashka bin
     bluetui
     calibre
-    fastmail
+    #fastmail
     hashcards
     claude-code
     clojure

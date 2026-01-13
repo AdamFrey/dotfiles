@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+~/.config/emacs/bin/doom sync && systemctl --user restart emacs

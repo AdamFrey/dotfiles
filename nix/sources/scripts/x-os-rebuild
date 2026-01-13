@@ -36,7 +36,8 @@
   (case (hostname)
     "matte-black-cadillac"   "/home/adam/src/dotfiles/nix#desktop"
     "stylitics-laptop-nixos" "/home/adam/src/dotfiles/nix#laptop"
-    "framework-laptop-nixos" "/home/adam/src/dotfiles/nix#framework-laptop"))
+    "framework-laptop-nixos" "/home/adam/src/dotfiles/nix#framework-laptop"
+    "work-laptop-nixos"      "/home/adam/src/dotfiles/nix#work-framework-laptop"))
 
 ;; Config ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

@@ -34,9 +34,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    private-nix = {
-      url = "git+ssh://git@github.com/AdamFrey/private-nix.git?ref=master";
-    };
+    #private-nix = {
+    #  url = "git+ssh://git@github.com/AdamFrey/private-nix.git?ref=master";
+    #};
   };
 
     # outputs is a function taking inputs, and destructuring
@@ -51,8 +51,8 @@
       agenix,
       claude-code,
       claude-desktop,
-      zen-browser,
-      private-nix }@inputs:
+      zen-browser
+      }@inputs:
     let
       system = "x86_64-linux";
       makeSystem = { extraModules, envVars }: nixpkgs.lib.nixosSystem {
@@ -133,6 +133,15 @@
             EMACS_FONT_SIZE = 14;
           };
         };
+	work-framework-laptop = makeSystem {
+	  extraModules = [
+	    ./machines/work-framework-laptop-hardware-configuration.nix
+	    ./machines/work-framework-laptop.nix
+	  ];
+          envVars = {
+            EMACS_FONT_SIZE = 14;
+          };
+	};
       };
     };
 }

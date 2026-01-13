@@ -488,22 +488,6 @@
         "type": "github"
       }
     },
-    "private-nix": {
-      "locked": {
-        "lastModified": 1761229484,
-        "narHash": "sha256-4dw757BruSHsgI7vdjhz8okAUC480Y5fTQsXDzmwXlI=",
-        "ref": "master",
-        "rev": "dfcda1e68d5f29c470b85f35c638beb493d9aaf8",
-        "revCount": 4,
-        "type": "git",
-        "url": "ssh://git@github.com/AdamFrey/private-nix.git"
-      },
-      "original": {
-        "ref": "master",
-        "type": "git",
-        "url": "ssh://git@github.com/AdamFrey/private-nix.git"
-      }
-    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -514,7 +498,6 @@
         "niri": "niri",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "private-nix": "private-nix",
         "stylix": "stylix",
         "zen-browser": "zen-browser"
       }
