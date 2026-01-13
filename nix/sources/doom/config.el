@@ -91,6 +91,7 @@
 
 ;; Editing  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(global-unset-key (kbd "M-l")) ;; I don't need downcase-word
 (global-set-key (kbd "C-t") 'forward-char)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 
