@@ -109,6 +109,7 @@
           extraModules = [
             ./desktop-hardware-configuration.nix
             ./desktop.nix
+            ./podman.nix
           ];
 
           envVars = {
@@ -119,6 +120,7 @@
           extraModules = [
             ./laptop-hardware-configuration.nix
             ./laptop.nix
+            ./podman.nix
           ];
           envVars = {
             EMACS_FONT_SIZE = 18;
@@ -126,8 +128,9 @@
         };
         framework-laptop = makeSystem {
           extraModules = [
-            ./framework-laptop-hardware-configuration.nix 
+            ./framework-laptop-hardware-configuration.nix
             ./framework-laptop.nix
+            ./podman.nix
           ];
           envVars = {
             EMACS_FONT_SIZE = 14;
@@ -137,6 +140,7 @@
 	  extraModules = [
 	    ./machines/work-framework-laptop-hardware-configuration.nix
 	    ./machines/work-framework-laptop.nix
+	    ./docker.nix
 	  ];
           envVars = {
             EMACS_FONT_SIZE = 14;

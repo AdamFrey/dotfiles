@@ -18,7 +18,6 @@ in
   imports =
     [ ./filesystem.nix
       ./emacs.nix
-      ./podman.nix
       ./browsers.nix
       ./audio.nix
       ./clojure.nix
