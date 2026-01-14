@@ -23,6 +23,7 @@
   # Audio/MIDI packages
   environment.systemPackages = with pkgs; [
     alsa-utils
+    pulsemixer  # TUI for audio device/volume control
     qpwgraph
     qsynth
   ];
