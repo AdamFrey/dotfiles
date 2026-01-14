@@ -148,6 +148,7 @@ in
     claude-code
     clojure
     cljfmt
+    devenv
     direnv
     duckdb
     emote
