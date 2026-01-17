@@ -22,6 +22,7 @@ in
       ./browsers.nix
       ./audio.nix
       ./clojure.nix
+      ./tailscale.nix
     ];
 
   # Bootloader.
