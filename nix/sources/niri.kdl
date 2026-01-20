@@ -77,7 +77,7 @@ output "DP-1" {
     position x=0 y=0
 }
 
-output "HDMI-A-1" {
+output "DP-2" {
    mode "1920x1200@59.950"
 
    transform "270"
