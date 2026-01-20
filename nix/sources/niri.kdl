@@ -56,7 +56,8 @@ input {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
 
-output "DP-1" {
+// Desktop outputs HDMI 
+output "HDMI-A-1" {
     focus-at-startup
 
     // Resolution and, optionally, refresh rate of the output.
@@ -70,16 +71,37 @@ output "DP-1" {
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
     scale 2
 
-    // Transform allows to rotate the output counter-clockwise, valid values are:
-    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
     transform "normal"
 
     position x=0 y=0
 }
 
+// Laptop main DisplayPort
+output "DP-3" {
+    focus-at-startup
+
+    // Resolution and, optionally, refresh rate of the output.
+    // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
+    // If the refresh rate is omitted, niri will pick the highest refresh rate
+    // for the resolution.
+    // If the mode is omitted altogether or is invalid, niri will pick one automatically.
+    // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
+    mode "3840x2160@59.997"
+
+    // You can use integer or fractional scale, for example use 1.5 for 150% scale.
+    scale 2
+
+    transform "normal"
+
+    position x=0 y=0
+}
+
+// Laptop second DisplayPort
 output "DP-2" {
    mode "1920x1200@59.950"
 
+   // Transform allows to rotate the output counter-clockwise, valid values are:
+   // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
    transform "270"
 
    // Position of the output in the global coordinate space.
@@ -91,7 +113,7 @@ output "DP-2" {
     // so to put another output directly adjacent to it on the right, set its x to 1920.
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
-   position x=1920 y=-450
+   position x=1920 y=-390
 }
 
 // Settings that influence how windows are positioned and sized.
