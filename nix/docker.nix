@@ -9,6 +9,7 @@
   # Add docker tools to system packages
   environment.systemPackages = with pkgs; [
     docker-compose
+    oxker
   ];
 
   # Add user to docker group
