@@ -14,7 +14,6 @@
       antares
       fd
       forge-mtg
-      logseq
       mozart2-binary
       nodePackages.prettier
       pavucontrol

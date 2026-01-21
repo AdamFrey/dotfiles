@@ -191,7 +191,7 @@ Home-manager manages dotfiles via `home.file` in home.nix:41. Files are symlinke
 - Git configured to rebase on pull by default (home.nix:92)
 
 **NAS Integration:**
-- NFS automounts at /home/adam/nas/* (art, immich, episteme, logseq, techne, prosopikos)
+- NFS automounts at /home/adam/nas/*
 - Mounts are automatic on access with 10-minute idle timeout
 - NAS IP: 192.168.0.221
 
