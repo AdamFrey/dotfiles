@@ -82,6 +82,30 @@
   services.batsignal.enable = true; # battery life notifier
   services.flameshot.enable = true;
 
+  # RAM usage monitor - notifies at 90% usage
+  systemd.user.services.ram-monitor = {
+    Unit.Description = "RAM usage monitor";
+    Service = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "ram-monitor" ''
+        threshold=90
+        usage=$(${pkgs.procps}/bin/free | ${pkgs.gawk}/bin/awk '/Mem:/ {printf "%.0f", $3/$2 * 100}')
+        if [ "$usage" -ge "$threshold" ]; then
+          ${pkgs.libnotify}/bin/notify-send -u critical "High RAM Usage" "RAM usage is at ''${usage}%"
+        fi
+      '';
+    };
+  };
+
+  systemd.user.timers.ram-monitor = {
+    Unit.Description = "Check RAM usage every 30 seconds";
+    Timer = {
+      OnBootSec = "1min";
+      OnUnitActiveSec = "30s";
+    };
+    Install.WantedBy = [ "timers.target" ];
+  };
+
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
