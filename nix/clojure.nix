@@ -19,15 +19,16 @@ let
   clj-paren-repair = mkClojureMcpCmd "clj-paren-repair" "clojure-mcp-light.paren-repair";
 
   invoker-src = let
-    rev = "656d3657f1532182ad2a3acd6afbaa255d8ca397";
+    rev = "18d00d8a85b2ed031c309ab2d642ce51de76edf5";
+    tag = "v0.3.6";
     shortSha = builtins.substring 0 7 rev;
     src = pkgs.fetchFromGitHub {
       owner = "filipesilva";
       repo = "invoker";
       inherit rev;
-      hash = "sha256-aSTaYdDfU9QFpY+aIPvqn+kEgdU3SF058g/vFwje/5M=";
+      hash = "sha256-rnvGgrAUhvdT0kHSK+qLL2VZjMP6XRAUwhxuIW/Gexo=";
     };
-  # Instead of letting invoker shell out to find SHA, hardcode it in the source  
+  # Instead of letting invoker shell out to find SHA, hardcode it in the source
   in pkgs.runCommand "invoker-patched" {} ''
     cp -r ${src} $out
     chmod -R u+w $out
@@ -37,7 +38,7 @@ let
         'sha "${rev}"' \
       --replace-fail \
         'out (str/trim (:out (process/sh opts "git describe --tags --dirty --always --long")))' \
-        'out "nix-0-g${shortSha}"'
+        'out "${tag}-0-g${shortSha}"'
   '';
 
   nvk = makeBabashkaCmd invoker-src "nvk" "invoker.nvk";
