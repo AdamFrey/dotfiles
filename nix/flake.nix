@@ -136,17 +136,17 @@
             EMACS_FONT_SIZE = 14;
           };
         };
-	work-framework-laptop = makeSystem {
-	  extraModules = [
-	    ./machines/work-framework-laptop-hardware-configuration.nix
-	    ./machines/work-framework-laptop.nix
-	    ./docker.nix
-	  ];
+	      work-framework-laptop = makeSystem {
+	        extraModules = [
+	          ./machines/work-framework-laptop-hardware-configuration.nix
+	          ./machines/work-framework-laptop.nix
+	          ./docker.nix
+	        ];
           envVars = {
             EMACS_FONT_SIZE = 14;
-            KITTY_STARTUP_DIR = "~/src/ride-health/ride-mono";
+            KITTY_STARTUP_DIR = "~/ride-mono";
           };
-	};
+	      };
       };
     };
 }
