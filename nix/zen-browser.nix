@@ -5,6 +5,9 @@
     inputs.zen-browser.homeModules.default
   ];
 
+  # Tell stylix which zen-browser profile to theme
+  stylix.targets.zen-browser.profileNames = [ "Adams Profile" ];
+
   programs.zen-browser = {
     enable = true;
     

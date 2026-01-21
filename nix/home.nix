@@ -58,7 +58,7 @@
       # ".config/kitty/kitty.conf".source = ./sources/kitty.conf; # Now managed by stylix
       ".config/niri/config.kdl".source = ./sources/niri.kdl;
       ".lein/profiles.clj".source = ./sources/lein/profiles.clj;
-      ".zen/onltmz18.Default Profile/zen-keyboard-shortcuts.json" = {
+      ".zen/Adams Profile/zen-keyboard-shortcuts.json" = {
         source = ./sources/zen/zen-keyboard-shortcuts.json;
         force = true;
       };
@@ -113,15 +113,17 @@
 
   programs.git = {
     enable = true;
-    userName = "Adam Frey";
-    userEmail = "adam@adamfrey.me";
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Adam Frey";
+        email = "adam@adamfrey.me";
+      };
       pull = { rebase = true; };
-    };
-    aliases = {
-      co = "checkout";
-      b  = "branch";
-      l  = "!git log --oneline | head";
+      alias = {
+        co = "checkout";
+        b  = "branch";
+        l  = "!git log --oneline | head";
+      };
     };
   };
 
@@ -132,8 +134,12 @@
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
-    matchBlocks = inputs.private-nix.sshHosts or {};
+    enableDefaultConfig = false;
+    matchBlocks = (inputs.private-nix.sshHosts or {}) // {
+      "*" = {
+        addKeysToAgent = "yes";
+      };
+    };
   };
 
   services.ssh-agent.enable = true;
@@ -151,7 +157,7 @@
     enable = true;
     autosuggestion.enable = true;
     defaultKeymap = "emacs";
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     history = {
       path = "${config.xdg.dataHome}/zsh/zsh_history";
       save = 10000000;
