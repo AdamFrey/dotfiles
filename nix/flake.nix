@@ -144,6 +144,7 @@
 	  ];
           envVars = {
             EMACS_FONT_SIZE = 14;
+            KITTY_STARTUP_DIR = "~/src/ride-health/ride-mono";
           };
 	};
       };

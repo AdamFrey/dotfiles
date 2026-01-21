@@ -1,4 +1,4 @@
-{ config, pkgs, envVars, inputs, ... }:
+{ config, pkgs, lib, envVars, inputs, ... }:
 
 {
   imports = [
@@ -65,6 +65,10 @@
       };
       ".zprintrc".source = ./sources/zprint/.zprintrc;
       ".claude/settings.json".source = ./sources/claude/settings.json;
+    } // lib.optionalAttrs (envVars ? KITTY_STARTUP_DIR) {
+      ".config/kitty/startup.session".text = ''
+        cd ${envVars.KITTY_STARTUP_DIR}
+      '';
     };
   };
 
@@ -152,6 +156,8 @@
       confirm_os_window_close = 0;
       window_padding_width = 15;
       # Stylix will override the colors, but we can set other preferences
+    } // lib.optionalAttrs (envVars ? KITTY_STARTUP_DIR) {
+      startup_session = "${config.xdg.configHome}/kitty/startup.session";
     };
     keybindings = {
       "ctrl+plus" = "change_font_size all +2.0";
