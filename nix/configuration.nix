@@ -30,6 +30,17 @@ in
 
   boot.kernelParams = [ "mem_sleep_default=deep" ];
 
+  # Swap configuration
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
+
+  swapDevices = [{
+    device = "/swapfile";
+    size = 16 * 1024;  # 16GB
+  }];
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
