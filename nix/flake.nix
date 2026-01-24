@@ -116,20 +116,10 @@
             EMACS_FONT_SIZE = 12;
           };
         };
-        laptop = makeSystem {
-          extraModules = [
-            ./laptop-hardware-configuration.nix
-            ./laptop.nix
-            ./podman.nix
-          ];
-          envVars = {
-            EMACS_FONT_SIZE = 18;
-          };
-        };
         framework-laptop = makeSystem {
           extraModules = [
-            ./framework-laptop-hardware-configuration.nix
-            ./framework-laptop.nix
+            ./machines/framework-laptop-hardware-configuration.nix
+            ./machines/framework-laptop.nix
             ./podman.nix
           ];
           envVars = {
