@@ -149,6 +149,7 @@ in
     bash
     bbin # Babashka bin
     bluetui
+    bubblewrap
     calibre
     #fastmail
     hashcards
