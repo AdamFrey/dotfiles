@@ -209,12 +209,13 @@
                 "x-scheme-handler/com.todoist"];
   };
 
-  xdg.desktopEntries.slack-wayland = {
-    name = "Slack Wayland";
-    exec = "slack --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WaylandWindowDecorations";
+  xdg.desktopEntries.slack = {
+    name = "Slack";
+    exec = "slack --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland";
     icon = "slack";
     mimeType = ["x-scheme-handler/slack"
                 "x-scheme-handler/com.slack"];
+    categories = ["Network" "InstantMessaging"];
   };
 
 }

@@ -297,7 +297,7 @@ binds {
     Mod+R { spawn "fuzzel"; }
     Mod+E { spawn "emacsclient" "--create-frame";  }
     Mod+B { spawn "zen-beta"; }
-    Mod+S { spawn "slack"; }
+    Mod+S { spawn "slack" "--enable-features=UseOzonePlatform,WaylandWindowDecorations" "--ozone-platform=wayland"; }
     Mod+Q { spawn "makoctl" "dismiss" "--all"; }
 
     Super+Alt+L { spawn "swaylock"; }
