@@ -389,7 +389,7 @@ Respects .gitignore and other ignore files."
 
 (after! cider
   ;; change cider pprint to comment so it uses the comment macro
-
+  
   (setq cider-comment-prefix "\n#_")
   (setq cider-comment-continued-prefix "")
   (setq cider-comment-postfix "\n")
@@ -406,6 +406,10 @@ Respects .gitignore and other ignore files."
   (define-key cider-mode-map (kbd "C-c C-z") 'af/cider-switch-to-repl-buffer)
   (define-key cider-mode-map (kbd "C-c x") 'af/pop-cider-error)
   (define-key cider-mode-map (kbd "C-c r") 'af/repl-go)
+
+  ;; remove syntax highlighting for typical functions
+  (setq cider-font-lock-dynamically '(deprecated))
+
 
   ;; TODO get ctrl - return working for eval
   (define-key cider-mode-map (kbd "C-RET") 'cider-eval-last-sexp)
