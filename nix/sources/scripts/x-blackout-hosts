@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 
-podman run --pull always --rm -it -v /etc/hosts:/etc/hosts \
+if command -v podman &> /dev/null; then
+    CONTAINER_RUNTIME=podman
+elif command -v docker &> /dev/null; then
+    CONTAINER_RUNTIME=docker
+else
+    echo "Error: Neither podman nor docker is available" >&2
+    exit 1
+fi
+
+$CONTAINER_RUNTIME run --pull always --rm -it -v /etc/hosts:/etc/hosts \
 -v "/home/adam/src/dotfiles/nix/private-nix/sources/hosts/myhosts:/hosts/myhosts" \
 -v "/home/adam/src/dotfiles/nix/private-nix/sources/hosts/whitelist:/hosts/whitelist" \
 ghcr.io/stevenblack/hosts:latest updateHostsFile.py --auto \
