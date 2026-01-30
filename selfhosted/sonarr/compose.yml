@@ -1,0 +1,21 @@
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    ports:
+      - 8989:8989
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=America/New_York
+    volumes:
+      - /mnt/pithos/containers/container-data/sonarr:/config
+      - /mnt/pithos/containers/container-data/qbittorrent-downloads:/downloads
+      - /mnt/pithos/art/tv:/tv
+    restart: unless-stopped
+    networks:
+      - apps
+
+networks:
+  apps:
+    external: true

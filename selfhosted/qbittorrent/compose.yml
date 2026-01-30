@@ -13,6 +13,7 @@ services:
       - WEBUI_PORT=5003
     volumes:
       - /mnt/pithos/containers/container-data/qbittorrent:/config
+      - /mnt/pithos/containers/container-data/qbittorrent-downloads:/downloads
       - /mnt/pithos/art:/art
       - /mnt/pithos/episteme:/episteme
       - /mnt/pithos/techne:/techne
