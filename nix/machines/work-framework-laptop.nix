@@ -4,6 +4,12 @@
 
   environment.systemPackages = with pkgs; [
     freelens-bin
+    (google-cloud-sdk.withExtraComponents (
+      with google-cloud-sdk.components;
+      [
+        gke-gcloud-auth-plugin
+      ]
+    ))
   ];
 
   powerManagement.powerDownCommands = ''
