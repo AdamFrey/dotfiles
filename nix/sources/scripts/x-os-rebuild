@@ -35,7 +35,6 @@
   []
   (case (hostname)
     "matte-black-cadillac"   "/home/adam/src/dotfiles/nix#desktop"
-    "stylitics-laptop-nixos" "/home/adam/src/dotfiles/nix#laptop"
     "framework-laptop-nixos" "/home/adam/src/dotfiles/nix#framework-laptop"
     "work-laptop-nixos"      "/home/adam/src/dotfiles/nix#work-framework-laptop"))
 
@@ -55,6 +54,12 @@
   "/home/adam/Public"
   "/home/adam/Templates"
   "/home/adam/Videos")
+
+;; Generate blackout hosts file if it doesn't exist
+(let [blackout-hosts-file "/home/adam/src/private-nix/sources/hosts/blackout-hosts"]
+  (when-not (fs/exists? blackout-hosts-file)
+    (println "Generating blackout hosts file (this only happens once)...")
+    (shell "x-blackout-hosts")))
 
 (try
   (shell "sudo nixos-rebuild switch --flake" (flake-path))

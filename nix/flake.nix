@@ -34,9 +34,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #private-nix = {
-    #  url = "git+ssh://git@github.com/AdamFrey/private-nix.git?ref=master";
-    #};
+    private-nix = {
+      url = "git+ssh://git@github.com/AdamFrey/private-nix.git?ref=master";
+    };
   };
 
     # outputs is a function taking inputs, and destructuring
@@ -51,7 +51,8 @@
       agenix,
       claude-code,
       claude-desktop,
-      zen-browser
+      zen-browser,
+      private-nix
       }@inputs:
     let
       system = "x86_64-linux";

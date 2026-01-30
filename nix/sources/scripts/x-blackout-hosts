@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+set -e
+
+BLACKOUT_HOSTS_FILE="/home/adam/src/private-nix/sources/hosts/blackout-hosts"
+
 if command -v podman &> /dev/null; then
     CONTAINER_RUNTIME=podman
 elif command -v docker &> /dev/null; then
@@ -9,8 +13,29 @@ else
     exit 1
 fi
 
-$CONTAINER_RUNTIME run --pull always --rm -it -v /etc/hosts:/etc/hosts \
--v "/home/adam/src/dotfiles/nix/private-nix/sources/hosts/myhosts:/hosts/myhosts" \
--v "/home/adam/src/dotfiles/nix/private-nix/sources/hosts/whitelist:/hosts/whitelist" \
-ghcr.io/stevenblack/hosts:latest updateHostsFile.py --auto \
---replace --extensions gambling porn
+TMPDIR=$(mktemp -d)
+trap "rm -rf $TMPDIR" EXIT
+
+# Create a minimal base hosts file for the generator
+cat > "$TMPDIR/hosts" << 'EOF'
+127.0.0.1 localhost
+::1 localhost
+EOF
+
+# Run the container to generate the new hosts file
+# The container writes to /hosts/ internally, so we mount our output there
+# and copy the result after generation
+$CONTAINER_RUNTIME run --pull always --rm \
+    -v "$TMPDIR:/output" \
+    -v "/home/adam/src/private-nix/sources/hosts/myhosts:/hosts/myhosts" \
+    -v "/home/adam/src/private-nix/sources/hosts/whitelist:/hosts/whitelist" \
+    ghcr.io/stevenblack/hosts:latest \
+    sh -c "updateHostsFile.py --auto --extensions gambling porn && cp hosts /output/hosts"
+
+# Ensure the generated directory exists
+mkdir -p "$(dirname "$BLACKOUT_HOSTS_FILE")"
+
+# Copy the generated hosts file to the dotfiles repo
+echo "Saving generated hosts file to $BLACKOUT_HOSTS_FILE..."
+cp "$TMPDIR/hosts" "$BLACKOUT_HOSTS_FILE"
+echo "Done! Commit and push to private-nix repo, then run 'nix flake update private-nix' and x-os-rebuild to apply."
