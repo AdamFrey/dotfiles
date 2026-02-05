@@ -2,8 +2,16 @@
 {
   networking.hostName = "work-laptop-nixos";
 
+  networking.extraHosts = ''
+    127.0.0.1 facebook.com
+    127.0.0.1 www.facebook.com
+  '';
+
   environment.systemPackages = with pkgs; [
     freelens-bin
+    lens
+    mitmproxy
+    podman-desktop
     (google-cloud-sdk.withExtraComponents (
       with google-cloud-sdk.components;
       [
