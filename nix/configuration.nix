@@ -163,8 +163,6 @@ in
     #fastmail
     hashcards
     claude-code
-    clojure
-    cljfmt
     devenv
     direnv
     duckdb

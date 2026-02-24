@@ -45,6 +45,9 @@ let
 in
 {
   environment.systemPackages = [
+    pkgs-unstable.clojure
+    pkgs-unstable.clojure-lsp
+    pkgs-unstable.cljfmt
     clj-paren-repair-claude-hook
     clj-nrepl-eval
     clj-paren-repair
