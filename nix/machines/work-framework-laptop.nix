@@ -12,6 +12,7 @@
     lens
     mitmproxy
     podman-desktop
+    vscode
     (google-cloud-sdk.withExtraComponents (
       with google-cloud-sdk.components;
       [
