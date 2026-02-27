@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 {
   networking.hostName = "work-laptop-nixos";
 
@@ -12,6 +12,7 @@
     lens
     mitmproxy
     podman-desktop
+    pkgs-unstable.opencode
     vscode
     (google-cloud-sdk.withExtraComponents (
       with google-cloud-sdk.components;
