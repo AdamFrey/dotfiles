@@ -99,7 +99,7 @@ in
     XDG_DATA_HOME      = "$HOME/.local/share";
     XDG_STATE_HOME     = "$HOME/.local/state";
     # BROWSER is now set conditionally in browsers.nix
-    EDITOR             = "emacsclient --create frame";
+    EDITOR             = "emacsclient --create-frame";
   };
 
   # Enable CUPS to print documents.
