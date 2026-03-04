@@ -208,7 +208,7 @@ in
   ] ++ [
     pkgs-unstable.beads
     pkgs-unstable.spotify
-    pkgs-unstable.zed-editor
+    pkgs.zed-editor
   ]
   ;
 
