@@ -45,6 +45,7 @@ let
 in
 {
   environment.systemPackages = [
+    pkgs-unstable.babashka
     pkgs-unstable.clojure
     pkgs-unstable.clojure-lsp
     pkgs-unstable.cljfmt
