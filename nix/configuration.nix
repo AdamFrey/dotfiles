@@ -199,6 +199,7 @@ in
     unzip
     uv
     waybar
+    xwayland-satellite
     zeal
     zenith
     zip

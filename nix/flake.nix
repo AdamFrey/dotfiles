@@ -122,6 +122,7 @@
             ./machines/framework-laptop-hardware-configuration.nix
             ./machines/framework-laptop.nix
             ./podman.nix
+            ./ardour.nix
           ];
           envVars = {
             EMACS_FONT_SIZE = 14;
