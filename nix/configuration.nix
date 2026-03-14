@@ -158,6 +158,7 @@ in
     bash
     bbin # Babashka bin
     bluetui
+    brightnessctl
     bubblewrap
     calibre
     #fastmail
