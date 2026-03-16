@@ -97,7 +97,7 @@ output "DP-3" {
 }
 
 // Laptop second DisplayPort
-output "DP-2" {
+output "DP-4" {
    mode "1920x1200@59.950"
 
    // Transform allows to rotate the output counter-clockwise, valid values are:
