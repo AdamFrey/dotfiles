@@ -269,23 +269,16 @@ Respects .gitignore and other ignore files."
   ;; https://stackoverflow.com/a/5148435
   (add-hook 'hack-local-variables-hook 'af/set-clojure-indent-style nil t))
 
-(if (boundp '+format-on-save-enabled-modes)
-    (progn
-      (add-to-list '+format-on-save-enabled-modes 'clojure-mode 'append)
-      (add-to-list '+format-on-save-enabled-modes 'clojurescript-mode 'append)
-      (add-to-list '+format-on-save-enabled-modes 'clojurec-mode 'append)))
-
-;; TODO can I remove this part?
-;; (setq +format-on-save-enabled-modes '(not emacs-lisp-mode sql-mode tex-mode latex-mode org-msg-edit-mode))
-
-(defun cljfmt-current-file ()
-  (interactive)
-  (let ((default-directory (locate-dominating-file buffer-file-name ".git")))
-    (shell-command
-     (format "cljfmt fix %s" (shell-quote-argument (buffer-file-name))))
-    (revert-buffer t t t)))
-
-;; (set-formatter! 'cljfmt 'cljfmt-current-file :modes '(clojure-mode))
+;; Override apheleia's cljfmt to pass --config pointing to the nearest .cljfmt.edn,
+(after! apheleia
+  (setf (alist-get 'cljfmt apheleia-formatters)
+        '("cljfmt" "fix"
+          (when-let ((dir (locate-dominating-file
+                           (or (apheleia-formatters-local-buffer-file-name)
+                               default-directory)
+                           ".cljfmt.edn")))
+            (list "--config" (expand-file-name ".cljfmt.edn" dir)))
+          "-")))
 
 (after! clojure-mode
   (define-clojure-indent
@@ -389,7 +382,7 @@ Respects .gitignore and other ignore files."
 
 (after! cider
   ;; change cider pprint to comment so it uses the comment macro
-  
+
   (setq cider-comment-prefix "\n#_")
   (setq cider-comment-continued-prefix "")
   (setq cider-comment-postfix "\n")
