@@ -28,10 +28,10 @@ in
     };
 
     # Conditionally include browser packages
+    # Zen browser is installed via home-manager module in zen-browser.nix
     environment.systemPackages = with pkgs;
       lib.optionals cfg [
         google-chrome
-        inputs.zen-browser.packages.${pkgs.system}.default
       ];
   };
 }

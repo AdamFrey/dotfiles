@@ -58,7 +58,7 @@
       # ".config/kitty/kitty.conf".source = ./sources/kitty.conf; # Now managed by stylix
       ".config/niri/config.kdl".source = ./sources/niri.kdl;
       ".lein/profiles.clj".source = ./sources/lein/profiles.clj;
-      ".zen/Adams Profile/zen-keyboard-shortcuts.json" = {
+      ".config/zen/Adams Profile/zen-keyboard-shortcuts.json" = {
         source = ./sources/zen/zen-keyboard-shortcuts.json;
         force = true;
       };

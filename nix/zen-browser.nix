@@ -2,7 +2,7 @@
 
 {
   imports = [
-    inputs.zen-browser.homeModules.default
+    inputs.zen-browser.homeModules.beta
   ];
 
   # Tell stylix which zen-browser profile to theme
@@ -10,12 +10,33 @@
 
   programs.zen-browser = {
     enable = true;
-    
+
+    # Declare the profile so it appears in profiles.ini / ProfileManager
+    profiles."Adams Profile" = {
+      id = 0;
+      isDefault = true;
+      # Path matches the existing profile directory name
+      path = "Adams Profile";
+
+      settings = {
+        "browser.tabs.warnOnClose" = false;
+        "browser.ctrlTab.sortByRecentlyUsed" = true;
+        "browser.startup.homepage" = "about:home";
+        "browser.toolbars.bookmarks.visibility" = "never";
+        "devtools.toolbox.host" = "right";
+        "browser.search.openintab" = true;
+        "browser.download.useDownloadDir" = true;
+        "browser.download.dir" = "/home/adam/inbox";
+        "privacy.donottrackheader.enabled" = true;
+        "browser.tabs.unloadOnLowMemory" = true;
+      };
+    };
+
     # Policies for browser configuration
     policies = {
       # Disable automatic updates (managed by Nix)
       DisableAppUpdate = true;
-      
+
       # Privacy settings
       DisableTelemetry = true;
       DisablePocket = true;
@@ -25,85 +46,7 @@
         Cryptomining = true;
         Fingerprinting = true;
       };
-      
-      # Browser preferences including keyboard shortcuts
-      Preferences = {
-        # Tab management shortcuts
-        "browser.tabs.warnOnClose" = {
-          Value = false;
-          Status = "default";
-        };
-        
-        # Custom keyboard shortcuts
-        # Note: Firefox/Zen uses different pref names for shortcuts
-        # Common shortcuts can be configured here
-        "browser.ctrlTab.sortByRecentlyUsed" = {
-          Value = true;
-          Status = "default";
-        };
-        
-        # Example: Set homepage
-        "browser.startup.homepage" = {
-          Value = "about:home";
-          Status = "default";
-        };
-        
-        # Hide bookmark toolbar
-        "browser.toolbars.bookmarks.visibility" = {
-          Value = "never";
-          Status = "default";
-        };
-        
-        # Developer tools shortcuts
-        "devtools.toolbox.host" = {
-          Value = "right";
-          Status = "default";
-        };
-        
-        # Search shortcuts
-        "browser.search.openintab" = {
-          Value = true;
-          Status = "default";
-        };
-        
-        # Downloads
-        "browser.download.useDownloadDir" = {
-          Value = true;
-          Status = "default";
-        };
-        "browser.download.dir" = {
-          Value = "/home/adam/inbox";
-          Status = "default";
-        };
-        
-        # Privacy
-        "privacy.donottrackheader.enabled" = {
-          Value = true;
-          Status = "default";
-        };
-        
-        # Performance
-        "browser.tabs.unloadOnLowMemory" = {
-          Value = true;
-          Status = "default";
-        };
-      };
-      
-      # Extension settings (add your favorite extensions here)
-      ExtensionSettings = {
-        # Example: uBlock Origin
-        # "uBlock0@raymondhill.net" = {
-        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-        #   installation_mode = "force_installed";
-        # };
-        
-        # Example: Vimium (for vim-like keyboard navigation)
-        # "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
-        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi";
-        #   installation_mode = "normal_installed";
-        # };
-      };
-      
+
       # Bookmarks (can be managed declaratively)
       ManagedBookmarks = [
         {
@@ -119,7 +62,7 @@
         }
       ];
     };
-    
+
     # Native messaging hosts (if needed for extensions)
     nativeMessagingHosts = with pkgs; [
       # firefoxpwa  # Progressive Web Apps
