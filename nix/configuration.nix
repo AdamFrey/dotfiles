@@ -119,7 +119,7 @@ in
   #   after = [ "graphical-session.target" ];
   #   partOf = [ "graphical-session.target" ];
   #   wantedBy = [ "graphical-session.target" ];
-    
+
   #   serviceConfig = {
   #     ExecStart = "${pkgs.wbg}/bin/wbg ${config.stylix.image}";
   #     Restart = "on-failure";
@@ -179,7 +179,7 @@ in
     htop
     ispell
     just
-    kakounePlugins.parinfer-rust
+    jq
     kitty
     leiningen
     libnotify
