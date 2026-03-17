@@ -1,25 +1,14 @@
 {
   "hooks": {
-    "PreCompact": [
+    "UserPromptSubmit": [
       {
         "hooks": [
           {
-            "command": "bd prime",
-            "type": "command"
+            "type": "command",
+            "command": "/home/adam/.claude/hooks/inject-behaviors.sh",
+            "timeout": 5
           }
-        ],
-        "matcher": ""
-      }
-    ],
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "command": "bd prime",
-            "type": "command"
-          }
-        ],
-        "matcher": ""
+        ]
       }
     ]
   }
