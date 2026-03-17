@@ -1,7 +1,7 @@
 { lib
-, stdenv
 , fetchurl
-, autoPatchelfHook
+, buildFHSEnv
+, stdenv
 }:
 
 let
@@ -13,18 +13,39 @@ let
     hash = "sha256-XJ0mwsbndaKp3cwWgLOEmx4Jq0ryS1WwYruIWNETi8U=";
   };
 
-in stdenv.mkDerivation {
-  inherit pname version;
+  pants-unwrapped = stdenv.mkDerivation {
+    pname = "${pname}-unwrapped";
+    inherit version;
 
-  dontUnpack = true;
+    dontUnpack = true;
+    dontPatchELF = true;
+    dontStrip = true;
 
-  nativeBuildInputs = [ autoPatchelfHook ];
+    installPhase = ''
+      runHook preInstall
+      install -Dm755 ${src} $out/bin/pants
+      runHook postInstall
+    '';
+  };
 
-  installPhase = ''
-    runHook preInstall
-    install -Dm755 ${src} $out/bin/pants
-    runHook postInstall
-  '';
+in buildFHSEnv {
+  name = "pants";
+  targetPkgs = pkgs: with pkgs; [
+    # Core requirements for the Python that scie-pants downloads
+    stdenv.cc.cc.lib
+    zlib
+    # SSL/TLS certificates
+    cacert
+    # Common build dependencies
+    gcc
+    glibc
+    bash
+    coreutils
+  ];
+  extraBwrapArgs = [
+    "--setenv" "SSL_CERT_FILE" "/etc/ssl/certs/ca-bundle.crt"
+  ];
+  runScript = "${pants-unwrapped}/bin/pants";
 
   meta = with lib; {
     description = "The Pants build system launcher (scie-pants)";
