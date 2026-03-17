@@ -7,6 +7,7 @@
 let
   hashcards = pkgs.callPackage ./packages/hashcards { };
   fastmail = pkgs.callPackage ./packages/fastmail { };
+  pants = pkgs.callPackage ./packages/pants { };
 in
 {
   # secret decryption
@@ -163,6 +164,7 @@ in
     calibre
     #fastmail
     hashcards
+    pants
     claude-code
     devenv
     direnv
