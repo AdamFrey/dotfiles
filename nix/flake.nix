@@ -136,7 +136,7 @@
 	        ];
           envVars = {
             EMACS_FONT_SIZE = 14;
-            KITTY_STARTUP_DIR = "~/ride-mono";
+            KITTY_STARTUP_DIR = "~/rh";
           };
 	      };
       };
