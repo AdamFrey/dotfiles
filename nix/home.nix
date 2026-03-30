@@ -14,11 +14,15 @@
       antares
       fd
       forge-mtg
+      grim
       mozart2-binary
       nodePackages.prettier
       pavucontrol
       ripgrep
+      satty
+      slurp
       wbg
+      wl-clipboard
       #music
       orca-c
       vital
@@ -80,7 +84,6 @@
 
   
   services.batsignal.enable = true; # battery life notifier
-  services.flameshot.enable = true;
 
   programs.fzf = {
     enable = true;
