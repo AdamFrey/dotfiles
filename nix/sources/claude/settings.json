@@ -1,4 +1,5 @@
 {
+  "voiceEnabled": true,
   "hooks": {
     "UserPromptSubmit": [
       {
