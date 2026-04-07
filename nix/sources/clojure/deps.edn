@@ -33,26 +33,6 @@
   {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2022.02.09"}}
    :main-opts  ["-m" "clj-kondo.main" "--lint" "src"]}
 
-  ;; Benchmarking library for Clojure
-  ;; https://github.com/hugoduncan/criterium/
-  ;; (require '[criterium.core :refer [bench quick-bench]]) ; require criterium
-  ;; (bench (adhoc-expression)) ; timing of a self contained expression
-  ;;
-  :performance/benchmark
-  {:extra-deps {criterium/criterium                      {:mvn/version "0.4.6"}
-                com.clojure-goes-fast/clj-async-profiler {:mvn/version "1.1.1"}}}
-
-  ;; clj-memory-meter
-  ;; - see https://github.com/clojure-goes-fast/clj-memory-meter
-  ;; - (require '[clj-memory-meter.core :as memory-meter])
-  ;; - (memory-meter/measure (your-expression))
-  :performance/memory-meter
-  {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "0.1.3"}}
-   :jvm-opts   ["-Djdk.attach.allowAttachSelf"]}
-
-  :performance/profiler
-  {:jvm-opts ["-agentpath:/home/adam/10-19.Software/14.Open-Source/yourkit/YourKit-JavaProfiler-2021.11/bin/linux-x86-64/libyjpagent.so=exceptions=disable,delay=10000"]}
-
   :check
   {:extra-deps {athos/clj-check {:git/url "https://github.com/athos/clj-check.git"
                                  :sha     "0ca84df1357d71429243b99908303f45a934654c"}}
@@ -72,8 +52,9 @@
    :jvm-opts   ["-Djdk.attach.allowAttachSelf"]
    :main-opts  ["-m" "nrepl.cmdline"]}
 
-  :dev/debug
-  {:extra-deps {adam/my.dev-tools {:local/root "/home/adam/src/dotfiles/nix/sources/clojure/my.dev-tools"}}}
+  :dev
+  {:extra-deps {adam/my.dev-tools {:local/root "/home/adam/src/dotfiles/nix/sources/clojure/my.dev-tools"}}
+   :jvm-opts   ["-Djdk.attach.allowAttachSelf"]}
 
   ;; kaocha - comprehensive test runner for Clojure/Script
   ;; tests.edn should be created for each project

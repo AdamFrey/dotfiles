@@ -12,9 +12,7 @@
  '[portal.api :as portal]
  '[portal.runtime.browser :as portal.browser]
  '[clj-java-decompiler.core :refer [decompile]]
- '[criterium.core :as cr]
-  ;; '[dev.nu.morse :as morse]
- )
+ '[criterium.core :as cr])
 
 (clojure+.hashp/install!)
 (clojure+.error/install!)
@@ -24,8 +22,6 @@
 (intern 'clojure.core (with-meta 'pp (meta #'pp)) #'pp)
 (intern 'clojure.core (with-meta 'javadoc (meta #'javadoc)) #'javadoc)
 ;; (intern 'clojure.core (with-meta 'portal (meta #'open)) #'open)
-;; (intern 'clojure.core (with-meta 'insp (meta #'morse/inspect)) #'morse/inspect)
-;; (morse/launch-in-proc)
 
 (declare p)
 
