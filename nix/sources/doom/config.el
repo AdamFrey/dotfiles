@@ -386,7 +386,7 @@ Respects .gitignore and other ignore files."
   (setq cider-comment-prefix "\n#_")
   (setq cider-comment-continued-prefix "")
   (setq cider-comment-postfix "\n")
-  (setq cider-clojure-cli-aliases ":dev")
+  (setq cider-clojure-cli-aliases ":my/dev")
   (setq cider-lein-parameters "with-profile +dbg repl :headless :host localhost")
   (setq cider-print-fn 'puget)
   (setq cider-repl-use-content-types t)

@@ -52,7 +52,7 @@
    :jvm-opts   ["-Djdk.attach.allowAttachSelf"]
    :main-opts  ["-m" "nrepl.cmdline"]}
 
-  :dev
+  :my/dev
   {:extra-deps {adam/my.dev-tools {:local/root "/home/adam/src/dotfiles/nix/sources/clojure/my.dev-tools"}}
    :jvm-opts   ["-Djdk.attach.allowAttachSelf"]}
 
