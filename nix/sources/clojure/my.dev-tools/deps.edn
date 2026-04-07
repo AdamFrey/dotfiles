@@ -1,7 +1,7 @@
 {:paths ["src"]
  :deps
  ;; if you update anything deps here, also make sure to change ~/.lein/profiles.clj
- {djblue/portal                  {:mvn/version "0.63.1"}
+ {djblue/portal                  {:mvn/version "0.61.0"}
   io.github.paintparty/fireworks {:mvn/version "0.20.0"}
   io.github.tonsky/clojure-plus  {:mvn/version "1.7.2"}
   org.clojars.abhinav/snitch     {:mvn/version "0.1.16"
