@@ -202,6 +202,7 @@ in
     unzip
     uv
     waybar
+    wikit
     xwayland-satellite
     zeal
     zenith
