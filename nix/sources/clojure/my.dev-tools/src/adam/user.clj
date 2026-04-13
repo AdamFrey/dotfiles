@@ -1,18 +1,19 @@
 (ns adam.user)
 
-(require
-  ;; requiring snitch interns these four methods in clojure.core
- '[snitch.core :refer [defn* defmethod* *fn *let]]
- '[sc.api]
- '[clojure.java.javadoc :refer (javadoc)]
- '[clojure.pprint :refer (pp pprint)]
- '[clojure+.error]
- '[clojure+.test]
- '[clojure+.hashp]
- '[portal.api :as portal]
- '[portal.runtime.browser :as portal.browser]
- '[clj-java-decompiler.core :refer [decompile]]
- '[criterium.core :as cr])
+(locking clojure.lang.RT/REQUIRE_LOCK
+  (require
+    ;; requiring snitch interns these four methods in clojure.core
+   '[snitch.core :refer [defn* defmethod* *fn *let]]
+   '[sc.api]
+   '[clojure.java.javadoc :refer (javadoc)]
+   '[clojure.pprint :refer (pp pprint)]
+   '[clojure+.error]
+   '[clojure+.test]
+   '[clojure+.hashp]
+   '[portal.api :as portal]
+   '[portal.runtime.browser :as portal.browser]
+   '[clj-java-decompiler.core :refer [decompile]]
+   '[criterium.core :as cr]))
 
 (clojure+.hashp/install!)
 (clojure+.error/install!)
