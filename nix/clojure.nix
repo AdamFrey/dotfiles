@@ -2,6 +2,7 @@
 
 let
   makeBabashkaCmd = src: name: module: pkgs.writeShellScriptBin name ''
+    export DEPS_CLJ_TOOLS_DIR=${pkgs-unstable.babashka}/clojure_tools
     exec ${pkgs-unstable.babashka}/bin/bb --config ${src}/bb.edn -m ${module} "$@"
   '';
 
