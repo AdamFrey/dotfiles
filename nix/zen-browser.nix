@@ -47,6 +47,20 @@
         Fingerprinting = true;
       };
 
+      # Block Google Images while allowing regular search
+      WebsiteFilter = {
+        Block = [
+          "*://images.google.com/*"
+          "*://www.google.com/search*tbm=isch*"
+          "*://www.google.*/search*tbm=isch*"
+          "*://www.google.com/search*udm=2*"
+          "*://www.google.*/search*udm=2*"
+          "*://www.google.com/imghp*"
+          "*://www.google.*/imghp*"
+          "*://lens.google.com/*"
+        ];
+      };
+
       # Bookmarks (can be managed declaratively)
       ManagedBookmarks = [
         {

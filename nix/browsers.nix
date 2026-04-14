@@ -27,6 +27,20 @@ in
       BROWSER = "zen-beta";
     };
 
+    # Chrome/Chromium policies (applies to Google Chrome too)
+    programs.chromium = mkIf cfg {
+      enable = true;
+      extraOpts = {
+        URLBlocklist = [
+          "images.google.com"
+          "google.com/search*tbm=isch*"
+          "google.com/search*udm=2*"
+          "google.com/imghp*"
+          "lens.google.com"
+        ];
+      };
+    };
+
     # Conditionally include browser packages
     # Zen browser is installed via home-manager module in zen-browser.nix
     environment.systemPackages = with pkgs;
