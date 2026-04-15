@@ -85,6 +85,9 @@ in
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  # Disable GNOME's GCR SSH agent - use home-manager's ssh-agent instead
+  systemd.user.sockets.gcr-ssh-agent.enable = false;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";

@@ -62,7 +62,11 @@
     (shell "x-blackout-hosts")))
 
 (try
-  (shell "sudo nixos-rebuild switch --flake" (flake-path))
+  ;; Forward SSH_AUTH_SOCK to allow fetching private flake inputs
+  (let [ssh-auth-sock (System/getenv "SSH_AUTH_SOCK")]
+    (if ssh-auth-sock
+      (shell (str "sudo SSH_AUTH_SOCK=" ssh-auth-sock " nixos-rebuild switch --flake") (flake-path))
+      (shell "sudo nixos-rebuild switch --flake" (flake-path))))
   (catch Exception ex
     (prn (.getMessage ex))
     (System/exit 1)))
