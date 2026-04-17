@@ -37,6 +37,13 @@ in
           "google.com/search*udm=2*"
           "google.com/imghp*"
           "lens.google.com"
+          "google.com/search*udm=39*"
+          "www.tiktok.com"
+          "tiktok.com"
+          "x.com"
+          "twitter.com"
+          "reddit.com"
+          "youtube.com"
         ];
       };
     };

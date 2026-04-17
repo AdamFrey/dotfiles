@@ -58,7 +58,48 @@
           "*://www.google.com/imghp*"
           "*://www.google.*/imghp*"
           "*://lens.google.com/*"
+          "*://www.google.com/search*udm=39*"
+          "*://www.google.*/search*udm=39*"
+          "*://www.tiktok.com/*"
+          "*://tiktok.com/*"
+          "*://x.com/*"
+          "*://www.x.com/*"
+          "*://twitter.com/*"
+          "*://www.twitter.com/*"
+          "*://www.reddit.com/*"
+          "*://reddit.com/*"
+          "*://old.reddit.com/*"
+          "*://www.youtube.com/*"
+          "*://youtube.com/*"
+          "*://m.youtube.com/*"
         ];
+      };
+
+      # Force-install uBlock Origin (no manual extension install needed)
+      ExtensionSettings = {
+        "uBlock0@raymondhill.net" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+          allowed_in_private_browsing = true;
+        };
+      };
+
+      # Configure uBlock Origin with custom cosmetic filters
+      "3rdparty".Extensions."uBlock0@raymondhill.net" = {
+        toAdd = {
+          userFilters = [
+            "! Hide Google Image previews in search results"
+            "www.google.com##[data-attrid^=\"VisualDigest\"]"
+            "! Hide Short videos section from Google search"
+            "www.google.com##.MjjYud:has(span:has-text(/^Short videos$/))"
+            "! Hide What people are saying section from Google search"
+            "www.google.com##.MjjYud:has(span:has-text(/^What people are saying$/))"
+            "! Hide Images preview carousel from Google search"
+            "www.google.com##div:has(> div > div[data-iu] span[role=\"heading\"]:has-text(/^Images$/))"
+            "! Hide YouTube comments"
+            "youtube.com##ytd-comments"
+          ];
+        };
       };
 
       # Bookmarks (can be managed declaratively)
