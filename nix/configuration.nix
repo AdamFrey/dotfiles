@@ -214,9 +214,7 @@ in
     # zen-browser moved to browsers.nix
   ] ++ [
     pkgs-unstable.beads
-    pkgs-unstable.spotify
-    pkgs-unstable.psst
-    pkgs.zed-editor
+    pkgs-unstable.ncspot
   ]
   ;
 

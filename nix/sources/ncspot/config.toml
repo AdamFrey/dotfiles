@@ -1,0 +1,73 @@
+[keybindings]
+# Navigation (magit-style: n/p instead of vim j/k)
+"n" = "move down 1"
+"p" = "move up 1"
+"C-n" = "move down 1"
+"C-p" = "move up 1"
+"C-d" = "move down 5"
+"C-u" = "move up 5"
+"g" = "move top"
+"G" = "move bottom"
+
+# Panels
+"1" = "focus queue"
+"2" = "focus search"
+"3" = "focus library"
+
+# Back/Quit (magit: q = bury buffer)
+"q" = "back"
+"Q" = "quit"
+
+# Playback
+"Return" = "play"
+"Space" = "queue"
+"." = "playpause"
+">" = "next"
+"<" = "previous"
+
+# Seek (f/F forward, b for back since q handles quit)
+"f" = "seek +1000"
+"F" = "seek +10000"
+"b" = "seek -1000"
+"B" = "seek -10000"
+
+# Save/Delete (magit-inspired: s = stage/save, d = delete)
+"s" = "save"
+"S" = "save current"
+"d" = "delete"
+
+# Volume
+"-" = "voldown 1"
+"+" = "volup 1"
+"[" = "voldown 5"
+"]" = "volup 5"
+
+# Repeat/Shuffle
+"r" = "repeat"
+"z" = "shuffle"
+
+# Queue
+"c" = "clear"
+"C-s" = "save queue"
+
+# Open/Browse
+"o" = "open selected"
+"O" = "open current"
+"a" = "open selected album"
+"A" = "open selected artist"
+"m" = "open recommendations selected"
+"M" = "open recommendations current"
+
+# Share
+"x" = "share selected"
+"X" = "share current"
+
+# Jump to playing track
+"l" = "current"
+
+# Search/Command (keep these from defaults)
+"/" = "search"
+"?" = "help"
+
+# Disable vim-style search occurrence navigation (freed n for movement)
+"Escape" = "back"

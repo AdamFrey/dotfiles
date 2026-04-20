@@ -66,6 +66,7 @@
         source = ./sources/zen/zen-keyboard-shortcuts.json;
         force = true;
       };
+      ".config/ncspot/config.toml".source = ./sources/ncspot/config.toml;
       ".zprintrc".source = ./sources/zprint/.zprintrc;
       ".claude/settings.json".source = ./sources/claude/settings.json;
     } // lib.optionalAttrs (envVars ? KITTY_STARTUP_DIR) {
