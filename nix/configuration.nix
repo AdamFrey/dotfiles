@@ -147,7 +147,6 @@ in
        httpie
        lagrange
        pgcli
-       psst
        todoist-electron
     ];
   };
@@ -216,6 +215,7 @@ in
   ] ++ [
     pkgs-unstable.beads
     pkgs-unstable.spotify
+    pkgs-unstable.psst
     pkgs.zed-editor
   ]
   ;
