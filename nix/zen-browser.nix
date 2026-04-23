@@ -72,6 +72,8 @@
           "*://www.youtube.com/*"
           "*://youtube.com/*"
           "*://m.youtube.com/*"
+          "*://www.facebook.com/reel/*"
+          "*://www.facebook.com/reels/*"
         ];
       };
 
@@ -96,6 +98,8 @@
             "www.google.com##.MjjYud:has(span:has-text(/^What people are saying$/))"
             "! Hide Images preview carousel from Google search"
             "www.google.com##div:has(> div > div[data-iu] span[role=\"heading\"]:has-text(/^Images$/))"
+            "! Hide Facebook Reels link"
+            "facebook.com##a[href*=\"/reel\"]"
             "! Hide YouTube comments"
             "youtube.com##ytd-comments"
           ];
