@@ -6,7 +6,29 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/home/adam/.claude/hooks/inject-behaviors.sh",
+            "command": "/home/adam/.claude/hooks/dispatch.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/adam/.claude/hooks/dispatch.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/adam/.claude/hooks/dispatch.sh",
             "timeout": 5
           }
         ]

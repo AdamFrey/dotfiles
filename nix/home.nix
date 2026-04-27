@@ -69,6 +69,10 @@
       ".config/ncspot/config.toml".source = ./sources/ncspot/config.toml;
       ".zprintrc".source = ./sources/zprint/.zprintrc;
       ".claude/settings.json".source = ./sources/claude/settings.json;
+      ".claude/hooks/dispatch.sh" = {
+        source = ./sources/claude/dispatch.sh;
+        executable = true;
+      };
     } // lib.optionalAttrs (envVars ? KITTY_STARTUP_DIR) {
       ".config/kitty/startup.session".text = ''
         cd ${envVars.KITTY_STARTUP_DIR}
