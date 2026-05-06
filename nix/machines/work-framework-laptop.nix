@@ -5,6 +5,8 @@
   networking.extraHosts = ''
     127.0.0.1 facebook.com
     127.0.0.1 www.facebook.com
+    127.0.0.1 wikipedia.org
+    127.0.0.1 en.wikipedia.org
   '';
 
   environment.systemPackages = with pkgs; [
