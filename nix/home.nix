@@ -52,6 +52,11 @@
         force = true;
       };
 
+      ".config/clojure/tools/tools.edn" = {
+        source = ./sources/clojure/tools.edn;
+        force = true;
+      };
+
       ".config/beets/config.yaml".source = ./sources/beets/config.yaml;
       ".config/containers/config.json".source = ./sources/docker/config.json;
       ".config/docker/config.json".source = ./sources/docker/config.json;

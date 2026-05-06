@@ -45,6 +45,10 @@ let
   nvk = makeBabashkaCmd invoker-src "nvk" "invoker.nvk";
 in
 {
+  environment.sessionVariables = {
+    DEPS_CLJ_TOOLS_DIR = "${pkgs-unstable.babashka}/clojure_tools";
+  };
+
   environment.systemPackages = [
     pkgs-unstable.babashka
     pkgs-unstable.clojure
