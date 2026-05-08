@@ -89,6 +89,14 @@
 ;; C-u M-x list-faces-display RET vertico RET
 ;; (set-face-foreground 'vertico-group-title "cadet blue")
 
+(after! corfu
+  (setq corfu-preselect 'first)
+  (map! :map corfu-map
+        "TAB"      #'corfu-insert
+        [tab]      #'corfu-insert
+        "RET"      #'corfu-insert
+        [return]   #'corfu-insert))
+
 ;; Editing  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (global-unset-key (kbd "M-l")) ;; I don't need downcase-word
