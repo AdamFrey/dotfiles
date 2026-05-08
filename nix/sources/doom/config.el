@@ -170,8 +170,7 @@ only works for semicolons."
 
 (after! magit
   (setq magit-display-buffer-function #'magit-display-buffer-pop-up-frame)
-  (setq magit-list-refs-sortby "-creatordate")
-  (add-hook 'magit-status-mode-hook (lambda () (company-mode -1))))
+  (setq magit-list-refs-sortby "-creatordate"))
 
 (defun endless/visit-pull-request-url ()
   "Visit the current branch's PR on Github."
@@ -417,9 +416,6 @@ Respects .gitignore and other ignore files."
   (setq cider-inspector-fill-frame t)
   (setq cider-inspector-pretty-print t)
 
-  (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
-  (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion)
-
   ;; NOTE I'm using my own complete-at-point largely to get fuzzy matching on java imports
   (advice-add 'cider-complete-at-point :override #'af/cider-complete-at-point)
   ;; (setq completion-category-overrides '((cider (orderless basic))))
@@ -449,11 +445,6 @@ Respects .gitignore and other ignore files."
 (after! sml-mode
   (set-formatter! 'smlformat '("smlfmt") :modes '(sml-mode))
   )
-;; Common ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-(after! company-mode
-  (define-key company-mode-map (kbd "TAB") 'company-indent-or-complete-common))
-
 ;; AwesomeWM ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (after! friar

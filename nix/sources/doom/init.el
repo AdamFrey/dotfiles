@@ -16,7 +16,8 @@
 
 (doom! :input
        :completion
-       company ; the ultimate code completion backend
+       ;; company                          ; the ultimate code completion backend
+       (corfu +orderless)
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; ivy              ; a search engine for love and life
@@ -24,12 +25,10 @@
 
        :ui
        ;;deft              ; notational velocity for Emacs
-       doom                   ; what makes DOOM look the way it does
-       doom-dashboard         ; a nifty splash screen for Emacs
-       doom-quit              ; DOOM quit-message prompts when you quit Emacs
+       doom                             ; what makes DOOM look the way it does
+       doom-dashboard                   ; a nifty splash screen for Emacs
        ;;fill-column       ; a `fill-column' indicator
        hl-todo                ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       ;;hydra
        ;;indent-guides     ; highlighted indent columns
        ;;ligatures         ; ligatures and symbols to make your code pretty again
        ;;minimap           ; show a map of the code on the side
@@ -42,8 +41,7 @@
        ;;tabs              ; a tab bar for Emacs
        ;;treemacs          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages
-       ;; (vc-gutter +pretty) ;; this was slow in collage
-                                        ; vcs diff in the fringe
+       ;; (vc-gutter +pretty) ;; vcs diff in the fringe slow in big repos, don't need it
        vi-tilde-fringe        ; fringe tildes to mark beyond EOB
        ;;window-select     ; visually switch windows
        workspaces             ; tab emulation, persistence & separate workspaces
@@ -59,7 +57,8 @@
        ;;objed             ; text object editing for the innocent
        ;;parinfer          ; turn lisp into python, sort of
        ;;rotate-text       ; cycle region at point between text candidates
-       snippets   ; my elves. They type so I don't have to
+       snippets                         ; my elves. They type so I don't have to
+       (whitespace +guess +trim)        ; a butler for your whitespace
        ;;word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
@@ -99,7 +98,7 @@
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
-       terraform  ; infrastructure as code
+       terraform                        ; infrastructure as code
        tree-sitter
        ;;tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
@@ -117,7 +116,7 @@
        ;;csharp            ; unity, .NET, and mono shenanigans
        data                     ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
-       elixir            ; erlang done right
+       elixir                       ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp                       ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age
@@ -142,7 +141,7 @@
        lua              ; one-based indices? one-based indices
        markdown         ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
-       nix               ; I hereby declare "nix geht mehr!"
+       nix              ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        org              ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
@@ -155,10 +154,10 @@
        rest                             ; Emacs as a REST client
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       (rust +lsp)              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       (rust +lsp)    ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;(scheme +racket)     ; a fully conniving family of lisps
-       sh                   ; she sells {ba,z,fi}sh shells on the C xor
+       sh                            ; she sells {ba,z,fi}sh shells on the C xor
        sml
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
@@ -166,6 +165,7 @@
        (web +lsp +tree-sitter)          ; the tubes
        yaml                             ; JSON, but readable
        (zig +lsp)
+       
        :email
        ;;(mu4e +gmail)
        notmuch
@@ -175,8 +175,8 @@
        ;;calendar
        ;;irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader
-       ;;twitter           ; twitter client https://twitter.com/vnought
-
+       everywhere          ;  *leave* Emacs!? You must be joking
+       
        :config
        ;;literate
        (default +bindings +smartparens))
