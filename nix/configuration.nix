@@ -159,7 +159,7 @@ in
   environment.systemPackages = with pkgs; [
     acpi
     bash
-    bbin # Babashka bin
+    pkgs-unstable.bbin # Babashka bin
     bluetui
     brightnessctl
     bubblewrap
