@@ -224,6 +224,7 @@ in
     dejavu_fonts
     nerd-fonts.jetbrains-mono
     nerd-fonts.dejavu-sans-mono
+    nerd-fonts.symbols-only
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
