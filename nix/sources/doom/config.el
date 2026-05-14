@@ -233,6 +233,111 @@ Respects .gitignore and other ignore files."
   (interactive "sRegexp: ")
   (ripgrep-regexp regexp (file-name-directory (buffer-file-name)) nil))
 
+;; IBuffer ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defvar af/ibuffer-flex-formats
+  '((mark modified read-only locked " "
+     (name 18 60 :left :elide :flex)
+     " " (size 9 -1 :right)
+     " " (mode 16 30 :left :elide :flex)
+     " " filename-and-process)
+    (mark " " (name 16 -1 :left) " " filename))
+  "Source ibuffer formats. A column tuple may end in `:flex' to declare
+itself flexible; declared MIN is its weight, declared MAX is its cap.")
+
+(defun af/ibuffer-fit-format (format width)
+  "Resolve :flex tags in FORMAT, sizing flex columns to fill WIDTH.
+
+Leftover = WIDTH minus the sum of every column's declared MIN.
+Leftover is split among flex columns weighted by MIN, each capped at MAX.
+Capped-column surplus respills among uncapped flex columns until the pool
+empties or all flex columns hit their caps."
+  (cl-labels ((entry-min (e)
+                (cond ((stringp e) (string-width e))
+                      ((memq e '(mark modified read-only locked)) 1)
+                      ((symbolp e) 0)
+                      (t (or (nth 1 e) 0))))
+              (flex-p (e) (and (listp e) (eq (nth 5 e) :flex))))
+    (let* ((flex-entries (cl-remove-if-not #'flex-p format))
+           (reserved (apply #'+ (mapcar #'entry-min format)))
+           (pool (max 0 (- width reserved)))
+           (extras (make-hash-table :test 'eq))
+           (uncapped (copy-sequence flex-entries)))
+      (dolist (e flex-entries)
+        (unless (and (integerp (nth 1 e)) (integerp (nth 2 e))
+                     (> (nth 2 e) 0) (>= (nth 2 e) (nth 1 e)))
+          (user-error
+           ":flex column %S needs explicit MIN and MAX (MAX > 0, MAX >= MIN)"
+           (nth 0 e)))
+        (puthash e 0 extras))
+      (catch 'af/ibuffer-fit-done
+        (while (and (> pool 0) uncapped)
+          (let* ((weight-sum (apply #'+ (mapcar (lambda (e) (nth 1 e)) uncapped)))
+                 (distributed 0)
+                 (still-uncapped nil))
+            (when (zerop weight-sum)
+              (throw 'af/ibuffer-fit-done nil))
+            (dolist (e uncapped)
+              (let* ((min (nth 1 e))
+                     (max (nth 2 e))
+                     (current (+ min (gethash e extras)))
+                     (share (/ (* pool min) weight-sum)))
+                (if (> (+ current share) max)
+                    (let ((room (- max current)))
+                      (puthash e (+ (gethash e extras) room) extras)
+                      (cl-incf distributed room))
+                  (puthash e (+ (gethash e extras) share) extras)
+                  (cl-incf distributed share)
+                  (push e still-uncapped))))
+            (setq uncapped (nreverse still-uncapped))
+            (cl-decf pool distributed)
+            (when (zerop distributed)
+              (throw 'af/ibuffer-fit-done nil)))))
+      (when (and (> pool 0) uncapped)
+        (let* ((e (car uncapped))
+               (current (+ (nth 1 e) (gethash e extras)))
+               (give (min pool (- (nth 2 e) current))))
+          (puthash e (+ (gethash e extras) give) extras)))
+      (mapcar (lambda (e)
+                (if (flex-p e)
+                    (let ((final (+ (nth 1 e) (gethash e extras))))
+                      (list (nth 0 e) final final
+                            (or (nth 3 e) :left)
+                            (or (nth 4 e) nil)))
+                  e))
+              format))))
+
+(defun af/ibuffer-refit (&optional window)
+  "Rebuild buffer-local `ibuffer-formats' from `af/ibuffer-flex-formats'.
+
+When called from `window-size-change-functions', WINDOW is the resized
+window and the refit routes to its buffer. When called interactively or
+from setup, WINDOW is nil and the refit applies to the current buffer,
+sized to any visible window showing it."
+  (let ((buf (if window (window-buffer window) (current-buffer))))
+    (with-current-buffer buf
+      (when (derived-mode-p 'ibuffer-mode)
+        (when-let ((win (or window
+                            (get-buffer-window buf)
+                            (get-buffer-window buf 'visible))))
+          (setq-local ibuffer-formats
+                      (mapcar (lambda (fmt)
+                                (af/ibuffer-fit-format fmt (window-body-width win)))
+                              af/ibuffer-flex-formats))
+          (ibuffer-redisplay t))))))
+
+(defun af/ibuffer-setup ()
+  "Install resize-aware refit on the current ibuffer buffer."
+  (add-hook 'window-size-change-functions #'af/ibuffer-refit nil t)
+  (let ((buf (current-buffer)))
+    (run-at-time 0 nil
+                 (lambda ()
+                   (when (buffer-live-p buf)
+                     (with-current-buffer buf (af/ibuffer-refit)))))))
+
+(after! ibuffer
+  (add-hook 'ibuffer-mode-hook #'af/ibuffer-setup))
+
 ;; Org Mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (after! ob
