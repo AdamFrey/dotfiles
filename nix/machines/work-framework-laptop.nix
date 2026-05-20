@@ -30,6 +30,12 @@
 
   services.browsersEnabled = true;
 
+  services.rh-snapshot-btrfs = {
+    enable = true;
+    owner = "adam";
+    imageSize = "32G"; # TBD: adjust after measuring per workshop/rh-snapshot/SPEC.md §3.3.2
+  };
+
   powerManagement.resumeCommands = ''
   ${pkgs.kmod}/bin/modprobe mt7925e || true
 '';

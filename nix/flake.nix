@@ -133,6 +133,7 @@
 	          ./machines/work-framework-laptop-hardware-configuration.nix
 	          ./machines/work-framework-laptop.nix
 	          ./docker.nix
+	          ./btrfs-rh-data.nix
 	        ];
           envVars = {
             EMACS_FONT_SIZE = 14;
