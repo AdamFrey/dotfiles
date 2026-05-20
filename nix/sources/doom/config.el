@@ -499,6 +499,7 @@ sized to any visible window showing it."
   (setq cider-comment-continued-prefix "")
   (setq cider-comment-postfix "\n")
   (setq cider-clojure-cli-aliases ":my/dev")
+  (add-to-list 'cider-jack-in-nrepl-middlewares "org.corfield.rephrase.nrepl/wrap-rephrase")
   (setq cider-lein-parameters "with-profile +dbg repl :headless :host localhost")
   (setq cider-print-fn 'puget)
   (setq cider-repl-use-content-types t)
