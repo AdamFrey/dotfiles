@@ -492,6 +492,39 @@ sized to any visible window showing it."
         (lambda (_) completion))
        :annotation-function #'cider-annotate-symbol))))
 
+(defun af/cider-set-cljc-eval (destination)
+  "Set `cider-clojurec-eval-destination' in the current buffer.
+DESTINATION is one of the symbols `clj', `cljs', or `multi'."
+  (interactive
+   (let ((current (or (bound-and-true-p cider-clojurec-eval-destination) 'multi)))
+     (list (intern (completing-read
+                    (format "Set cljc eval destination (currently `%s'): " current)
+                    '("clj" "cljs" "multi")
+                    nil t nil nil (symbol-name current))))))
+  (setq-local cider-clojurec-eval-destination destination)
+  (message "cljc eval destination set to `%s' (this buffer only)" destination))
+
+(defun af/cider-load-buffer-everywhere ()
+  "Load current buffer into every linked or friendly CIDER session.
+\"Friendly\" means the buffer's file is on the session's classpath
+\(see `sesman-current-sessions' and CIDER's friendly-session check)."
+  (interactive)
+  (unless buffer-file-name
+    (user-error "Buffer `%s' is not associated with a file" (current-buffer)))
+  (let* ((buf (current-buffer))
+         (sessions (sesman-current-sessions 'CIDER)))
+    (unless sessions
+      (user-error "No linked or friendly CIDER sessions for `%s'" (buffer-name buf)))
+    (message "Loading %s into %d session(s): %s"
+             (buffer-name buf)
+             (length sessions)
+             (mapconcat #'car sessions ", "))
+    (dolist (session sessions)
+      (condition-case err
+          (let ((cider-default-session (car session)))
+            (cider-load-buffer buf))
+        (error (message "Load failed in %s: %s" (car session) (error-message-string err)))))))
+
 (after! cider
   ;; change cider pprint to comment so it uses the comment macro
 
