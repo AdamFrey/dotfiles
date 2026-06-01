@@ -8,6 +8,7 @@ let
   hashcards = pkgs.callPackage ./packages/hashcards { };
   fastmail = pkgs.callPackage ./packages/fastmail { };
   noumenon = pkgs.callPackage ./packages/noumenon { };
+  dirge = pkgs.callPackage ./packages/dirge { };
 in
 {
   # secret decryption
@@ -167,6 +168,7 @@ in
     #fastmail
     hashcards
     noumenon
+    dirge
     claude-code
     devenv
     direnv
