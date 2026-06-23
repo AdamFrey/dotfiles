@@ -9,16 +9,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "dirge";
-  version = "0.2.2";
+  version = "0.2.3";
 
   src = fetchFromGitHub {
     owner = "dirge-code";
     repo = "dirge";
     rev = "v${version}";
-    hash = "sha256-iioljMOhmCC0z1bzBfTt1/oIkHsmhKoN0j1Ph+4dwbk=";
+    hash = "sha256-uHIWUmnT0WCuwHOp2QQX6SiEpaDi7RmGOeKWB6TzIKM=";
   };
 
-  cargoHash = "sha256-JqS6AuYcTM0odeHMLFMZYaeti+aqWWduBAlhH8JUDg8=";
+  cargoHash = "sha256-Lyt7jsUo9K4UqKqiKsBz6cMWhOMGFNlngEgBGqxQ9Bk=";
 
   nativeBuildInputs = [ pkg-config rustPlatform.bindgenHook clang mold ];
   buildInputs = [ openssl ];
