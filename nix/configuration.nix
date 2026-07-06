@@ -9,6 +9,27 @@ let
   fastmail = pkgs.callPackage ./packages/fastmail { };
   noumenon = pkgs.callPackage ./packages/noumenon { };
   dirge = pkgs.callPackage ./packages/dirge { };
+  roborev = pkgs.callPackage ./packages/roborev { };
+
+  # Rebuild claude-desktop locally so we can override `nodePackages.asar`,
+  # which was removed from nixpkgs (asar is now at the top level as `pkgs.asar`).
+  claudeDesktopSrc = inputs.claude-desktop;
+  claude-desktop-patchy-cnb = pkgs.callPackage "${claudeDesktopSrc}/pkgs/patchy-cnb.nix" { };
+  claude-desktop = pkgs.callPackage "${claudeDesktopSrc}/pkgs/claude-desktop.nix" {
+    patchy-cnb = claude-desktop-patchy-cnb;
+    nodePackages = { inherit (pkgs) asar; };
+  };
+  claude-desktop-with-fhs = pkgs.buildFHSEnv {
+    name = "claude-desktop";
+    targetPkgs = pkgs: with pkgs; [ docker glibc openssl nodejs uv ];
+    runScript = "${claude-desktop}/bin/claude-desktop";
+    extraInstallCommands = ''
+      mkdir -p $out/share/applications
+      cp ${claude-desktop}/share/applications/claude.desktop $out/share/applications/
+      mkdir -p $out/share/icons
+      cp -r ${claude-desktop}/share/icons/* $out/share/icons/
+    '';
+  };
 in
 {
   # secret decryption
@@ -155,6 +176,11 @@ in
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # bitwarden-desktop 2026.5.0 still pins electron 39, which is EOL in nixpkgs.
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-39.8.10"
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
@@ -169,6 +195,7 @@ in
     hashcards
     noumenon
     dirge
+    roborev
     claude-code
     devenv
     direnv
@@ -212,7 +239,7 @@ in
     zenith
     zip
     zoxide
-    inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
+    claude-desktop-with-fhs
     # zen-browser moved to browsers.nix
   ] ++ [
     pkgs-unstable.beads

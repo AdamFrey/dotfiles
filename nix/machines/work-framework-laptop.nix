@@ -10,8 +10,6 @@
   '';
 
   environment.systemPackages = with pkgs; [
-    freelens-bin
-    lens
     mitmproxy
     podman-desktop
     pkgs-unstable.opencode

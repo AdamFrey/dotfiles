@@ -16,7 +16,7 @@
       forge-mtg
       grim
       mozart2-binary
-      nodePackages.prettier
+      prettier
       pavucontrol
       ripgrep
       satty

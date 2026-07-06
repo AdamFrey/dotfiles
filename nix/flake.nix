@@ -1,13 +1,13 @@
 {
   inputs = {
-    nixpkgs.url          = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url          = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url      = "github:numtide/flake-utils";
 
     agenix.url = "github:ryantm/agenix";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -16,7 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix.url = "github:danth/stylix/release-25.11";
+    stylix.url = "github:danth/stylix/release-26.05";
 
     claude-code = {
       url = "github:sadjow/claude-code-nix";
