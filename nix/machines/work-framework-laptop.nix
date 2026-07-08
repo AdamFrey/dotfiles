@@ -22,6 +22,9 @@
     ))
   ];
 
+
+  networking.firewall.interfaces."br-+".allowedTCPPorts = [ 8082 ];
+
   powerManagement.powerDownCommands = ''
   ${pkgs.kmod}/bin/modprobe -r mt7925e || true
 '';
