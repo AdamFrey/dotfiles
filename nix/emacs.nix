@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, envVars, ... }:
 
 {
   systemd.user.services.emacs = {
@@ -17,6 +17,10 @@
     };
 
     environment = {
+      # Consumed by sources/doom/config.el; set here so the daemon always has
+      # it regardless of graphical-session env-import timing.
+      EMACS_FONT_SIZE = toString envVars.EMACS_FONT_SIZE;
+
       # Some variables for GTK applications I could launch from Emacs
       #GTK_DATA_PREFIX        = config.system.path;
       #GTK_PATH               = "${config.system.path}/lib/gtk-3.0:${config.system.path}/lib/gtk-2.0";

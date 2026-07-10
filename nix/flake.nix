@@ -66,6 +66,7 @@
             overlays = [ claude-code.overlays.default ];
           };
           inherit inputs;
+          inherit envVars;
         };
 
         modules = [
