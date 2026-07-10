@@ -202,6 +202,7 @@ in
     duckdb
     emote
     emacs-pgtk
+    fossil
     fuzzel
     git
     git-filter-repo
