@@ -217,6 +217,22 @@ only works for semicolons."
    '(".clojure-components.edn")
    :test-suffix "_test"))
 
+(defun af/projectile-remove-nas-projects ()
+  "Drop every ~/nas/ entry from `projectile-known-projects' and persist.
+NAS-backed projects block the switch-project prompt for ~2s each
+while the NFS automount times out when the NAS is unreachable."
+  (interactive)
+  (let ((removed (- (length projectile-known-projects)
+                    (length (setq projectile-known-projects
+                                  (seq-remove
+                                   (lambda (project)
+                                     (string-prefix-p "~/nas/" project))
+                                   projectile-known-projects))))))
+    (if (zerop removed)
+        (message "No NAS projects in projectile list")
+      (projectile-save-known-projects)
+      (message "Removed %d NAS project(s) from projectile" removed))))
+
 
 
 ;; After running project search, 'C-o' for search options, then 'a' to open
