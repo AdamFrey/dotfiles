@@ -230,7 +230,8 @@ in
     rclone
     rlwrap
     slack
-    shortwave # internet radio
+    shortwave              # internet radio
+    pkgs-unstable.timr-tui # pomodoro
     unzip
     uv
     waybar
