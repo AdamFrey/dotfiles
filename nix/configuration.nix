@@ -195,7 +195,7 @@ in
     #fastmail
     hashcards
     noumenon
-    dirge
+    #dirge # AI harness
     roborev
     claude-code
     devenv
