@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, pkgs-unstable, inputs, ... }:
+{ config, lib, pkgs, pkgs-unstable, inputs, ... }:
 
 let
   hashcards = pkgs.callPackage ./packages/hashcards { };
@@ -56,7 +56,8 @@ in
   # Swap configuration
   zramSwap = {
     enable = true;
-    memoryPercent = 50;
+    # mkDefault so a memory-constrained machine can raise this; see swap-capacity.nix.
+    memoryPercent = lib.mkDefault 50;
   };
 
   swapDevices = [{

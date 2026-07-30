@@ -21,6 +21,19 @@
       # it regardless of graphical-session env-import timing.
       EMACS_FONT_SIZE = toString envVars.EMACS_FONT_SIZE;
 
+      # Cap every JVM the daemon launches — the CIDER REPLs above all. Measured
+      # 2026-07-30: two uncapped REPLs reached 1448 and 2470 MiB RSS against an
+      # ergonomic MaxHeapSize of 3.73 GiB each (25% of RAM), so an idle pair
+      # could claim half the machine.
+      JDK_JAVA_OPTIONS = lib.concatStringsSep " " [
+        "-Xmx1536m"
+        # Clojure's class churn grows metaspace without bound by default.
+        "-XX:MaxMetaspaceSize=512m"
+        # REPLs idle for long stretches; hand unused heap back to the OS every
+        # five minutes instead of holding it as swap-eligible pages.
+        "-XX:G1PeriodicGCInterval=300000"
+      ];
+
       # Some variables for GTK applications I could launch from Emacs
       #GTK_DATA_PREFIX        = config.system.path;
       #GTK_PATH               = "${config.system.path}/lib/gtk-3.0:${config.system.path}/lib/gtk-2.0";

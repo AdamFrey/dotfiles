@@ -135,6 +135,8 @@
 	          ./machines/work-framework-laptop.nix
 	          ./docker.nix
 	          ./btrfs-rh-data.nix
+	          ./swap-capacity.nix
+	          ./memory-floors.nix
 	        ];
           envVars = {
             EMACS_FONT_SIZE = 14;
