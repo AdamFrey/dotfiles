@@ -3,6 +3,7 @@
 {
   imports = [
     ./zen-browser.nix
+    ./emacs-daemon.nix
   ];
 
   home = {

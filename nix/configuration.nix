@@ -40,7 +40,6 @@ in
 
   imports =
     [ ./filesystem.nix
-      ./emacs.nix
       ./browsers.nix
       ./audio.nix
       ./clojure.nix
@@ -161,6 +160,7 @@ in
   users.users.adam = {
     isNormalUser = true;
     description = "Adam Frey";
+    uid = 1000;
     extraGroups = [ "networkmanager" "wheel" "podman" "audio" ];
     packages = with pkgs; [
        beeper

@@ -558,6 +558,26 @@ DESTINATION is one of the symbols `clj', `cljs', or `multi'."
   (setq-default cider-auto-jump-to-error nil)
   (setq cider-repl-pop-to-buffer-on-connect nil)
   (setq nrepl-sync-request-timeout 30)
+
+  ;; Place jack-in JVMs in repl.slice so their heap is reclaimable separately
+  ;; from the Emacs daemon's own memory. Without this, CIDER's REPLs are children
+  ;; of the daemon and share its cgroup, and ~3 GiB of JVM heap absorbed nearly
+  ;; all of the protection meant for the editor. See nix/memory-floors.nix.
+  (defun af/wrap-nrepl-cmd-in-repl-slice (args)
+    "Prefix `nrepl-start-server-process' CMD so its JVM is placed in repl.slice.
+ARGS is (DIRECTORY CMD ON-PORT-CALLBACK). Idempotent."
+    (let ((directory (nth 0 args))
+          (cmd       (nth 1 args))
+          (callback  (nth 2 args)))
+      (list directory
+            (if (string-prefix-p "systemd-run " cmd)
+                cmd
+              (concat "systemd-run --user --scope --slice=repl.slice "
+                      "--quiet --collect " cmd))
+            callback)))
+
+  (advice-add 'nrepl-start-server-process
+              :filter-args #'af/wrap-nrepl-cmd-in-repl-slice)
   (define-key cider-mode-map (kbd "C-c C-z") 'af/cider-switch-to-repl-buffer)
   (define-key cider-mode-map (kbd "C-c x") 'af/pop-cider-error)
   (define-key cider-mode-map (kbd "C-c r") 'af/repl-go)

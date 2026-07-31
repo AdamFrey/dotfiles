@@ -294,7 +294,11 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return { spawn "kitty"; }
+    // Terminals go in term.slice so kernel reclaim protects them separately from
+    // the browser and Slack, which share app.slice and are reclaimable. See
+    // nix/memory-floors.nix. Only this binding is wrapped: a kitty started from
+    // a shell or fuzzel still lands in app.slice.
+    Mod+Return { spawn "systemd-run" "--user" "--scope" "--slice=term.slice" "--quiet" "--collect" "kitty"; }
     Mod+R { spawn "fuzzel"; }
     Mod+Z { spawn "/home/adam/.config/emacs/bin/doom" "+everywhere"; }
     Mod+E { spawn "emacsclient" "--create-frame";  }
