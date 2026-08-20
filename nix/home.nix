@@ -40,6 +40,8 @@
     shellAliases = {
       ls     = "ls -1 --color";
       duct   = "clojure -M:duct";
+      night  = "sudo /run/current-system/specialisation/night/bin/switch-to-configuration switch";
+      day    = "sudo /run/current-system/bin/switch-to-configuration switch";
     };
 
     file = {
