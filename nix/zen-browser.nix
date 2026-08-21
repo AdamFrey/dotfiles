@@ -29,6 +29,9 @@
         "browser.download.dir" = "/home/adam/inbox";
         "privacy.donottrackheader.enabled" = true;
         "browser.tabs.unloadOnLowMemory" = true;
+
+        # Allow locally built browser extensions to install.
+        "xpinstall.signatures.required" = false;
       };
     };
 
@@ -84,6 +87,15 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
           allowed_in_private_browsing = true;
         };
+
+        # web-pause, built locally by `bb pause:package` in the polyrepo.
+        # ExtensionSettings takes URLs rather than paths, hence file://.
+        # Rebuild the artifact after changing the extension; the filename is
+        # pinned so this URL stays valid across version bumps.
+        "web-pause@adamfrey.me" = {
+          installation_mode = "force_installed";
+          install_url = "file:///home/adam/src/polyrepo/projects/web-pause/web-ext-artifacts/web-pause.zip";
+        };
       };
 
       # Configure uBlock Origin with custom cosmetic filters
@@ -104,6 +116,19 @@
             "youtube.com##ytd-comments"
           ];
         };
+      };
+
+      # Sites that pause behind a typing gate, rather than being blocked
+      # outright by WebsiteFilter above.
+      "3rdparty".Extensions."web-pause@adamfrey.me" = {
+        domains = [
+          "scryfall.com"
+          "cubecobra.com"
+        ];
+        prompts = [
+          "The cards will still be there tomorrow. Is this what you sat down to do?"
+          "You are not building a deck right now. You are avoiding something else."
+        ];
       };
 
       # Bookmarks (can be managed declaratively)
