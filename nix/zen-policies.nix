@@ -96,8 +96,13 @@
 
     # Sites that pause behind a typing gate, rather than being blocked
     # outright by WebsiteFilter above.
+    #
+    # An entry is a host, optionally followed by a path prefix. A bare host
+    # covers its subdomains too, so scryfall.com also matches www.scryfall.com.
+    # Adding a path narrows the match to part of a site -- google.com/search
+    # would pause searching while leaving mail.google.com alone.
     "3rdparty".Extensions."web-pause@adamfrey.me" = {
-      domains = [
+      patterns = [
         "scryfall.com"
         "cubecobra.com"
         "mtg.wiki"
@@ -108,6 +113,7 @@
         "yahoo.com"
         "nytimes.com"
         "hipstersofthecoast.com"
+        "google.com/search"
       ];
       prompts = [
         "Romans 5:17 For if, because of one man's trespass, death reigned through that one man, much more will those who receive the abundance of grace and the free gift of righteousness reign in life through the one man Jesus Christ."
