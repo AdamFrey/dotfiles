@@ -10,6 +10,7 @@ let
   noumenon = pkgs.callPackage ./packages/noumenon { };
   dirge = pkgs.callPackage ./packages/dirge { };
   roborev = pkgs.callPackage ./packages/roborev { };
+  jolt = pkgs.callPackage ./packages/jolt { };
 
   # Rebuild claude-desktop locally so we can override `nodePackages.asar`,
   # which was removed from nixpkgs (asar is now at the top level as `pkgs.asar`).
@@ -197,6 +198,7 @@ in
     noumenon
     #dirge # AI harness
     roborev
+    jolt
     claude-code
     devenv
     direnv
