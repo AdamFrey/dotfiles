@@ -112,6 +112,7 @@
         email = "adam@adamfrey.me";
       };
       pull = { rebase = true; };
+      safe = { directory = "${config.home.homeDirectory}/src/rh-lde/services"; };
       alias = {
         co = "checkout";
         b  = "branch";
