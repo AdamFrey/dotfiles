@@ -48,6 +48,19 @@ in
       };
     };
 
+    # Zen's enterprise policies. This is the copy that actually takes effect.
+    #
+    # Gecko checks SysConfD ("/etc/" + MOZ_APP_NAME, and Zen's MOZ_APP_NAME is
+    # "zen") before the app directory. The home-manager module writes the same
+    # set into the wrapper package's distribution/ dir, but Gecko resolves
+    # XREAppDist through the wrapper's symlinks to the unwrapped package, whose
+    # distribution/policies.json is an empty {"policies":{}} -- which is why
+    # about:policies reported the service inactive until this file existed.
+    #
+    environment.etc."zen/policies/policies.json" = mkIf cfg {
+      text = builtins.toJSON { policies = import ./zen-policies.nix; };
+    };
+
     # Conditionally include browser packages
     # Zen browser is installed via home-manager module in zen-browser.nix
     environment.systemPackages = with pkgs;
