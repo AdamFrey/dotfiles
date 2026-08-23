@@ -124,6 +124,7 @@
             ./machines/framework-laptop.nix
             ./podman.nix
             ./ardour.nix
+            ./sqlite.nix
           ];
           envVars = {
             EMACS_FONT_SIZE = 14;
