@@ -1,5 +1,7 @@
 {
-  "voiceEnabled": true,
+  "permissions": {
+    "defaultMode": "auto"
+  },
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -8,6 +10,15 @@
             "type": "command",
             "command": "/home/adam/.claude/hooks/dispatch.sh",
             "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/adam/.claude/hooks/inject-behaviors.sh",
+            "timeout": 5
           }
         ]
       }
@@ -56,5 +67,8 @@
         ]
       }
     ]
-  }
+  },
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true,
+  "tui": "fullscreen"
 }
