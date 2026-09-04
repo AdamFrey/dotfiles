@@ -12,15 +12,6 @@
             "timeout": 10
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/home/adam/.claude/hooks/inject-behaviors.sh",
-            "timeout": 5
-          }
-        ]
       }
     ],
     "SessionStart": [
