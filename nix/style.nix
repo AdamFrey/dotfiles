@@ -5,6 +5,7 @@
         image = config.lib.stylix.pixel "base0A";
         polarity = "light";
         enable = true;
+        targets.gtksourceview.enable = false;
     };
 
     specialisation.night.configuration = {
