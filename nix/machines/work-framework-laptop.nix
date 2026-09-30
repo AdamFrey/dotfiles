@@ -7,6 +7,14 @@
     127.0.0.1 www.facebook.com
     127.0.0.1 wikipedia.org
     127.0.0.1 en.wikipedia.org
+    127.0.0.1 scryfall.com
+    127.0.0.1 www.scryfall.com
+    127.0.0.1 cubecobra.com
+    127.0.0.1 www.cubecobra.com
+    127.0.0.1 mtg.wiki
+    127.0.0.1 www.mtg.wiki
+    127.0.0.1 mtgtop8.com
+    127.0.0.1 www.mtgtop8.com
   '';
 
   environment.systemPackages = with pkgs; [
