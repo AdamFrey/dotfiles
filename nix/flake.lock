@@ -91,7 +91,9 @@
     },
     "claude-code": {
       "inputs": {
-        "nixpkgs": ["nixpkgs-unstable"],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
         "systems": "systems_2"
       },
       "locked": {
@@ -110,8 +112,12 @@
     },
     "claude-desktop": {
       "inputs": {
-        "flake-utils": ["flake-utils"],
-        "nixpkgs": ["nixpkgs"]
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1764098187,
@@ -129,7 +135,10 @@
     },
     "darwin": {
       "inputs": {
-        "nixpkgs": ["agenix", "nixpkgs"]
+        "nixpkgs": [
+          "agenix",
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1744478979,
@@ -164,7 +173,10 @@
     },
     "flake-parts": {
       "inputs": {
-        "nixpkgs-lib": ["stylix", "nixpkgs"]
+        "nixpkgs-lib": [
+          "stylix",
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1782949081,
@@ -233,7 +245,10 @@
     },
     "home-manager": {
       "inputs": {
-        "nixpkgs": ["agenix", "nixpkgs"]
+        "nixpkgs": [
+          "agenix",
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1745494811,
@@ -251,7 +266,9 @@
     },
     "home-manager_2": {
       "inputs": {
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1787377438,
@@ -270,7 +287,10 @@
     },
     "home-manager_3": {
       "inputs": {
-        "nixpkgs": ["zen-browser", "nixpkgs"]
+        "nixpkgs": [
+          "zen-browser",
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1786719456,
@@ -290,7 +310,9 @@
       "inputs": {
         "niri-stable": "niri-stable",
         "niri-unstable": "niri-unstable",
-        "nixpkgs": ["nixpkgs"],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "nixpkgs-stable": "nixpkgs-stable",
         "xwayland-satellite-stable": "xwayland-satellite-stable",
         "xwayland-satellite-unstable": "xwayland-satellite-unstable"
@@ -424,8 +446,14 @@
     },
     "nur": {
       "inputs": {
-        "flake-parts": ["stylix", "flake-parts"],
-        "nixpkgs": ["stylix", "nixpkgs"]
+        "flake-parts": [
+          "stylix",
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "stylix",
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1785549842,
@@ -443,11 +471,11 @@
     },
     "private-nix": {
       "locked": {
-        "lastModified": 1775926680,
-        "narHash": "sha256-AhNvawdMJHdKFAjQeYx9FB+yIE+XseoaAE2GC1FFHKY=",
+        "lastModified": 1788554018,
+        "narHash": "sha256-FJUKOvNx+vtehwcVo/XGW39u5Q94rzJFY9kk2KpiPj0=",
         "ref": "master",
-        "rev": "5b4b2f7677a697eda02a78ed5f8e45fa9350efa9",
-        "revCount": 9,
+        "rev": "bb045ba49b5b3d1c0b9947e1107408d924c58306",
+        "revCount": 10,
         "type": "git",
         "url": "ssh://git@github.com/AdamFrey/private-nix.git"
       },
@@ -664,7 +692,9 @@
     "zen-browser": {
       "inputs": {
         "home-manager": "home-manager_3",
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1787430507,

@@ -2,3 +2,4 @@
 .devenv.flake.nix
 .direnv/
 nix/private-nix/
+nix/result

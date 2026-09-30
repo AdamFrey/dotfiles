@@ -1,0 +1,32 @@
+diff --git a/src/ui/search_results.rs b/src/ui/search_results.rs
+index 82eecd6..69c6173 100644
+--- a/src/ui/search_results.rs
++++ b/src/ui/search_results.rs
+@@ -77,8 +77,6 @@ impl SearchResultsView {
+         tabs.add_tab("Albums", list_albums);
+         tabs.add_tab("Artists", list_artists);
+         tabs.add_tab("Playlists", list_playlists);
+-        tabs.add_tab("Shows", list_shows);
+-        tabs.add_tab("Episodes", list_episodes);
+ 
+         let mut view = Self {
+             search_term,
+@@ -539,18 +537,6 @@ impl SearchResultsView {
+                 &query,
+                 Some(&self.pagination_playlists),
+             );
+-            self.perform_search(
+-                Box::new(Self::search_show),
+-                &self.results_shows,
+-                &query,
+-                Some(&self.pagination_shows),
+-            );
+-            self.perform_search(
+-                Box::new(Self::search_episode),
+-                &self.results_episodes,
+-                &query,
+-                Some(&self.pagination_episodes),
+-            );
+         }
+     }
+ }

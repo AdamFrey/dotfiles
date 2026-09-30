@@ -56,6 +56,18 @@
       }@inputs:
     let
       system = "x86_64-linux";
+
+      # Our own Spotify app's PKCE client id, consumed by overlays/ncspot.nix.
+      # Kept in the private-nix input rather than this public repo -- see that
+      # overlay for why. null falls back to ncspot's shared upstream app.
+      ncspotClientId =
+        let
+          clientIdFile = "${private-nix}/sources/ncspot/spotify-client-id";
+        in
+          if builtins.pathExists clientIdFile
+          then builtins.replaceStrings [ "\n" ] [ "" ] (builtins.readFile clientIdFile)
+          else null;
+
       makeSystem = { extraModules, envVars }: nixpkgs.lib.nixosSystem {
         inherit system;
         # specialArgs is passed as an argument set to every module in the module list
@@ -63,7 +75,10 @@
           pkgs-unstable = import nixpkgs-unstable {
             inherit system;
             config.allowUnfree = true;
-            overlays = [ claude-code.overlays.default ];
+            overlays = [
+              claude-code.overlays.default
+              (import ./overlays/ncspot.nix { spotifyClientId = ncspotClientId; })
+            ];
           };
           inherit inputs;
           inherit envVars;

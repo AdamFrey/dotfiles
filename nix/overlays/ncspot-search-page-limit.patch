@@ -1,0 +1,72 @@
+diff --git a/src/ui/search_results.rs b/src/ui/search_results.rs
+index 69c6173..c61b66c 100644
+--- a/src/ui/search_results.rs
++++ b/src/ui/search_results.rs
+@@ -22,6 +22,13 @@ use rspotify::model::SearchType;
+ use rspotify::model::search::SearchResult;
+ use std::sync::{Arc, RwLock};
+ 
++/// Page size for `/v1/search` requests.
++///
++/// Spotify caps `limit` on the search endpoint at 10; anything higher is
++/// rejected with `400 {"error":{"status":400,"message":"Invalid limit"}}`.
++/// The library endpoints still accept 50, which is why only search breaks.
++const SEARCH_PAGE_LIMIT: u32 = 10;
++
+ pub struct SearchResultsView {
+     search_term: String,
+     results_tracks: Arc<RwLock<Vec<Track>>>,
+@@ -127,7 +134,7 @@ impl SearchResultsView {
+         if let Ok(SearchResult::Tracks(results)) =
+             spotify
+                 .api
+-                .search(SearchType::Track, query, 50, offset as u32)
++                .search(SearchType::Track, query, SEARCH_PAGE_LIMIT, offset as u32)
+         {
+             let mut t = results.items.iter().map(|ft| ft.into()).collect();
+             let mut r = tracks.write().unwrap();
+@@ -168,7 +175,7 @@ impl SearchResultsView {
+         if let Ok(SearchResult::Albums(results)) =
+             spotify
+                 .api
+-                .search(SearchType::Album, query, 50, offset as u32)
++                .search(SearchType::Album, query, SEARCH_PAGE_LIMIT, offset as u32)
+         {
+             let mut a = results.items.iter().map(|sa| sa.into()).collect();
+             let mut r = albums.write().unwrap();
+@@ -209,7 +216,7 @@ impl SearchResultsView {
+         if let Ok(SearchResult::Artists(results)) =
+             spotify
+                 .api
+-                .search(SearchType::Artist, query, 50, offset as u32)
++                .search(SearchType::Artist, query, SEARCH_PAGE_LIMIT, offset as u32)
+         {
+             let mut a = results.items.iter().map(|fa| fa.into()).collect();
+             let mut r = artists.write().unwrap();
+@@ -250,7 +257,7 @@ impl SearchResultsView {
+         if let Ok(SearchResult::Playlists(results)) =
+             spotify
+                 .api
+-                .search(SearchType::Playlist, query, 50, offset as u32)
++                .search(SearchType::Playlist, query, SEARCH_PAGE_LIMIT, offset as u32)
+         {
+             let mut pls = results.items.iter().map(|sp| sp.into()).collect();
+             let mut r = playlists.write().unwrap();
+@@ -291,7 +298,7 @@ impl SearchResultsView {
+         if let Ok(SearchResult::Shows(results)) =
+             spotify
+                 .api
+-                .search(SearchType::Show, query, 50, offset as u32)
++                .search(SearchType::Show, query, SEARCH_PAGE_LIMIT, offset as u32)
+         {
+             let mut pls = results.items.iter().map(|sp| sp.into()).collect();
+             let mut r = shows.write().unwrap();
+@@ -332,7 +339,7 @@ impl SearchResultsView {
+         if let Ok(SearchResult::Episodes(results)) =
+             spotify
+                 .api
+-                .search(SearchType::Episode, query, 50, offset as u32)
++                .search(SearchType::Episode, query, SEARCH_PAGE_LIMIT, offset as u32)
+         {
+             let mut e = results.items.iter().map(|se| se.into()).collect();
+             let mut r = episodes.write().unwrap();

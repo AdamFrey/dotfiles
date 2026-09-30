@@ -1,3 +1,6 @@
+# Library screen tabs.
+library_tabs = ["tracks", "albums", "artists", "playlists"]
+
 [keybindings]
 # Navigation (magit-style: n/p instead of vim j/k)
 "n" = "move down 1"
