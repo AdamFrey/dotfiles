@@ -11,17 +11,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     stylix.url = "github:danth/stylix/release-26.05";
 
-    claude-code = {
-      url = "github:sadjow/claude-code-nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    # Deliberately no `inputs.nixpkgs.follows`. This flake is only built and
+    # cached against its own pinned nixpkgs; pointing it at ours changes every
+    # output hash, so cache.numtide.com (see configuration.nix) would miss on
+    # every rebuild and claude-code would be refetched locally each time.
+    llm-agents.url = "github:numtide/llm-agents.nix";
 
     claude-desktop = {
       url = "github:k3d3/claude-desktop-linux-flake";
@@ -46,10 +42,9 @@
       nixpkgs-unstable,
       flake-utils,
       home-manager,
-      niri,
       stylix,
       agenix,
-      claude-code,
+      llm-agents,
       claude-desktop,
       zen-browser,
       private-nix
@@ -76,7 +71,6 @@
             inherit system;
             config.allowUnfree = true;
             overlays = [
-              claude-code.overlays.default
               (import ./overlays/ncspot.nix { spotifyClientId = ncspotClientId; })
             ];
           };
@@ -85,7 +79,6 @@
         };
 
         modules = [
-          { nixpkgs.overlays = [ niri.overlays.niri claude-code.overlays.default ]; }
           ./configuration.nix
 
           agenix.nixosModules.default # secrets
@@ -107,13 +100,31 @@
 
 
 
-          niri.nixosModules.niri
-          {
+          ({ pkgs, ... }: {
+            # nixpkgs' programs.niri module (nixos/modules/programs/wayland/niri.nix)
+            # replaces niri-flake: it registers the session, portals, and systemd
+            # units, and defaults the package to pkgs.niri.
             programs.niri.enable = true;
-            programs.niri.package = inputs.niri.packages.${system}.niri-unstable;
             environment.variables.NIXOS_OZONE_WL = "1";
 
-          }
+            # The one thing that module does not provide, and niri-flake did.
+            # Without an agent, anything calling polkit from a niri session gets
+            # no authentication dialog; GNOME's own agent runs only in a GNOME
+            # session. Same binary and unit shape as niri-flake-polkit.service.
+            systemd.user.services.niri-polkit-agent = {
+              description = "PolicyKit authentication agent for the niri session";
+              wantedBy = [ "niri.service" ];
+              after = [ "graphical-session.target" ];
+              partOf = [ "graphical-session.target" ];
+              serviceConfig = {
+                Type = "simple";
+                ExecStart = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1";
+                Restart = "on-failure";
+                RestartSec = 1;
+                TimeoutStopSec = 10;
+              };
+            };
+          })
 
           stylix.nixosModules.stylix
           ./style.nix

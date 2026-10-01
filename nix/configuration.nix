@@ -12,6 +12,12 @@ let
   roborev = pkgs.callPackage ./packages/roborev { };
   jolt = pkgs.callPackage ./packages/jolt { };
 
+  # Taken as a flake output rather than through an overlay. nixpkgs lags
+  # claude-code releases by weeks, and llm-agents' binary cache only holds
+  # builds made against its own pinned nixpkgs -- an overlay would rebuild
+  # against ours and miss that cache every time.
+  claude-code = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code;
+
   # Rebuild claude-desktop locally so we can override `nodePackages.asar`,
   # which was removed from nixpkgs (asar is now at the top level as `pkgs.asar`).
   claudeDesktopSrc = inputs.claude-desktop;
@@ -38,6 +44,14 @@ in
   #age.secrets.ssh-config-entries.file = secrets/ssh-config-entries.age;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Binary cache for the llm-agents flake, which serves claude-code prebuilt.
+  # These are list options, so they merge with the nixpkgs defaults rather
+  # than replacing cache.nixos.org.
+  nix.settings.substituters = [ "https://cache.numtide.com" ];
+  nix.settings.trusted-public-keys = [
+    "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+  ];
 
   imports =
     [ ./filesystem.nix

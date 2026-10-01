@@ -169,7 +169,9 @@
   '';
   };
 
-  stylix.targets.niri.enable = false;
+  # stylix.targets.niri was supplied by niri-flake's home-manager module, not by
+  # stylix itself; with that flake gone the option no longer exists. Nothing
+  # themes niri now, which is what disabling it achieved anyway.
   stylix.targets.kitty.enable = true;
 
   programs.kitty = {
