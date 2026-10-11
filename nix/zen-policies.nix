@@ -114,7 +114,6 @@
         "yahoo.com"
         "nytimes.com"
         "hipstersofthecoast.com"
-        "google.com/search"
         "fastmail.com"
         "app.slack.com/client/T03RZGPFR/C06MAR553"
         "facebook.com"
