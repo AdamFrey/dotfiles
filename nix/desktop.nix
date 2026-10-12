@@ -1,5 +1,3 @@
-{ config, ... }:
-
 {
   networking.hostName = "matte-black-cadillac";
 
@@ -9,12 +7,11 @@
   # key and no authorized_keys file. Who may open a shell is decided by the
   # tailnet policy file in the admin console, not by this repo.
   #
-  age.secrets.tailscale-authkey.file = ./secrets/tailscale-authkey.age;
-
+  # Enrollment is manual. The node key lives in
+  # /var/lib/tailscale with expiry disabled, so it survives reboots and
+  # rebuilds indefinitely. Rejoining after a reinstall, or after losing
+  # /var/lib/tailscale, needs `sudo tailscale login` at the machine.
   services.tailscale = {
-    authKeyFile = config.age.secrets.tailscale-authkey.path;
-
-    extraUpFlags = [ "--ssh" ];
     extraSetFlags = [ "--ssh" ];
 
     openFirewall = true;

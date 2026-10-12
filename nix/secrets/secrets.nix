@@ -8,5 +8,4 @@ let
 in
 {
   "ssh-config-entries.age".publicKeys = [ adamUserKey ];
-  "tailscale-authkey.age".publicKeys = [ adamUserKey ];
 }
