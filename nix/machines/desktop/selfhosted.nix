@@ -89,6 +89,9 @@ in
       "${media}:/media:ro"
     ];
     environment.UID = "1000";
+
+    # Use the GPU for tanscoding
+    devices = [ "/dev/dri:/dev/dri" ];
   };
 
   age.secrets.miniflux-admin.file = ../../secrets/miniflux-admin.age;
