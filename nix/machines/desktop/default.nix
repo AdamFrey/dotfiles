@@ -1,3 +1,5 @@
+{ inputs, ... }:
+
 {
   imports = [
     ./disk-config.nix
@@ -8,6 +10,9 @@
   ];
 
   networking.hostName = "matte-black-cadillac";
+
+  # Only applied on a fresh install; mutableUsers leaves passwd alone after.
+  users.users.adam.hashedPassword = inputs.private-nix.userPasswords.desktop.adam;
 
   # Remote access via Tailscale SSH.
   #
