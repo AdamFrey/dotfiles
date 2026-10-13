@@ -140,34 +140,107 @@ fails the desktop may sit unreachable, so be ready to switch the monitor to it.
 Services will be unhappy until section 6 — `/pithos/art` is empty, immich has
 no library. That is expected, not a fault.
 
+Three things did fail on the 2026-10-13 install, and two were config bugs:
+
+- **`swapfile.swap`** — "it appears to have holes". ZFS allocates the file
+  sparsely and `swapon` refuses it. Fixed in `configuration.nix`: the swapfile
+  is now declared only on a non-ZFS root. zram carries swap on this machine.
+- **`podman-emby`** — "statfs /var/lib/emby: no such file or directory".
+  podman will not create a bind-mount source. Fixed in `selfhosted.nix` with a
+  `systemd.tmpfiles` rule.
+- **`/run/agenix` empty, so miniflux and the borg job cannot start.** Not a
+  bug — `age.identityPaths` is `/home/adam/.ssh/id_ed25519`, and `/home` is an
+  empty dataset until section 6. **Every secret stays undecryptable until the
+  home restore lands, the offsite backup included.** Order the restore
+  accordingly, and re-check `ls /run/agenix/` after it.
+
 ---
 
 ## 6. Restore
 
-Four transfers with different destinations. `restore-notes.md` on the NAS is
-authoritative; this is the summary.
+`restore-notes.md` on the NAS is authoritative; this is the summary.
+
+### 6.0 The link is the whole schedule
+
+Measure it before planning anything:
 
 ```sh
-# 1. bulk media  (~1.1 TB — the long one)
-rsync -aHAX --info=progress2 \
-  --exclude-from=/mnt/pithos/migration/restore-exclude.txt \
-  admin@192.168.0.221:/mnt/pithos/ /pithos/
-
-# 2. home
-rsync -aHAX admin@192.168.0.221:/mnt/pithos/migration/desktop-home/ /home/adam/
-
-# 3. immich originals -> NVMe, not pithos
-rsync -aHAX admin@192.168.0.221:/mnt/pithos/immich/library/ /var/lib/immich/library/
-rsync -aHAX admin@192.168.0.221:/mnt/pithos/immich/video/   /var/lib/immich/video/
-
-# 4. linkwarden archives
-rsync -aHAX admin@192.168.0.221:/mnt/pithos/migration/k3s-volumes/linkwarden-archives/ \
-  /var/lib/linkwarden/
+cat /sys/class/net/e*/speed   # on both machines
 ```
 
-**Expect roughly three hours at 100 Mbit.** The Archer C54's LAN ports are
-Fast Ethernet; moving both machines onto the EAP211 bridge's gigabit ports
-would cut this to about 25 minutes. Worth doing first if the cabling is in hand.
+At **100 Mbit** (12.5 MB/s) the 1.165 TB of media alone is **~26 hours**, and
+the whole restore ~31. At gigabit it is **~3 hours**. Both NICs are
+gigabit-capable; the Archer C54's LAN ports are Fast Ethernet and the EAP211
+bridge has three unused gigabit ports. Move both cables before the bulk copy —
+it is the single largest factor in how long this takes.
+
+### 6.1 The exclude file has a format trap
+
+`rsync --exclude-from` treats a line as a comment **only when the line starts
+with `#`**. A trailing comment becomes part of the pattern, so the pattern
+silently matches nothing. The 2026-10-13 revision of `restore-exclude.txt` had
+trailing comments on its five largest entries — `/art/INBOX`, `/immich`,
+`/migration`, `/ix-applications`, `qbittorrent-downloads` — and every one was
+inert. INBOX's 616 G would have gone onto a pool that cannot hold it. Verify
+with a dry run and read the byte count, never the file:
+
+```sh
+rsync -n -aHAX --stats --exclude-from=... src/ dst/ | grep "Total file size"
+```
+
+Post-exclude the media is 1,164,661,534,322 bytes across 2,964 files — about
+60% of the 1.81 T pool once the small datasets land.
+
+### 6.2 Transfer per dataset, not the whole tree
+
+`/pithos` itself is a plain directory on `rpool/root`; only the six children
+are mounted datasets. A single `rsync /mnt/pithos/ /pithos/` therefore writes
+`containers`, `lifedb`, `data`, `adams-home`, `media-test` and
+`lifedb-datalevin` onto the **NVMe**, which is not where any of it belongs.
+Copy each dataset to its own mountpoint instead.
+
+```sh
+# pull from the desktop; admin can sudo passwordlessly on the NAS
+SSH='ssh -i /root/.ssh/id_ed25519'
+
+# 1. the five small datasets  (~18 G)
+for ds in episteme techne logseq prosopikos memories; do
+  rsync -aHAX --rsync-path="sudo -n rsync" -e "$SSH" \
+    admin@192.168.0.221:/mnt/pithos/$ds/ /pithos/$ds/
+done
+
+# 2. media  (1.165 TB — the long one; exclude paths are art-relative here)
+rsync -aHAX --info=progress2 --rsync-path="sudo -n rsync" -e "$SSH" \
+  --exclude-from=/root/exclude-art.txt \
+  admin@192.168.0.221:/mnt/pithos/art/ /pithos/art/
+
+# 3. home — do this early, it is what unlocks agenix
+rsync -aHAX --rsync-path="sudo -n rsync" -e "$SSH" \
+  admin@192.168.0.221:/mnt/pithos/migration/desktop-home/ /home/adam/
+
+# 4. immich originals -> NVMe, not pithos
+rsync -aHAX --rsync-path="sudo -n rsync" -e "$SSH" \
+  admin@192.168.0.221:/mnt/pithos/immich/library/ /var/lib/immich/library/
+rsync -aHAX --rsync-path="sudo -n rsync" -e "$SSH" \
+  admin@192.168.0.221:/mnt/pithos/immich/video/ /var/lib/immich/video/
+
+# 5. linkwarden archives
+rsync -aHAX --rsync-path="sudo -n rsync" -e "$SSH" \
+  admin@192.168.0.221:/mnt/pithos/migration/k3s-volumes/linkwarden-archives/ \
+  /var/lib/linkwarden/
+
+# 6. service state (~152 M) -> /var/lib/<service>, per service
+#    emby 85M, sonarr 32M, postgres 16M, qbittorrent 7.5M, prowlarr 7.0M,
+#    audiobookshelf 3.9M, all under containers/container-data/
+```
+
+### 6.3 Not covered by any of the above
+
+Six top-level directories on the NAS belong to no dataset and no exclude, ~19 M
+in total: `adams-home` 14K, `data` 2.8M, `lifedb` 13M, `lifedb-datalevin` 24K,
+`media-test` 3.0M, and `containers/{dockge,stacks,data}` ~9 M. lifedb and
+lifedb-datalevin are dropped by decision. The rest is small enough to stage
+somewhere and triage later rather than hold up the migration.
 
 `desktop-sda1` and `desktop-sda2-home` are **not** a wholesale restore target.
 96 G was staged; about 21 G is kept and filed into existing `pithos`
