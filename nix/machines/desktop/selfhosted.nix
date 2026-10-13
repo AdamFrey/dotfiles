@@ -38,6 +38,8 @@ in
     # already uses for bbin and friends.
     package = pkgs-unstable.immich;
     port = port.immich;
+    # Defaults to localhost, which makes the lanPorts firewall hole useless.
+    host = "0.0.0.0";
     mediaLocation = "/var/lib/immich";
     machine-learning.enable = true;
     database.createDB = true;
@@ -64,6 +66,8 @@ in
   };
 
   services.audiobookshelf = {
+    # Defaults to 127.0.0.1, which makes the lanPorts firewall hole useless.
+    host = "0.0.0.0";
     enable = true;
     port = port.audiobookshelf;
   };
