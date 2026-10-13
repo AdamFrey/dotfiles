@@ -76,6 +76,11 @@ in
     webuiPort = port.qbittorrent;
   };
 
+  # podman refuses to start when a bind-mount source is missing, and unlike the
+  # native services above there is no StateDirectory= to create it. 1000 is the
+  # uid the container is told to run as just below.
+  systemd.tmpfiles.rules = [ "d /var/lib/emby 0750 1000 100 -" ];
+
   virtualisation.oci-containers.containers.emby = {
     image = "emby/embyserver:latest";
     ports = [ "${toString port.emby}:8096" ];

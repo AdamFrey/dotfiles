@@ -74,7 +74,8 @@ in
     memoryPercent = lib.mkDefault 50;
   };
 
-  swapDevices = [{
+  # ZFS machines run on zram alone.
+  swapDevices = lib.mkIf (config.fileSystems."/".fsType != "zfs") [{
     device = "/swapfile";
     size = 16 * 1024;  # 16GB
   }];
