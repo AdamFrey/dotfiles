@@ -1,5 +1,16 @@
 { config, lib, pkgs, ... }:
+
+# NFS automounts for the shared datasets.
+#
+# Skipped on matte-black-cadillac, which holds the datasets itself once the
+# NAS is folded into it -- a machine has no business NFS-mounting its own
+# storage, and after the NAS is gone these would point at nothing.
+#
+# The address is still the NAS. It moves to the desktop once that machine
+# serves NFS; until then the laptops keep reading from 192.168.0.221.
 let
+  servesTheseDatasets = config.networking.hostName == "matte-black-cadillac";
+
   nasMount = path: {
     device = "192.168.0.221:/mnt/pithos/${path}";
     fsType = "nfs";
@@ -18,10 +29,12 @@ let
   root = "/home/adam/nas";
 in
 {
-  fileSystems."${root}/art"        = nasMount "art";
-  fileSystems."${root}/immich"     = nasMount "immich";
-  fileSystems."${root}/episteme"   = nasMount "episteme";
-  fileSystems."${root}/logseq"     = nasMount "logseq";
-  fileSystems."${root}/techne"     = nasMount "techne";
-  fileSystems."${root}/prosopikos" = nasMount "prosopikos";
+  fileSystems = lib.mkIf (!servesTheseDatasets) {
+    "${root}/art"        = nasMount "art";
+    "${root}/immich"     = nasMount "immich";
+    "${root}/episteme"   = nasMount "episteme";
+    "${root}/logseq"     = nasMount "logseq";
+    "${root}/techne"     = nasMount "techne";
+    "${root}/prosopikos" = nasMount "prosopikos";
+  };
 }

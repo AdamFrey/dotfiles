@@ -1,5 +1,11 @@
 {
-  imports = [ ./offsite-backup.nix ];
+  imports = [
+    ./disk-config.nix
+    ./zfs.nix
+    ./selfhosted.nix
+    ./ollama.nix
+    ./offsite-backup.nix
+  ];
 
   networking.hostName = "matte-black-cadillac";
 

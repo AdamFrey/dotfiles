@@ -142,6 +142,7 @@
       nixosConfigurations = {
         desktop = makeSystem {
           extraModules = [
+            disko.nixosModules.disko
             ./machines/desktop/hardware-configuration.nix
             ./machines/desktop
             ./podman.nix
