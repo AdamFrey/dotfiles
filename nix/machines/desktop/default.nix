@@ -14,6 +14,18 @@
   # Only applied on a fresh install; mutableUsers leaves passwd alone after.
   users.users.adam.hashedPassword = inputs.private-nix.userPasswords.desktop.adam;
 
+  # This machine must never sleep.
+  services.displayManager.gdm.autoSuspend = false;
+
+  # autoSuspend only covers the login screen, so refuse sleep outright --
+  # otherwise GNOME suspends it again once someone logs in and walks away.
+  systemd.targets = {
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
+  };
+
   # Remote access via Tailscale SSH.
   #
   # tailscaled terminates the SSH session itself, so there is no sshd, no host
