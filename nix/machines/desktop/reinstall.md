@@ -151,8 +151,20 @@ Three things did fail on the 2026-10-13 install, and two were config bugs:
 - **`/run/agenix` empty, so miniflux and the borg job cannot start.** Not a
   bug — `age.identityPaths` is `/home/adam/.ssh/id_ed25519`, and `/home` is an
   empty dataset until section 6. **Every secret stays undecryptable until the
-  home restore lands, the offsite backup included.** Order the restore
-  accordingly, and re-check `ls /run/agenix/` after it.
+  home restore lands, the offsite backup included** -- and `nixos-rebuild`
+  itself fails on `agenixChown` until then, so this blocks fixing anything
+  else. Copy the identity across before the first rebuild:
+
+  ```sh
+  rsync -a --exclude=config --rsync-path="sudo -n rsync" \
+    admin@192.168.0.221:/mnt/pithos/migration/desktop-home/.ssh/ /home/adam/.ssh/
+  chown -R adam:users /home/adam/.ssh && chmod 700 /home/adam/.ssh
+  ```
+
+  Exclude `config`: home-manager owns it as a store symlink, and copying the
+  staged one points it at a store path that no longer exists. Then
+  `/run/current-system/bin/switch-to-configuration switch` and check
+  `ls /run/agenix/` shows five secrets.
 
 ---
 
