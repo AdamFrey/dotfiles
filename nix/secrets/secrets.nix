@@ -8,4 +8,10 @@ let
 in
 {
   "ssh-config-entries.age".publicKeys = [ adamUserKey ];
+  "borg-repo-passphrase.age".publicKeys = [ adamUserKey ];
+  "borg-storagebox-key.age".publicKeys = [ adamUserKey ];
+  "borg-repokey-export.age".publicKeys = [ adamUserKey ];
+  "miniflux-admin.age".publicKeys = [ adamUserKey ];
+  "linkwarden-nextauth.age".publicKeys = [ adamUserKey ];
+  "healthchecks-ping-url.age".publicKeys = [ adamUserKey ];
 }

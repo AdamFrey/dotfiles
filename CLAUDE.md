@@ -62,7 +62,7 @@ Located in `nix/packages/`, loaded via `callPackage` in configuration.nix:8. Eac
 ### Self-Hosted Services (selfhosted/)
 
 Docker Compose configurations for self-hosted applications:
-- audiobookshelf, datalevin, emby, grampsweb, miniflux, postgres, qbittorrent
+- audiobookshelf, datalevin, emby, grampsweb, miniflux, postgres, prowlarr, qbittorrent, sonarr
 
 Each service has its own directory with a `compose.yml` file.
 

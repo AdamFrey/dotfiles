@@ -143,6 +143,16 @@ in
     EDITOR             = "emacsclient --create-frame";
   };
 
+  programs.ssh.knownHosts."hetzner-storagebox" = {
+    hostNames = [ "[${inputs.private-nix.storageBox.user}.your-storagebox.de]:23" ];
+    publicKey = inputs.private-nix.storageBox.hostKey;
+  };
+
+  programs.git = {
+    enable = true;
+    config.safe.directory = "/home/adam/src/dotfiles";
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.brlaser ];
@@ -210,6 +220,7 @@ in
     bash
     pkgs-unstable.bbin # Babashka bin
     bluetui
+    borgbackup
     brightnessctl
     bubblewrap
     calibre

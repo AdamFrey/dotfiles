@@ -1,4 +1,6 @@
 {
+  imports = [ ./offsite-backup.nix ];
+
   networking.hostName = "matte-black-cadillac";
 
   # Remote access via Tailscale SSH.
