@@ -19,11 +19,11 @@ in
   #   restore with: age -d -i ~/.ssh/id_ed25519 secrets/borg-repokey-export.age
   #                 borg key import <repo> <file>
 
-  age.secrets.borg-repo-passphrase.file = ./secrets/borg-repo-passphrase.age;
-  age.secrets.healthchecks-ping-url.file = ./secrets/healthchecks-ping-url.age;
+  age.secrets.borg-repo-passphrase.file = ../../secrets/borg-repo-passphrase.age;
+  age.secrets.healthchecks-ping-url.file = ../../secrets/healthchecks-ping-url.age;
 
   age.secrets.borg-storagebox-key = {
-    file = ./secrets/borg-storagebox-key.age;
+    file = ../../secrets/borg-storagebox-key.age;
     mode = "0400";
   };
 

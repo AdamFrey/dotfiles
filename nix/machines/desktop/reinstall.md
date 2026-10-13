@@ -3,9 +3,10 @@
 The desktop is being rebuilt from ext4 onto two single-disk ZFS pools as part
 of folding the TrueNAS box into it. This is the procedure.
 
-ZFS root cannot be set up the way `nix/README.md` describes for a new machine.
-`nixos-generate-config` *describes* pools; it does not create them. Everything
-in section 3 happens by hand, before `nixos-install` runs.
+The layout is declared in `disk-config.nix` and applied by disko, driven
+remotely by nixos-anywhere. No installer USB, and nothing typed by hand at the
+machine -- which matters because the dataset names have to match `zfs.nix`
+exactly.
 
 ---
 
@@ -21,7 +22,7 @@ are wiped and not after.
 | healthchecks.io is green | its dashboard |
 | `restore-exclude.txt` and `restore-notes.md` exist | on the NAS at `/mnt/pithos/migration/` |
 | The NAS is healthy | `zpool status pithos` — ONLINE, no errors |
-| You have a NixOS installer USB | 26.05 or newer, so the ZFS in the installer matches |
+| The laptop can reach the desktop as root over plain SSH | see 4.1 |
 
 **The desktop's disks hold nothing unique at this point.** Everything was
 staged to the NAS and verified by file count. The offsite copy is a third
@@ -45,117 +46,84 @@ NVMe and only bulk media goes on `sda`.
 
 ---
 
-## 3. Create the pools
+## 3. Disk layout
 
-Boot the installer. Identify disks by `/dev/disk/by-id/` rather than `sda` —
-kernel names are not stable across boots.
+`disk-config.nix` in this directory declares both pools and every dataset.
+Nothing is typed by hand.
 
-### 3.1 Partition the NVMe
+**It is not imported by `default.nix`.** Importing it declares filesystems that
+conflict with the ext4 layout the machine runs on today, and disko erases disks
+without asking. It is switched on as part of step 4.
 
-1 GiB ESP plus the rest for ZFS. **The current ESP is 512 MiB and sits at 83%
-full**, which leaves no room for more than a couple of generations; 1 GiB
-avoids that.
-
-```sh
-DISK=/dev/disk/by-id/nvme-Lexar_SSD_NM790_2TB_...   # tab-complete the real one
-sgdisk --zap-all "$DISK"
-sgdisk -n1:1M:+1G  -t1:EF00 -c1:ESP   "$DISK"
-sgdisk -n2:0:0     -t2:BF00 -c2:rpool "$DISK"
-partprobe "$DISK"
-mkfs.vfat -F32 -n ESP "${DISK}-part1"
-```
-
-### 3.2 Create `rpool`
+Before anything else, fill in the two device paths. Run on the desktop:
 
 ```sh
-zpool create -f \
-  -o ashift=12 \
-  -O compression=zstd \
-  -O atime=off \
-  -O xattr=sa -O acltype=posixacl \
-  -O mountpoint=none \
-  rpool "${DISK}-part2"
+ls -l /dev/disk/by-id/ | grep -E 'nvme-Lexar|WDC_WD20EZAZ'
 ```
 
-`xattr=sa` and `acltype=posixacl` are not optional — systemd and journald
-need them, and adding them after the fact does not fix already-written files.
-
-### 3.3 Create the rpool datasets
-
-The names are fixed by `zfs.nix`, which snapshots `rpool/home`,
-`rpool/var/lib/postgresql` and `rpool/var/lib/immich` by name.
-
-```sh
-zfs create -o mountpoint=legacy rpool/root
-zfs create -o mountpoint=legacy rpool/nix
-zfs create -o mountpoint=legacy rpool/home
-
-zfs create -o canmount=off -o mountpoint=none rpool/var
-zfs create -o canmount=off -o mountpoint=none rpool/var/lib
-zfs create -o mountpoint=legacy rpool/var/lib/postgresql
-zfs create -o mountpoint=legacy rpool/var/lib/immich
-zfs create -o mountpoint=legacy rpool/var/lib/linkwarden
-```
-
-### 3.4 Create `pithos` on the spinning disk
-
-Dataset names mirror the NAS so the laptops' NFS paths do not change.
-
-```sh
-HDD=/dev/disk/by-id/ata-WDC_WD20EZAZ-...        # tab-complete the real one
-sgdisk --zap-all "$HDD"
-sgdisk -n1:0:0 -t1:BF00 -c1:pithos "$HDD"
-partprobe "$HDD"
-
-zpool create -f \
-  -o ashift=12 \
-  -O compression=zstd \
-  -O atime=off \
-  -O xattr=sa -O acltype=posixacl \
-  -O mountpoint=none \
-  pithos "${HDD}-part1"
-
-for d in art episteme techne memories logseq prosopikos; do
-  zfs create -o mountpoint=legacy "pithos/$d"
-done
-```
-
-**`recordsize` is left at the default.** Raising it to 1M suits large media
-and would reduce metadata on an SMR disk, but it is not reversible for
-already-written data, and the default is adequate. Decide before copying
-1.1 TB, not after.
+and replace both `REPLACE-ME-` placeholders. by-id, never `sda` — kernel names
+are not stable across boots.
 
 ---
 
-## 4. Install
+## 4. Install with nixos-anywhere
 
-```sh
-mount -t zfs rpool/root /mnt
-mkdir -p /mnt/{boot,nix,home,var/lib/{postgresql,immich,linkwarden},pithos/{art,episteme,techne,memories,logseq,prosopikos}}
-mount "${DISK}-part1" /mnt/boot
-mount -t zfs rpool/nix  /mnt/nix
-mount -t zfs rpool/home /mnt/home
-for d in postgresql immich linkwarden; do mount -t zfs "rpool/var/lib/$d" "/mnt/var/lib/$d"; done
-for d in art episteme techne memories logseq prosopikos; do mount -t zfs "pithos/$d" "/mnt/pithos/$d"; done
+No installer USB. `nixos-anywhere` kexecs into an installer over SSH, partitions
+per `disk-config.nix`, and installs — all from the laptop.
 
-nixos-generate-config --root /mnt
+### 4.1 Give it an SSH route in
+
+The desktop has no sshd; Tailscale SSH is not enough, because nixos-anywhere
+needs plain SSH as root. Add temporarily:
+
+```nix
+services.openssh = {
+  enable = true;
+  settings.PermitRootLogin = "prohibit-password";
+};
+users.users.root.openssh.authorizedKeys.keys = [ "<adam's id_ed25519.pub>" ];
 ```
 
-Then, **before installing**:
+Rebuild, confirm `ssh root@192.168.0.10 true` works from the laptop, then
+**remove it again once the install is done**.
 
-1. Copy the generated `/mnt/etc/nixos/hardware-configuration.nix` over
-   `nix/desktop-hardware-configuration.nix` in the repo.
-2. Add the three modules to `desktop.nix`:
-   `imports = [ ./zfs.nix ./selfhosted.nix ./ollama.nix ./offsite-backup.nix ];`
-3. Commit and push, so the installer can fetch the flake.
+### 4.2 Switch on the reinstall modules
 
-```sh
-nixos-install --flake github:AdamFrey/dotfiles?dir=nix#desktop
+In `machines/desktop/default.nix`, add the four modules that have been waiting:
+
+```nix
+imports = [ ./disk-config.nix ./zfs.nix ./selfhosted.nix ./ollama.nix ./offsite-backup.nix ];
 ```
 
-**`networking.hostId` must survive.** `zfs.nix` pins it to `8f3a1c7e`; if the
-generated config sets a different one, the pools will need `-f` on every
-import. Check before installing.
+and in `flake.nix`'s desktop block, add `disko.nixosModules.disko`.
+
+`hardware-configuration.nix` must stop declaring `fileSystems` — disko owns
+them now. Keep its kernel modules and CPU settings.
+
+Commit and push; nixos-anywhere evaluates from the flake.
+
+**Check before running:**
+
+```sh
+nix eval .#nixosConfigurations.desktop.config.fileSystems --apply builtins.attrNames
+```
+
+Thirteen entries: `/`, `/boot`, `/home`, `/nix`, six under `/pithos`, and three
+under `/var/lib`. If that is wrong, stop — it is far cheaper to fix here.
+
+### 4.3 Run it
+
+```sh
+nix run github:nix-community/nixos-anywhere -- \
+  --flake /home/adam/src/dotfiles/nix#desktop \
+  --target-host root@192.168.0.10
+```
+
+**This erases both disks.** Everything irreplaceable is staged on the NAS and
+in the Hetzner repository — that is what section 1 verifies.
+
+The machine reboots into the new system when it finishes. If the kexec stage
+fails the desktop may sit unreachable, so be ready to switch the monitor to it.
 
 ---
 
@@ -164,7 +132,7 @@ import. Check before installing.
 | Check | Expected |
 |---|---|
 | `zpool status` | both pools ONLINE |
-| `zfs list` | all datasets mounted where section 3 put them |
+| `zfs list` | all datasets mounted where `disk-config.nix` declares them |
 | `systemctl --failed` | empty, or only services waiting on absent data |
 | `tailscale status` | node online — **this needs `sudo tailscale login`**, enrolment is manual by design |
 | `systemctl list-timers` | `borgbackup-job-offsite` and `sanoid` present |

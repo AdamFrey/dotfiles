@@ -6,6 +6,12 @@
 
     agenix.url = "github:ryantm/agenix";
 
+    # Declarative disk layout, used only by the desktop reinstall.
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,6 +50,7 @@
       home-manager,
       stylix,
       agenix,
+      disko,
       llm-agents,
       claude-desktop,
       zen-browser,
@@ -135,8 +142,8 @@
       nixosConfigurations = {
         desktop = makeSystem {
           extraModules = [
-            ./desktop-hardware-configuration.nix
-            ./desktop.nix
+            ./machines/desktop/hardware-configuration.nix
+            ./machines/desktop
             ./podman.nix
           ];
 

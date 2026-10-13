@@ -86,8 +86,8 @@ in
     environment.UID = "1000";
   };
 
-  age.secrets.miniflux-admin.file = ./secrets/miniflux-admin.age;
-  age.secrets.linkwarden-nextauth.file = ./secrets/linkwarden-nextauth.age;
+  age.secrets.miniflux-admin.file = ../../secrets/miniflux-admin.age;
+  age.secrets.linkwarden-nextauth.file = ../../secrets/linkwarden-nextauth.age;
 
   networking.firewall = {
     allowedTCPPorts = builtins.attrValues lanPorts;
