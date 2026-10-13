@@ -26,6 +26,19 @@
     hybrid-sleep.enable = false;
   };
 
+  # TODO: sleep overnight to save power. Feasible -- /sys/class/rtc/rtc0/wakealarm
+  # exists, so rtcwake can schedule the wake -- but not worth it as things stand:
+  #
+  #   - every maintenance job runs inside a midnight-06:00 window. borg at 00:00,
+  #     sanoid hourly, fstrim Mon 00:55, zpool-trim Mon 01:31, scrub Sun 01:20.
+  #     Sleeping through it delays the backup past the healthchecks.io grace
+  #     period and drops five hourly snapshots a night.
+  #   - a sleeping machine leaves the tailnet, which defeats reaching these
+  #     services from a trip -- and "midnight local" is daytime abroad.
+  #
+  # Worth roughly 110 kWh/yr. Cheaper first step: spin pithos down when idle,
+  # which is most of the day, and leave the machine reachable.
+
   # Remote access via Tailscale SSH.
   #
   # tailscaled terminates the SSH session itself, so there is no sshd, no host
