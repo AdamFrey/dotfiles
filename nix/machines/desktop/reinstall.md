@@ -55,14 +55,14 @@ Nothing is typed by hand.
 conflict with the ext4 layout the machine runs on today, and disko erases disks
 without asking. It is switched on as part of step 4.
 
-Before anything else, fill in the two device paths. Run on the desktop:
+Device paths come from `private-nix`. Verify them against the machine if a disk has been swapped:
 
 ```sh
 ls -l /dev/disk/by-id/ | grep -E 'nvme-Lexar|WDC_WD20EZAZ'
 ```
 
-and replace both `REPLACE-ME-` placeholders. by-id, never `sda` — kernel names
-are not stable across boots.
+by-id rather than by-path throughout: by-path names a physical slot, so a moved
+cable would point disko at a different disk and erase it.
 
 ---
 

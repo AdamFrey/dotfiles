@@ -17,14 +17,18 @@
 # binds to /pithos/art, /var/lib/immich and /var/lib/linkwarden. Rename one and
 # sanoid errors on every run while services start against missing paths.
 #
-# Device paths must be set from `ls -l /dev/disk/by-id/` on the target before
-# this is used. by-id, never sda -- kernel names are not stable across boots.
+# Device paths come from private-nix
+{ inputs, ... }:
+
+let
+  disks = inputs.private-nix.diskIds.desktop;
+in
 {
   disko.devices = {
     disk = {
       nvme = {
         type = "disk";
-        device = "/dev/disk/by-id/REPLACE-ME-nvme-Lexar_SSD_NM790_2TB";
+        device = disks.nvme;
         content = {
           type = "gpt";
           partitions = {
@@ -51,7 +55,7 @@
 
       hdd = {
         type = "disk";
-        device = "/dev/disk/by-id/REPLACE-ME-ata-WDC_WD20EZAZ";
+        device = disks.hdd;
         content = {
           type = "gpt";
           partitions = {
