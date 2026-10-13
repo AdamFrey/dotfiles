@@ -22,9 +22,7 @@ by 568, and the native services run as something else entirely:
 its own config.** Chown to the uid that already owns the destination state
 directory rather than to 568.
 
-## Ports moved
-
-Bookmarks, the Roku, and any client config still point at the old numbers.
+## Clients pointed at the NAS need repointing before it is wiped
 
 | Service | Was | Now |
 |---|---|---|
