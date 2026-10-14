@@ -248,11 +248,37 @@ rsync -aHAX --rsync-path="sudo -n rsync" -e "$SSH" \
 
 ### 6.3 Not covered by any of the above
 
-Six top-level directories on the NAS belong to no dataset and no exclude, ~19 M
-in total: `adams-home` 14K, `data` 2.8M, `lifedb` 13M, `lifedb-datalevin` 24K,
-`media-test` 3.0M, and `containers/{dockge,stacks,data}` ~9 M. lifedb and
-lifedb-datalevin are dropped by decision. The rest is small enough to stage
-somewhere and triage later rather than hold up the migration.
+The top-level directories that belong to no dataset, triaged 2026-10-13.
+Nothing here is deleted on the NAS -- "dropped" means not copied forward, and
+the wipe takes care of the rest.
+
+Keep, filed after art lands:
+
+| Source | Destination |
+|---|---|
+| `data/magic-the-gathering/` | `prosopikos/collections/magic-the-gathering/` |
+| `data/my-health/weight/` minus `.clerk/cache` | `prosopikos/health/weight/` |
+| `data/world-wide-web/my-bookmarks-feb-2024.html` | `episteme/bookmarks/` |
+| `media-test/The Wind-Up Bird Chronicle.epub` | `art/literature/` |
+
+`data/authentication/github-recovery-codes.txt` is already moved, to
+`prosopikos/authentication/`, mode 600. It is plaintext recovery codes, so it
+wants to end up in Bitwarden rather than living on a dataset indefinitely.
+
+Dropped:
+
+| Source | Why |
+|---|---|
+| `adams-home` | `.bashrc`/`.profile`/`.bash_logout` skeleton |
+| `lifedb` | PG 16 cluster, 11 weight readings and 15 exercise rows, superseded |
+| `lifedb-datalevin` | service dropped |
+| `containers/dockge` | the compose manager is gone |
+| `containers/stacks` | captured in `legacy-stack.md` |
+| `containers/data/postgres` | stale PG 18 copy; the compose file used `container-data/postgres` |
+| `containers/container-data/postgres` | PG 18, held only miniflux -- see below |
+
+The MTG export is a personal inventory, not a card database: its columns are
+Quantity, Condition, Date Added and Purchase Price across 2,750 rows.
 
 `desktop-sda1` and `desktop-sda2-home` are **not** a wholesale restore target.
 96 G was staged; about 21 G is kept and filed into existing `pithos`

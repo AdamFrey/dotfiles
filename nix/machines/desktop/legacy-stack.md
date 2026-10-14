@@ -50,8 +50,8 @@ is one line, if transcoding turns out to matter.
 into 17 if nothing 18-only was used. Relevant if anything in that cluster is
 still wanted -- miniflux was its main tenant and is being set up fresh.
 
-Two other clusters are in the same family of problem: `immich/pgData`, and
-`k3s-volumes/linkwarden-pgdata` at PG 16.
+The two clusters that do need migrating are upgrades, which `pg_upgrade`
+handles: `immich/pgData`, and `k3s-volumes/linkwarden-pgdata` at PG 16.
 
 ## What each service could see
 
