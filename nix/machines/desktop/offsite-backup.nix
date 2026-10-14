@@ -29,7 +29,23 @@ in
 
   services.borgbackup.jobs.offsite = {
     repo = repository;
-    paths = [ "/home/adam" ];
+    paths = [
+      "/home/adam"
+
+      # pithos, except art
+      "/pithos/prosopikos"
+      "/pithos/episteme"
+      "/pithos/techne"
+      "/pithos/memories"
+      "/pithos/logseq"
+
+      # immich originals. thumbs and video are regenerated from these.
+      "/var/lib/immich/library"
+      "/var/lib/immich/upload"
+
+      # pg_dump output
+      "/var/backup/postgresql"
+    ];
 
     # Rebuildable, machine-local, or enormous-and-replaceable.
     exclude = [
@@ -104,4 +120,13 @@ in
   };
 
   systemd.services.borgbackup-job-offsite.path = [ pkgs.curl ];
+
+  # Dumps rather than the live data directory, which is not consistent when
+  # copied. Scheduled before the 00:00 borg run so each archive carries that
+  # night's dump.
+  services.postgresqlBackup = {
+    enable = true;
+    startAt = "23:45";
+    location = "/var/backup/postgresql";
+  };
 }
