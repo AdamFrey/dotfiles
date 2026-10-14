@@ -99,7 +99,11 @@ in
   };
 
   age.secrets.miniflux-admin.file = ../../secrets/miniflux-admin.age;
-  age.secrets.linkwarden-nextauth.file = ../../secrets/linkwarden-nextauth.age;
+
+  age.secrets.linkwarden-nextauth = {
+    file = ../../secrets/linkwarden-nextauth.age;
+    owner = "linkwarden";
+  };
 
   networking.firewall = {
     allowedTCPPorts = builtins.attrValues lanPorts;
