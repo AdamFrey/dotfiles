@@ -5,6 +5,7 @@
     ./disk-config.nix
     ./zfs.nix
     ./selfhosted.nix
+    ./samba.nix
     ./ollama.nix
     ./offsite-backup.nix
   ];

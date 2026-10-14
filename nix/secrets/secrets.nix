@@ -14,4 +14,5 @@ in
   "miniflux-admin.age".publicKeys = [ adamUserKey ];
   "linkwarden-nextauth.age".publicKeys = [ adamUserKey ];
   "healthchecks-ping-url.age".publicKeys = [ adamUserKey ];
+  "pithos-smb-credentials.age".publicKeys = [ adamUserKey ];
 }

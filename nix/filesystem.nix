@@ -1,40 +1,51 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
-# NFS automounts for the shared datasets.
+# SMB mounts of the pithos datasets, served by matte-black-cadillac over the
+# tailnet. See machines/desktop/samba.nix for the other end.
 #
-# Skipped on matte-black-cadillac, which holds the datasets itself once the
-# NAS is folded into it -- a machine has no business NFS-mounting its own
-# storage, and after the NAS is gone these would point at nothing.
+# Skipped on matte-black-cadillac, which holds the datasets itself.
 #
-# The address is still the NAS. It moves to the desktop once that machine
-# serves NFS; until then the laptops keep reading from 192.168.0.221.
 let
   servesTheseDatasets = config.networking.hostName == "matte-black-cadillac";
 
-  nasMount = path: {
-    device = "192.168.0.221:/mnt/pithos/${path}";
-    fsType = "nfs";
+  server = "matte-black-cadillac";
+  datasets = [ "art" "episteme" "techne" "logseq" "prosopikos" "memories" ];
+
+  smbMount = share: {
+    device = "//${server}/${share}";
+    fsType = "cifs";
     options = [
+      "credentials=${config.age.secrets.pithos-smb-credentials.path}"
+
+      # The server forces adam:users; match it so the client agrees.
+      "uid=1000"
+      "gid=100"
+      "iocharset=utf8"
+      "vers=3.1.1"
+
       "x-systemd.automount"
-      "x-systemd.requires=network-online.target"
-      "x-systemd.device-timeout=500ms"
-      "x-systemd.mount-timeout=2" # Fail mount attempts after 2 seconds
-      "x-systemd.idle-timeout=600" # disconnects after 10 minutes of inactivity
+      "x-systemd.requires=tailscaled.service" # the address only resolves on the tailnet
+      "x-systemd.idle-timeout=600"            # unmount after 10 minutes unused
+      "x-systemd.mount-timeout=5"
       "noauto"
-      "soft"      # Return errors instead of hanging
-      "timeo=10"  # NFS timeout in deciseconds (1 second)
-      "retrans=1" # Only retry once before failing
+      "soft" # return errors rather than hanging when the desktop is away
     ];
   };
+
   root = "/home/adam/nas";
 in
 {
-  fileSystems = lib.mkIf (!servesTheseDatasets) {
-    "${root}/art"        = nasMount "art";
-    "${root}/immich"     = nasMount "immich";
-    "${root}/episteme"   = nasMount "episteme";
-    "${root}/logseq"     = nasMount "logseq";
-    "${root}/techne"     = nasMount "techne";
-    "${root}/prosopikos" = nasMount "prosopikos";
+  age.secrets = lib.mkIf (!servesTheseDatasets) {
+    pithos-smb-credentials.file = ./secrets/pithos-smb-credentials.age;
   };
+
+  # mount.cifs ships only when this is set -- declaring a cifs fileSystem is
+  # not enough.
+  boot.supportedFilesystems.cifs = lib.mkIf (!servesTheseDatasets) true;
+
+  fileSystems = lib.mkIf (!servesTheseDatasets) (
+    lib.listToAttrs (
+      map (d: lib.nameValuePair "${root}/${d}" (smbMount d)) datasets
+    )
+  );
 }
