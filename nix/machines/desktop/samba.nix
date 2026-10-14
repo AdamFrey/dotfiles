@@ -15,6 +15,9 @@ in
     # this host by MagicDNS instead.
     nmbd.enable = false;
 
+    # We don't need Windows support
+    winbindd.enable = false;
+
     # Would open 139 and 445 on every interface. The rule at the bottom is
     # tailnet-only, matching how selfhosted.nix scopes its admin ports.
     openFirewall = false;
