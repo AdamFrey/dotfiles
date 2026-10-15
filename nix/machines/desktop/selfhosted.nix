@@ -117,6 +117,7 @@ in
   users.groups.media = { };
   users.users.qbittorrent.extraGroups = [ "media" ];
   users.users.sonarr.extraGroups = [ "media" ];
+  users.users.adam.extraGroups = [ "media" ];
   systemd.services.qbittorrent.serviceConfig.UMask = "0002";
 
   systemd.tmpfiles.rules = [

@@ -5,7 +5,17 @@
 # SMB rather than NFS because the iOS Files app speaks only SMB.
 #
 let
-  datasets = [ "art" "episteme" "techne" "logseq" "prosopikos" "memories" ];
+  # art is the shared media pool: emby, audiobookshelf, sonarr and qbittorrent
+  # all read and write it, so it is owned by the media group. The rest is
+  # adam's own material and stays adam:users.
+  datasets = {
+    art = "media";
+    episteme = "users";
+    techne = "users";
+    logseq = "users";
+    prosopikos = "users";
+    memories = "users";
+  };
 in
 {
   services.samba = {
@@ -29,19 +39,19 @@ in
         "map to guest" = "never";
       };
     }
-    // lib.genAttrs datasets (name: {
+    // lib.mapAttrs (name: group: {
       path = "/pithos/${name}";
       browseable = "yes";
       "read only" = "no";
       "valid users" = "adam";
 
-      # Clients present their own ids; pin everything to adam:users so the
-      # files stay readable from the console and inside the borg job.
+      # Clients present their own ids. Pinning the owner keeps what lands
+      # here readable from the console, by the services, and by the borg job.
       "force user" = "adam";
-      "force group" = "users";
-      "create mask" = "0644";
-      "directory mask" = "0755";
-    });
+      "force group" = group;
+      "create mask" = "0664";
+      "directory mask" = "2775";
+    }) datasets;
   };
 
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 445 ];
