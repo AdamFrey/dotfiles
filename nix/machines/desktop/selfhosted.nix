@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, pkgs-unstable, inputs, ... }:
 
 # The household services, run natively rather than as containers.
 
@@ -98,6 +98,7 @@ in
       # qbittorrent-nox blocks on first run without this.
       LegalNotice.Accepted = true;
       Preferences.WebUI.Username = "adam";
+      Preferences.WebUI.Password_PBKDF2 = inputs.private-nix.qbittorrent.webuiPasswordHash;
       BitTorrent.Session.DefaultSavePath = downloadInbox;
       BitTorrent.Session.TempPathEnabled = false;
     };

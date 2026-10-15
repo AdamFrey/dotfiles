@@ -443,11 +443,11 @@
     },
     "private-nix": {
       "locked": {
-        "lastModified": 1791923072,
-        "narHash": "sha256-8k/pOWEaLPxOFqt7n+7gLfcRSQ5p+GvvKPd8U5UZMaE=",
+        "lastModified": 1792070384,
+        "narHash": "sha256-+PXg15dTG4WUFJyUqFsWMx8W5Ti7HBtAhTHM385i0oc=",
         "ref": "master",
-        "rev": "42d225525d662f4ceb051b68d660f9ceb52743a2",
-        "revCount": 13,
+        "rev": "5f5a28c9a60c806fafea505bf937286ea05751c1",
+        "revCount": 14,
         "type": "git",
         "url": "ssh://git@github.com/AdamFrey/private-nix.git"
       },
