@@ -45,6 +45,16 @@ in
 
       # pg_dump output
       "/var/backup/postgresql"
+
+      "/var/lib/linkwarden"
+
+      # The *arr stack keeps indexers, download clients and root folders in
+      # its own databases, which nix cannot declare. Backing them up is what
+      # makes the wiring reproducible.
+      "/var/lib/sonarr"
+      "/var/lib/prowlarr"
+      "/var/lib/audiobookshelf"
+      "/var/lib/emby"
     ];
 
     # Rebuildable, machine-local, or enormous-and-replaceable.

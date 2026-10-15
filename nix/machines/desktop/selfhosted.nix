@@ -1,9 +1,12 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 
 # The household services, run natively rather than as containers.
 
 let
   media = "/pithos/art";
+
+  # Must sit inside the pithos/art dataset; see the tmpfiles rule below.
+  downloadInbox = "${media}/.bittorrent-downloads";
 
   # Opening a port here also opens it to the tailnet.
   lanPorts = {
@@ -75,15 +78,49 @@ in
   services.sonarr.enable = true;
   services.prowlarr.enable = true;
 
+  users.users.prowlarr = {
+    isSystemUser = true;
+    group = "prowlarr";
+    home = "/var/lib/prowlarr";
+  };
+  users.groups.prowlarr = { };
+  systemd.services.prowlarr.serviceConfig = {
+    DynamicUser = lib.mkForce false;
+    User = "prowlarr";
+    Group = "prowlarr";
+    StateDirectory = "prowlarr";
+  };
+
   services.qbittorrent = {
     enable = true;
     webuiPort = port.qbittorrent;
+    serverConfig = {
+      # qbittorrent-nox blocks on first run without this.
+      LegalNotice.Accepted = true;
+      Preferences.WebUI.Username = "adam";
+      BitTorrent.Session.DefaultSavePath = downloadInbox;
+      BitTorrent.Session.TempPathEnabled = false;
+    };
   };
 
-  # podman refuses to start when a bind-mount source is missing, and unlike the
-  # native services above there is no StateDirectory= to create it. 1000 is the
-  # uid the container is told to run as just below.
-  systemd.tmpfiles.rules = [ "d /var/lib/emby 0750 1000 100 -" ];
+  # Sonarr hardlinks imports rather than copying.
+  #
+  # fs.protected_hardlinks is 1, so sonarr may only link files it can read
+  # AND write. Hence the shared group, the setgid bit, and qbittorrent's
+  # UMask below -- without all three, imports silently fall back to copying.
+  users.groups.media = { };
+  users.users.qbittorrent.extraGroups = [ "media" ];
+  users.users.sonarr.extraGroups = [ "media" ];
+  systemd.services.qbittorrent.serviceConfig.UMask = "0002";
+
+  systemd.tmpfiles.rules = [
+    # setgid: downloads inherit the media group so sonarr can link them.
+    "d ${downloadInbox} 2775 qbittorrent media -"
+
+    # podman will not create a bind-mount source, and a container has no
+    # StateDirectory= to do it instead. 1000 is the uid emby runs as below.
+    "d /var/lib/emby 0750 1000 100 -"
+  ];
 
   virtualisation.oci-containers.containers.emby = {
     image = "emby/embyserver:latest";
