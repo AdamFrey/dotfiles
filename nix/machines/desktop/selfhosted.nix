@@ -99,6 +99,11 @@ in
       LegalNotice.Accepted = true;
       Preferences.WebUI.Username = "adam";
       Preferences.WebUI.Password_PBKDF2 = inputs.private-nix.qbittorrent.webuiPasswordHash;
+
+      # Skip auth for connections from the machine itself, so the torrents
+      # can be managed by script. Reaching localhost already means shell
+      # access here, and the WebUI port is tailnet-only.
+      Preferences.WebUI.LocalHostAuth = false;
       BitTorrent.Session.DefaultSavePath = downloadInbox;
       BitTorrent.Session.TempPathEnabled = false;
     };
