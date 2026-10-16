@@ -134,7 +134,8 @@ in
     ports = [ "${toString port.emby}:8096" ];
     volumes = [
       "/var/lib/emby:/config"
-      "${media}:/media:ro"
+
+      "${media}:${media}:ro"
     ];
     environment.UID = "1000";
 
