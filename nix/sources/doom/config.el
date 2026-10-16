@@ -120,14 +120,10 @@ only works for semicolons."
 
 (global-set-key (kbd "C-c #") 'comment-header)
 
-(use-package! multiple-cursors
-  :config
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-
-  ;; to remove a function accidentally marked as run only once,
-  ;; ~/.config/emacs/.local/cache/.mc-lists.el and change mc/cmds-to-run-once
-  )
+;; to remove a function accidentally marked as run only once,
+;; ~/.config/emacs/.local/cache/.mc-lists.el and change mc/cmds-to-run-once
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 
 (defun whack-whitespace (arg)
   "Delete all white space from point to the next word.  With prefix ARG
