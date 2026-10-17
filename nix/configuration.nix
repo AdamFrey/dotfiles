@@ -255,7 +255,6 @@ in
     impala
     mako # notifications
     nodejs_22
-    ollama
     pandoc
     pciutils
     polylith

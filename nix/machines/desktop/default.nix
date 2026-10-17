@@ -6,9 +6,12 @@
     ./zfs.nix
     ./selfhosted.nix
     ./samba.nix
-    ./ollama.nix
     ./offsite-backup.nix
   ];
+
+  # Local LLM inference (ollama on the RX 580) lived here until 2026-10-17.
+  # Removed as unused:
+  #   git show dbc8aba:nix/machines/desktop/ollama.nix
 
   networking.hostName = "matte-black-cadillac";
 
