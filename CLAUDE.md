@@ -16,7 +16,6 @@ This is a personal dotfiles repository managing system configurations across mul
 
 The main content is a flake-based NixOS configuration supporting multiple machines:
 - `desktop` (hostname: matte-black-cadillac)
-- `laptop` (hostname: stylitics-laptop-nixos)
 - `framework-laptop` (hostname: framework-laptop-nixos)
 - `work-framework-laptop` (hostname: work-laptop-nixos)
 
@@ -94,7 +93,6 @@ Manual rebuild commands:
 ```sh
 # Rebuild for specific machine
 sudo nixos-rebuild switch --flake ./nix#desktop
-sudo nixos-rebuild switch --flake ./nix#laptop
 sudo nixos-rebuild switch --flake ./nix#framework-laptop
 sudo nixos-rebuild switch --flake ./nix#work-framework-laptop
 

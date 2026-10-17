@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a NixOS flake-based configuration repository that manages system and user configurations for multiple machines (desktop, laptop, framework-laptop). It uses home-manager for user-level package management and configuration.
+This is a NixOS flake-based configuration repository that manages system and user configurations for multiple machines (desktop, framework-laptop, work-framework-laptop). It uses home-manager for user-level package management and configuration.
 
 ## System Architecture
 
@@ -15,7 +15,7 @@ The repository uses a modular flake design with `makeSystem` function that creat
 - **flake.nix**: Main entry point defining inputs, system configurations, and the `makeSystem` function
 - **configuration.nix**: Base system configuration imported by all machines
 - **home.nix**: User-level configuration managed by home-manager
-- Machine-specific files: `desktop.nix`, `laptop.nix`, `framework-laptop.nix` and their corresponding hardware configurations
+- Machine-specific files under `machines/`: the `desktop/` directory, and `framework-laptop.nix` / `work-framework-laptop.nix` with their corresponding hardware configurations
 
 ### Module System
 
@@ -44,14 +44,14 @@ Custom packages are in `packages/` directory:
 ### System Operations
 
 ```sh
-# Apply system configuration changes (use machine name: desktop, laptop, or framework-laptop)
+# Apply system configuration changes (use machine name: desktop, framework-laptop, or work-framework-laptop)
 sudo nixos-rebuild switch --flake .#desktop
 
 # Update all flake inputs
 nix flake update
 
 # Build without activating
-sudo nixos-rebuild build --flake .#laptop
+sudo nixos-rebuild build --flake .#framework-laptop
 
 # Test configuration without making it default boot option
 sudo nixos-rebuild test --flake .#framework-laptop
