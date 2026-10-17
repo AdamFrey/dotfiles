@@ -19,16 +19,16 @@ let
   # numCtx must also be set as contextWindow in ../../pi.nix. Ollama defaults
   # to 4096 and silently truncates past it, while clients assume far more.
   models = {
-    "qwen3.5:9b" = {
+    "granite4.2:8b" = {
       gguf = pkgs.fetchurl {
-        url = "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/main/Qwen3.5-9B-Q4_K_M.gguf";
-        hash = "sha256-A7dHJ6hgpWM44ELEQguz8Esv7Fc0F19MufqFPa9St+g=";
+        url = "https://huggingface.co/ibm-granite/granite-4.2-8b-GGUF/resolve/main/granite-4.2-8b-Q4_K_M.gguf";
+        hash = "sha256-Fqk2nQgF+Atzd9Jdh/k3qQwF3ASteRc6UgAeQsmqsxE=";
       };
 
-      # 5.7 GiB of weights leaves room for this much cache: only 8 of the 32
-      # layers are full attention, so a token costs 32 KiB rather than the
-      # ~128 KiB a conventional 9B would want.
-      numCtx = 32768;
+      # The ceiling: 12288 spills 6% onto the CPU. Conventional attention
+      # costs 160 KiB a token here, five times what a linear-attention model
+      # of this size wants.
+      numCtx = 8192;
     };
   };
 

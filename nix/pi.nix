@@ -16,11 +16,11 @@ let
   # and will overrun the window ollama actually allocated.
   models = [
     {
-      id = "qwen3.5:9b";
-      contextWindow = 32768;
+      id = "granite4.2:8b";
+      contextWindow = 8192;
 
       # Leaves three quarters of the window for the conversation.
-      maxTokens = 8192;
+      maxTokens = 2048;
     }
   ];
 
