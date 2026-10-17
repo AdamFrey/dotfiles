@@ -43,8 +43,19 @@ let
     };
   };
 
+  model = builtins.head models;
+
   settingsJson = {
-    defaultModel = "ollama/${(builtins.head models).id}";
+    defaultModel = "ollama/${model.id}";
+
+    # Pi reserves 16384 tokens and keeps 20000 recent by default, both larger
+    # than this whole window, so every turn fired a summarising second call
+    # that took three minutes. Budget: ~1700 system prompt + 3072 recent +
+    # 2048 reply fits 8192.
+    compaction = {
+      reserveTokens = model.maxTokens;
+      keepRecentTokens = 3072;
+    };
   };
 in
 {
