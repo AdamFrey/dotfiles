@@ -4,6 +4,7 @@
   imports = [
     ./zen-browser.nix
     ./emacs-daemon.nix
+    ./pi.nix
   ];
 
   home = {
