@@ -90,7 +90,12 @@ in
 
       "/home/adam/.gitlibs"        # clojure git deps, re-fetched on demand
       "/home/adam/.migration-logs" # transient, from the 2026-10 consolidation
-      "**/GPUCache"                # electron and chromium
+
+      # Electron apps cache under ~/.config rather than ~/.cache
+      "**/GPUCache"
+      "**/Cache"
+      "**/Code Cache"
+      "**/CachedData"
     ];
 
     encryption = {
