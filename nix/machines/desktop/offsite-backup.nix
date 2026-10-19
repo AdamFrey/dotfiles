@@ -32,12 +32,12 @@ in
     paths = [
       "/home/adam"
 
-      # pithos, except art
       "/pithos/prosopikos"
       "/pithos/episteme"
       "/pithos/techne"
       "/pithos/memories"
       "/pithos/logseq"
+      "/pithos/art"
 
       # immich originals. thumbs and video are regenerated from these.
       "/var/lib/immich/library"
@@ -62,11 +62,17 @@ in
       "/home/adam/.cache"
       "/home/adam/.local/share/Trash"
       "/home/adam/.local/share/containers"
-      "/home/adam/nas"          # NFS automounts -- walking these pulls the NAS through
+      "/home/adam/nas"          # SMB automounts of this machine's own datasets
       "/home/adam/src/*/target" # build output
       "/home/adam/src/*/result" # nix build symlinks
       "**/node_modules"
       "**/.direnv"
+
+      # art is opt-out: everything under it is backed up unless named here.
+      #
+      "/pithos/art/tv"
+      "/pithos/art/movies"
+      "/pithos/art/.bittorrent-downloads" # staging; hardlinked into art/tv
 
       # Language package caches.
       "/home/adam/.m2"
