@@ -215,8 +215,8 @@ only works for semicolons."
 
 (defun af/projectile-remove-nas-projects ()
   "Drop every ~/nas/ entry from `projectile-known-projects' and persist.
-NAS-backed projects block the switch-project prompt for ~2s each
-while the NFS automount times out when the NAS is unreachable."
+Projects under ~/nas/ block the switch-project prompt for ~2s each
+while the SMB automount times out when the desktop is unreachable."
   (interactive)
   (let ((removed (- (length projectile-known-projects)
                     (length (setq projectile-known-projects

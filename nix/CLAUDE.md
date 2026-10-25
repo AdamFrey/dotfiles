@@ -21,7 +21,7 @@ The repository uses a modular flake design with `makeSystem` function that creat
 
 The configuration is split into specialized modules:
 - **emacs.nix**: Emacs systemd service configuration (runs as daemon)
-- **filesystem.nix**: NFS automounts for NAS at 192.168.0.221
+- **filesystem.nix**: SMB automounts of the desktop's pithos datasets, at /home/adam/nas/*
 - **podman.nix**: Container runtime with Docker compatibility
 - **style.nix**: Stylix theme configuration with base16 color schemes
 - **secrets/secrets.nix**: agenix-managed secrets (SSH keys at /home/adam/.ssh/id_ed25519)
@@ -112,6 +112,7 @@ Uses agenix with identity at /home/adam/.ssh/id_ed25519 (configuration.nix:12). 
 - The system uses Niri (Wayland compositor) as the window manager with GNOME as desktop environment
 - Emacs runs as a systemd user service (daemon mode) and should be accessed via emacsclient
 - Shell: zsh with direnv, starship, fzf, and zoxide integrations
-- NAS mounts are automounted on access (x-systemd.automount)
+- ~/nas/* is the desktop's pithos datasets over SMB, automounted on access
+  (x-systemd.automount); the module is a no-op on the desktop itself
 - Git is configured to rebase on pull by default
 - The system uses Stylix for unified theming across applications

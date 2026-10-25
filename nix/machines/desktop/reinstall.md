@@ -92,7 +92,7 @@ Rebuild, confirm `ssh root@192.168.0.10 true` works from the laptop, then
 In `machines/desktop/default.nix`, add the four modules that have been waiting:
 
 ```nix
-imports = [ ./disk-config.nix ./zfs.nix ./selfhosted.nix ./ollama.nix ./offsite-backup.nix ];
+imports = [ ./disk-config.nix ./zfs.nix ./selfhosted.nix ./samba.nix ./offsite-backup.nix ];
 ```
 
 and in `flake.nix`'s desktop block, add `disko.nixosModules.disko`.
@@ -289,27 +289,38 @@ per-item mapping and the list of what is dropped.
 
 ## 7. Post-restore
 
-| Task | Note |
+All done. Outcomes recorded because several differ from what was planned.
+
+| Task | Outcome |
 |---|---|
-| immich library import | Fresh database by design. `pgData` on the NAS is PG 15 and eighteen months cold; the library is re-imported instead. Asset count should reach ~14,564 |
-| linkwarden database | `pgdata` is **PG 16**, target is 17.11 — `pg_upgrade` or dump/restore before first start |
-| Renames | `Im.Alan.Partridge.S01-S02...` to `Im Alan Partridge`; both films into per-title folders. See `restore-notes.md` §4 |
-| Rewrite `filesystem.nix` | It still NFS-mounts from 192.168.0.221 on all four machines, including this one. The desktop must not mount from itself |
-| Measure free VRAM | `cat /sys/class/drm/card*/device/mem_info_vram_*` under a normal niri session, before sizing ollama models |
+| immich library import | Done. 17,542 assets, above the ~14,564 the source suggested |
+| linkwarden database | Done 2026-10-13 22:44. Prisma applied 65 migrations on top of the restored PG 16 dump, reaching 99; 1,600 links intact |
+| Renames | Done 2026-10-19, all three |
+| Rewrite `filesystem.nix` | Done in `790911b` — SMB from the desktop, and a no-op on the desktop itself |
+| Measure free VRAM | Moot; ollama was removed as unused. See `git show dbc8aba:nix/machines/desktop/ollama.nix` |
 
 ---
 
-## 8. The gate before the NAS is wiped
+## 8. The gate before the NAS is wiped — passed 2026-10-19
 
-**Do not destroy `pithos` on the NAS until every one of these passes.** This is
-spec §7.1, and it is the last point at which anything is recoverable.
+| Gate | Result |
+|---|---|
+| All services running | Yes, no failed units |
+| immich asset count | 17,542 |
+| emby plays from `/pithos/art`, Roku reaches it | Yes |
+| borg restore test | 9 files across every source, all byte-identical |
+| `desktop-sda1` / `desktop-sda2-home` filed per `restore-notes.md` §8 | Yes; ~20 GB, verified file-by-file |
 
-- All services running and reachable over tailnet or LAN as configured
-- immich asset count matches the source
-- emby plays from `/pithos/art` and the Roku can reach it
-- A borg restore test pulls a sampled file back intact
-- `desktop-sda1` and `desktop-sda2-home` have been filed per `restore-notes.md` §8, not merely copied
+A full file-level comparison of both machines found the only differences to be
+`restore-exclude.txt`'s own entries. Four things the §8 table missed were
+caught and rescued: `pithos/data`, the grampsweb genealogy database, the old
+PG 18 cluster, and `media-test`'s one book. The migration record itself —
+`restore-notes.md` and `restore-exclude.txt`, which existed only on the NAS —
+is preserved at `prosopikos/migration-2026-10/`, along with 132 MB of legacy
+service state.
 
-Then, and only then: wipe `pithos`, remove the SSH key authorised during the
-migration, disable the SSH service, remove the node from the tailnet, and ship
-both Exos drives with the machine.
+Remaining to sell the box: destroy `pithos`, overwrite both Exos (SANITIZE is
+rejected by the SAT layer; both drives report zero reallocated sectors, so a
+`dd` pass covers every block that held data), `nvme format` the boot SSD, and
+install TrueNAS Community Edition fresh. Then remove the `truenas-scale` node
+from the tailnet.

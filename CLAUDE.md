@@ -7,7 +7,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a personal dotfiles repository managing system configurations across multiple machines using NixOS with Nix flakes. The repository contains:
 
 - **nix/**: NixOS system and user configurations (primary content)
-- **selfhosted/**: Docker Compose files for self-hosted services
 - **keyboard/**: Keyboardio keyboard layout configurations
 
 ## Repository Structure
@@ -33,7 +32,7 @@ The flake uses a `makeSystem` function (nix/flake.nix:58-105) that creates NixOS
 **Module System:**
 Configurations are split into focused modules imported by configuration.nix:
 - **emacs.nix**: Systemd user service running Emacs as daemon
-- **filesystem.nix**: NFS automounts for NAS (192.168.0.221) at /home/adam/nas/*
+- **filesystem.nix**: SMB automounts of the desktop's pithos datasets at /home/adam/nas/*
 - **podman.nix**: Container runtime with Docker compatibility
 - **style.nix**: Stylix theme configuration (base16 color schemes, supports dark/light specialisation)
 - **browsers.nix**: Browser configuration and defaults
@@ -58,12 +57,14 @@ Located in `nix/packages/`, loaded via `callPackage` in configuration.nix:8. Eac
 - **home.nix**: User-level configuration managed by home-manager (packages, dotfiles, shell config)
 - **sources/**: Configuration files for various programs (doom emacs, kitty, niri, clojure, etc.)
 
-### Self-Hosted Services (selfhosted/)
+### Self-Hosted Services
 
-Docker Compose configurations for self-hosted applications:
-- audiobookshelf, datalevin, emby, grampsweb, miniflux, postgres, prowlarr, qbittorrent, sonarr
+Declared natively in `nix/machines/desktop/selfhosted.nix`: postgresql, immich,
+miniflux, linkwarden, audiobookshelf, sonarr, prowlarr, qbittorrent, and emby. A
+`selfhosted/` directory of Docker Compose files served this role on the old
+TrueNAS box and was removed 2026-10-19:
 
-Each service has its own directory with a `compose.yml` file.
+    git show 41b5193:selfhosted
 
 ### Development Environment
 
@@ -188,10 +189,11 @@ Home-manager manages dotfiles via `home.file` in home.nix:41. Files are symlinke
 **Version Control:**
 - Git configured to rebase on pull by default (home.nix:92)
 
-**NAS Integration:**
-- NFS automounts at /home/adam/nas/*
-- Mounts are automatic on access with 10-minute idle timeout
-- NAS IP: 192.168.0.221
+**Shared storage:**
+- The desktop (matte-black-cadillac) holds the pithos datasets and serves them
+  over SMB on the tailnet; see machines/desktop/samba.nix
+- Other machines automount them at /home/adam/nas/* on access, with a
+  10-minute idle timeout. The name is historical -- there is no separate NAS.
 
 ## Working with This Repository
 
