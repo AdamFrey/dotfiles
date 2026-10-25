@@ -14,6 +14,7 @@
 
     packages = with pkgs; [
       antares
+      bluetuith
       fd
       forge-mtg
       grim
