@@ -444,11 +444,11 @@
     "polyrepo": {
       "flake": false,
       "locked": {
-        "lastModified": 1793037200,
-        "narHash": "sha256-+UpuZDEfXNi6DucSEHNir9AYK8qomUEcZoGmsc9002s=",
+        "lastModified": 1793041883,
+        "narHash": "sha256-HBmW8RJiHEvL21xNWitrh2WoPunIr5kH5nFPV7b8rV8=",
         "ref": "main",
-        "rev": "794fd3a2761cfd7a92c5b1c4b8e0d2c4a662a861",
-        "revCount": 97,
+        "rev": "0e18c8372b350e7286eaf730bcebf49c6aa35f1e",
+        "revCount": 98,
         "type": "git",
         "url": "ssh://git@github.com/AdamFrey/polyrepo.git"
       },
