@@ -8,16 +8,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "hashcards";
-  version = "05-16-2026";
+  version = "0.5.0";
 
   src = fetchFromGitHub {
     owner = "eudoxia0";
     repo = "hashcards";
-    rev = "3d45bf5a345599fc937c66d9ee7fd143a3aab5fc";
-    sha256 = "sha256-zMJ/noq0FRcSzU5yj6I604Gv7z1kjB1dtQgr++sNyTc=";
+    rev = "v${version}";
+    sha256 = "sha256-XX3j5ljOpyIxFJq3NPAM7ZPGoc33BH0bGOFMzJJ7XEg=";
   };
 
-  cargoHash = "sha256-kH1rRYngqsPEyT+kGAaPbLYm3lSBefqsTCcDlxQGXEA=";
+  cargoHash = "sha256-CK4k8etB4MZUkJWk/OabuBuIN+AkT/GulsYS1Qa7NVE=";
 
   doCheck = false;
 

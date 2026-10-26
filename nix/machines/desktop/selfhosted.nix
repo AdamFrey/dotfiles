@@ -22,9 +22,33 @@ let
     qbittorrent = 8080;
     miniflux = 8081;
     linkwarden = 3000;
+    hashcards = 8082;
   };
 
   port = lanPorts // tailnetPorts;
+
+  hashcards = pkgs.callPackage ../../packages/hashcards { };
+
+  hashcardsLauncher = pkgs.callPackage
+    "${inputs.polyrepo}/projects/hashcards-launcher/package.nix"
+    { babashka = pkgs-unstable.babashka; };
+
+  # The drill sessions listen here. Loopback only: the launcher forwards to it.
+  hashcardsDrillPort = 8083;
+
+  hashcardsLauncherConfig = pkgs.writeText "hashcards-launcher.edn" ''
+    {:afrey.hashcards-launcher/drill-session
+     {:hashcards-bin "${hashcards}/bin/hashcards"
+      :port          ${toString hashcardsDrillPort}
+      :card-limit    60
+      :collections   [{:name "Flashcards"
+                       :dir  "/pithos/prosopikos/hashcards/decks"}]}
+
+     :afrey.hashcards-launcher/http-server
+     {:host          "0.0.0.0"
+      :port          ${toString port.hashcards}
+      :drill-session #ig/ref :afrey.hashcards-launcher/drill-session}}
+  '';
 in
 {
   # One cluster. immich and miniflux attach to it rather than running their
@@ -73,6 +97,24 @@ in
     host = "0.0.0.0";
     enable = true;
     port = port.audiobookshelf;
+  };
+
+  # Starts hashcards drill sessions from any device on the tailnet. The source
+  # is projects/hashcards-launcher in the polyrepo flake input. To ship a
+  # change, push the polyrepo, then run `nix flake update polyrepo`.
+  systemd.services.hashcards-launcher = {
+    description = "hashcards drill launcher";
+    wantedBy = [ "multi-user.target" ];
+    unitConfig.RequiresMountsFor = [ "/pithos/prosopikos" ];
+    # git pulls the collection before each session.
+    path = [ pkgs.git pkgs.openssh ];
+    serviceConfig = {
+      User = "adam";
+      ExecStart = "${hashcardsLauncher}/bin/hashcards-launcher ${hashcardsLauncherConfig}";
+      Restart = "on-failure";
+      # The default 100 ms gives up after five quick failures.
+      RestartSec = 10;
+    };
   };
 
   services.sonarr.enable = true;

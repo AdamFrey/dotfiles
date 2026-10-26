@@ -39,6 +39,11 @@
     private-nix = {
       url = "git+ssh://git@github.com/AdamFrey/private-nix.git?ref=master";
     };
+
+    polyrepo = {
+      url = "git+ssh://git@github.com/AdamFrey/polyrepo.git?ref=main";
+      flake = false;
+    };
   };
 
     # outputs is a function taking inputs, and destructuring
@@ -54,7 +59,8 @@
       llm-agents,
       claude-desktop,
       zen-browser,
-      private-nix
+      private-nix,
+      polyrepo
       }@inputs:
     let
       system = "x86_64-linux";
