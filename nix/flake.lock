@@ -441,6 +441,23 @@
         "type": "github"
       }
     },
+    "polyrepo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793037200,
+        "narHash": "sha256-+UpuZDEfXNi6DucSEHNir9AYK8qomUEcZoGmsc9002s=",
+        "ref": "main",
+        "rev": "794fd3a2761cfd7a92c5b1c4b8e0d2c4a662a861",
+        "revCount": 97,
+        "type": "git",
+        "url": "ssh://git@github.com/AdamFrey/polyrepo.git"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "ssh://git@github.com/AdamFrey/polyrepo.git"
+      }
+    },
     "private-nix": {
       "locked": {
         "lastModified": 1792070384,
@@ -467,6 +484,7 @@
         "llm-agents": "llm-agents",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "polyrepo": "polyrepo",
         "private-nix": "private-nix",
         "stylix": "stylix",
         "zen-browser": "zen-browser"
