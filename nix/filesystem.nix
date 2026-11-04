@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 # SMB mounts of the pithos datasets, served by matte-black-cadillac over the
 # tailnet. See machines/desktop/samba.nix for the other end.
@@ -48,4 +48,18 @@ in
       map (d: lib.nameValuePair "${root}/${d}" (smbMount d)) datasets
     )
   );
+
+  # Access while offline (e.g. right after resume) can trip the mount start
+  # limit, which leaves the automount failed for good. Re-arm it whenever a
+  # network comes up.
+  networking.networkmanager.dispatcherScripts = lib.mkIf (!servesTheseDatasets) [
+    {
+      type = "basic";
+      source = pkgs.writeShellScript "rearm-nas-automounts" ''
+        [ "$2" = up ] || exit 0
+        ${pkgs.systemd}/bin/systemctl reset-failed 'home-adam-nas-*.automount' 'home-adam-nas-*.mount'
+        ${pkgs.systemd}/bin/systemctl start 'home-adam-nas-*.automount'
+      '';
+    }
+  ];
 }
