@@ -15,6 +15,18 @@
     127.0.0.1 www.mtg.wiki
     127.0.0.1 mtgtop8.com
     127.0.0.1 www.mtgtop8.com
+    127.0.0.1 manapool.com
+    127.0.0.1 www.manapool.com
+    127.0.0.1 moxfield.com
+    127.0.0.1 www.moxfield.com
+    127.0.0.1 mtgstocks.com
+    127.0.0.1 www.mtgstocks.com
+    127.0.0.1 wizards.com
+    127.0.0.1 magic.wizards.com
+    127.0.0.1 tcgplayer.com
+    127.0.0.1 www.tcgplayer.com
+    127.0.0.1 edhrec.com
+    127.0.0.1 www.edhrec.com
   '';
 
   environment.systemPackages = with pkgs; [
