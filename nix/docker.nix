@@ -9,6 +9,15 @@
     # them — including the ones started with `docker run` rather than compose,
     # which carry no compose labels and so cannot be capped from a compose file.
     daemon.settings.cgroup-parent = "docker.slice";
+
+    # Weekly `docker system prune`. The until filter spares anything created in
+    # the last two weeks so freshly pulled work images survive. Volumes are
+    # untouched.
+    autoPrune = {
+      enable = true;
+      dates = "weekly";
+      flags = [ "--all" "--filter" "until=336h" ];
+    };
   };
 
   # MemoryHigh throttles reclaim rather than killing. MemoryMax would
