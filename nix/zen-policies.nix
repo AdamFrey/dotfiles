@@ -11,6 +11,11 @@
 # that takes effect.
 #
 # Defined here rather than in either module so the two cannot drift apart.
+# The site blocks, uBlock filters and web-pause settings come from
+# browser-blocking.nix, which Chrome shares.
+let
+  blocking = import ./browser-blocking.nix;
+in
 {
     # Disable automatic updates (managed by Nix)
     DisableAppUpdate = true;
@@ -25,36 +30,7 @@
       Fingerprinting = true;
     };
 
-    # Block Google Images while allowing regular search
-    WebsiteFilter = {
-      Block = [
-        "*://images.google.com/*"
-        "*://www.google.com/search*tbm=isch*"
-        "*://www.google.*/search*tbm=isch*"
-        "*://www.google.com/search*udm=2*"
-        "*://www.google.*/search*udm=2*"
-        "*://www.google.com/imghp*"
-        "*://www.google.*/imghp*"
-        "*://lens.google.com/*"
-        "*://www.google.com/search*udm=39*"
-        "*://www.google.*/search*udm=39*"
-        "*://www.tiktok.com/*"
-        "*://tiktok.com/*"
-        "*://x.com/*"
-        "*://www.x.com/*"
-        "*://twitter.com/*"
-        "*://www.twitter.com/*"
-        "*://www.reddit.com/*"
-        "*://reddit.com/*"
-        "*://old.reddit.com/*"
-        "*://www.youtube.com/*"
-        "*://youtube.com/*"
-        "*://m.youtube.com/*"
-        "*://www.facebook.com/reel/*"
-        "*://www.facebook.com/reels/*"
-        "*://www.tmz.com"
-      ];
-    };
+    WebsiteFilter.Block = blocking.zenWebsiteFilterBlock;
 
     # Force-install uBlock Origin (no manual extension install needed)
     ExtensionSettings = {
@@ -77,52 +53,11 @@
     # Configure uBlock Origin with custom cosmetic filters
     "3rdparty".Extensions."uBlock0@raymondhill.net" = {
       toAdd = {
-        userFilters = [
-          "! Hide Google Image previews in search results"
-          "www.google.com##[data-attrid^=\"VisualDigest\"]"
-          "! Hide Short videos section from Google search"
-          "www.google.com##.MjjYud:has(span:has-text(/^Short videos$/))"
-          "! Hide What people are saying section from Google search"
-          "www.google.com##.MjjYud:has(span:has-text(/^What people are saying$/))"
-          "! Hide Images preview carousel from Google search"
-          "www.google.com##div:has(> div > div[data-iu] span[role=\"heading\"]:has-text(/^Images$/))"
-          "! Hide Facebook Reels link"
-          "facebook.com##a[href*=\"/reel\"]"
-          "! Hide YouTube comments"
-          "youtube.com##ytd-comments"
-        ];
+        userFilters = blocking.ublockUserFilters;
       };
     };
 
-    # Sites that pause behind a typing gate, rather than being blocked
-    # outright by WebsiteFilter above.
-    #
-    # An entry is a host, optionally followed by a path prefix. A bare host
-    # covers its subdomains too, so scryfall.com also matches www.scryfall.com.
-    # Adding a path narrows the match to part of a site -- google.com/search
-    # would pause searching while leaving mail.google.com alone.
-    "3rdparty".Extensions."web-pause@adamfrey.me" = {
-      patterns = [
-        "scryfall.com"
-        "cubecobra.com"
-        "discord.com"
-        "mtg.wiki"
-        "pitchfork.com"
-        "luckypaper.co"
-        "nba.com"
-        "espn.com"
-        "yahoo.com"
-        "nytimes.com"
-        "hipstersofthecoast.com"
-        "fastmail.com"
-        "app.slack.com/client/T03RZGPFR/C06MAR553"
-        "facebook.com"
-      ];
-      prompts = [
-        "Romans 5:17 For if, because of one man's trespass, death reigned through that one man, much more will those who receive the abundance of grace and the free gift of righteousness reign in life through the one man Jesus Christ."
-        "2 Corinthians 10:17-18 Let the one who boasts, boast in the Lord. For it is not the one who commends himself who is approved, but the one whom the Lord commends."
-      ];
-    };
+    "3rdparty".Extensions."web-pause@adamfrey.me" = blocking.webPause;
 
     # Bookmarks (can be managed declaratively)
     ManagedBookmarks = [

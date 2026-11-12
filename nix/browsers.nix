@@ -9,6 +9,7 @@ with lib;
 
 let
   cfg = config.services.browsersEnabled;
+  blocking = import ./browser-blocking.nix;
 in
 {
   options.services.browsersEnabled = mkOption {
@@ -27,36 +28,24 @@ in
       BROWSER = "zen-beta";
     };
 
-    # Chrome/Chromium policies (applies to Google Chrome too)
+    # Chrome/Chromium policies
     programs.chromium = mkIf cfg {
       enable = true;
+
+      # uBlock Origin Lite.
+      extensions = [ "ddkjiahejlhfcafbddmgiahcphecmpfh" ];
+
       extraOpts = {
-        URLBlocklist = [
-          "images.google.com"
-          "google.com/search*tbm=isch*"
-          "google.com/search*udm=2*"
-          "google.com/imghp*"
-          "lens.google.com"
-          "google.com/search*udm=39*"
-          "www.tiktok.com"
-          "tiktok.com"
-          "x.com"
-          "twitter.com"
-          "reddit.com"
-          "youtube.com"
-        ];
+        URLBlocklist = blocking.chromeUrlBlocklist;
+        MetricsReportingEnabled = false;
+
+        # web-pause, loaded unpacked from the polyrepo's dist/ directory.
+        # The manifest key fixes this ID.
+        "3rdparty".extensions.ndeglbjlglechmbeiffambpoocdbgfpo = blocking.webPause;
       };
     };
 
-    # Zen's enterprise policies. This is the copy that actually takes effect.
-    #
-    # Gecko checks SysConfD ("/etc/" + MOZ_APP_NAME, and Zen's MOZ_APP_NAME is
-    # "zen") before the app directory. The home-manager module writes the same
-    # set into the wrapper package's distribution/ dir, but Gecko resolves
-    # XREAppDist through the wrapper's symlinks to the unwrapped package, whose
-    # distribution/policies.json is an empty {"policies":{}} -- which is why
-    # about:policies reported the service inactive until this file existed.
-    #
+    # Zen's enterprise policies.
     environment.etc."zen/policies/policies.json" = mkIf cfg {
       text = builtins.toJSON { policies = import ./zen-policies.nix; };
     };
