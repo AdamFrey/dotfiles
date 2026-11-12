@@ -39,6 +39,11 @@ in
         URLBlocklist = blocking.chromeUrlBlocklist;
         MetricsReportingEnabled = false;
 
+        DefaultSearchProviderEnabled = true;
+        DefaultSearchProviderName = blocking.googleWebSearch.name;
+        DefaultSearchProviderSearchURL = blocking.googleWebSearch.url;
+        DefaultSearchProviderSuggestURL = "{google:baseURL}complete/search?output=chrome&q={searchTerms}";
+
         # web-pause, loaded unpacked from the polyrepo's dist/ directory.
         # The manifest key fixes this ID.
         "3rdparty".extensions.ndeglbjlglechmbeiffambpoocdbgfpo = blocking.webPause;

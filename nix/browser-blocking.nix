@@ -9,15 +9,19 @@
 #   query  One query parameter, as { name = "value"; }. Optional.
 #
 # Chrome cannot put a wildcard inside a host or a path. So this file has no
-# google.* patterns. Google redirects its country domains to google.com, so
-# the google.com entries cover them.
+# google.* patterns.
 let
   entries = [
     # Google Images and Lens. Regular search stays open.
     { host = "images.google.com"; }
     { host = "google.com"; path = "/search"; query = { tbm = "isch"; }; }
     { host = "google.com"; path = "/search"; query = { udm = "2"; }; }
-    # The short videos tab of Google search.
+    # The videos and short videos tabs of Google search. Google uses the
+    # named values now. The numbers are older forms of the same tabs.
+    { host = "google.com"; path = "/search"; query = { udm = "vids"; }; }
+    { host = "google.com"; path = "/search"; query = { udm = "7"; }; }
+    { host = "google.com"; path = "/search"; query = { tbm = "vid"; }; }
+    { host = "google.com"; path = "/search"; query = { udm = "short_vids"; }; }
     { host = "google.com"; path = "/search"; query = { udm = "39"; }; }
     { host = "google.com"; path = "/imghp"; }
     { host = "lens.google.com"; }
@@ -32,16 +36,19 @@ let
     { host = "tmz.com"; }
   ];
 
-  # Work needs these hosts. Evaluation fails if an entry with no path blocks
-  # one of them, because such an entry blocks every subdomain of its host.
-  protectedHosts = [
-    "calendar.google.com"
-    "meet.google.com"
-    "mail.google.com"
-    "accounts.google.com"
-    "docs.google.com"
-    "drive.google.com"
+  # Work needs these URLs. Each path is the start of the path that the app
+  # uses. Evaluation fails if an entry blocks one of these URLs.
+  protectedUrls = [
+    { host = "calendar.google.com"; path = "/calendar"; }
+    { host = "meet.google.com"; path = "/"; }
+    { host = "mail.google.com"; path = "/mail"; }
+    { host = "accounts.google.com"; path = "/"; }
+    { host = "docs.google.com"; path = "/"; }
+    { host = "drive.google.com"; path = "/drive"; }
   ];
+
+  hasPrefix = prefix: s:
+    builtins.substring 0 (builtins.stringLength prefix) s == prefix;
 
   hasSuffix = suffix: s:
     let
@@ -49,17 +56,22 @@ let
       l = builtins.stringLength s;
     in l >= sl && builtins.substring (l - sl) sl s == suffix;
 
-  blocksProtectedHost = entry: protected:
-    !(entry ? path)
-    && (protected == entry.host || hasSuffix ".${entry.host}" protected);
+  # An entry blocks a protected URL when both of these are true:
+  #   - The entry host is the protected host or a parent domain of it.
+  #   - The entry path is a prefix of the protected path. No path is the
+  #     empty prefix, so it blocks every path.
+  blocksProtectedUrl = entry: protected:
+    (protected.host == entry.host || hasSuffix ".${entry.host}" protected.host)
+    && hasPrefix (entry.path or "") protected.path;
 
   checkEntry = entry:
     let
-      hits = builtins.filter (blocksProtectedHost entry) protectedHosts;
+      hits = builtins.filter (blocksProtectedUrl entry) protectedUrls;
       queryNames = builtins.attrNames (entry.query or { });
     in
     if hits != [ ] then
-      throw "browser-blocking.nix: the entry for ${entry.host} blocks the protected host ${builtins.head hits}. Add a path to the entry."
+      let hit = builtins.head hits;
+      in throw "browser-blocking.nix: the entry for ${entry.host}${entry.path or ""} blocks the protected URL ${hit.host}${hit.path}."
     else if builtins.length queryNames > 1 then
       throw "browser-blocking.nix: the entry for ${entry.host} has more than one query parameter."
     else
@@ -88,6 +100,14 @@ in
 {
   zenWebsiteFilterBlock = map toZenPattern checkedEntries;
   chromeUrlBlocklist = map toChromeFilter checkedEntries;
+
+  # The default search engine in both browsers. udm=14 opens the Web tab of
+  # Google search. That tab shows no image grid, AI Overview or knowledge
+  # panel. This file holds it because it hides distracting Google content too.
+  googleWebSearch = {
+    name = "Google Web";
+    url = "https://www.google.com/search?q={searchTerms}&udm=14";
+  };
 
   # uBlock Origin custom filters. Only Zen uses them. uBlock Origin Lite in
   # Chrome has no policy for custom filters.

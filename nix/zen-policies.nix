@@ -11,8 +11,8 @@
 # that takes effect.
 #
 # Defined here rather than in either module so the two cannot drift apart.
-# The site blocks, uBlock filters and web-pause settings come from
-# browser-blocking.nix, which Chrome shares.
+# The site blocks, uBlock filters, web-pause settings and default search
+# engine come from browser-blocking.nix, which Chrome shares.
 let
   blocking = import ./browser-blocking.nix;
 in
@@ -31,6 +31,17 @@ in
     };
 
     WebsiteFilter.Block = blocking.zenWebsiteFilterBlock;
+
+    SearchEngines = {
+      Add = [
+        {
+          Name = blocking.googleWebSearch.name;
+          URLTemplate = blocking.googleWebSearch.url;
+          Suggest = "https://www.google.com/complete/search?client=firefox&q={searchTerms}";
+        }
+      ];
+      Default = blocking.googleWebSearch.name;
+    };
 
     # Force-install uBlock Origin (no manual extension install needed)
     ExtensionSettings = {
