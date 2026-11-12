@@ -218,6 +218,7 @@ in
   # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
     acpi
+    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default # agenix CLI
     bash
     pkgs-unstable.bbin # Babashka bin
     bluetui
