@@ -5,6 +5,7 @@
 # runs sshd, so /etc/ssh/ssh_host_ed25519_key does not exist to encrypt to.
 let
   adamUserKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICxnBNepKp/F//SWNkI9aIa3qXEtcr2hA0JgI6iiUvgJ adam@adamfrey.me";
+  workLaptopKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK3pEHlL+ipRK0zctgumIu2R+1pQgfUod7n7KQJ7US0d adam@adamfrey.me";
 in
 {
   "ssh-config-entries.age".publicKeys = [ adamUserKey ];
@@ -14,5 +15,5 @@ in
   "miniflux-admin.age".publicKeys = [ adamUserKey ];
   "linkwarden-nextauth.age".publicKeys = [ adamUserKey ];
   "healthchecks-ping-url.age".publicKeys = [ adamUserKey ];
-  "pithos-smb-credentials.age".publicKeys = [ adamUserKey ];
+  "pithos-smb-credentials.age".publicKeys = [ adamUserKey workLaptopKey ];
 }
