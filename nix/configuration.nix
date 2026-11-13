@@ -157,6 +157,20 @@ in
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.brlaser ];
+  services.printing.browsed.enable = false;
+  hardware.printers.ensurePrinters = [
+    {
+      name = "Brother_HL_L2350DW";
+      description = "Brother HL-L2350DW";
+      deviceUri = "ipp://BRWC0B5D7E774C1.local/ipp/print";
+      model = "drv:///brlaser.drv/brl2350d.ppd";
+      ppdOptions = {
+        PageSize = "Letter";
+        Duplex = "DuplexNoTumble";
+      };
+    }
+  ];
+  hardware.printers.ensureDefaultPrinter = "Brother_HL_L2350DW";
 
   services.avahi = {
     enable = true;
